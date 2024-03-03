@@ -2,9 +2,11 @@
 [Dd]ata/
 [Ll]ogs/
 [Dd]ist/
+[Tt]est/
 
 .env
 token.json
 *.py*
+*.test.*
 
 package-lock.json

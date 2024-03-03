@@ -1,6 +1,6 @@
 {
   "name": "@nkhind/vivawallet-sdk",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Non-Official VivaWallet API SDK",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -31,7 +31,6 @@
     "@types/node": "^20.11.24",
     "@types/uuid": "^9.0.8",
     "@types/validator": "^13.11.9",
-    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.3"
   },
   "dependencies": {

@@ -5,7 +5,7 @@ import {
   NkRequestError,
   NkRequestResponse,
   RequestsOptions,
-} from '~~/types/Requests.types';
+} from '../types/Requests.types';
 
 /**
  * Make an uuid V4

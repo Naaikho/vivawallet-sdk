@@ -1,16 +1,16 @@
 import {
   VivaSmartCheckoutOptions,
   VivawalletAPIInit,
-} from '~~/types/Vivawallet.types';
+} from '../types/Vivawallet.types';
 import VivaAuth from './VivaAuth.class';
 import VivaSkull from './VivaSkull.class';
-import { SourceCodeDatas } from '~~/types/VivaSource.types';
-import { requests } from '~/utils/functions';
+import { SourceCodeDatas } from '../types/VivaSource.types';
+import { requests } from '../utils/functions';
 import {
   VivaTransaction,
   VivaTransactionRefundOptions,
-} from '~~/types/VivaTransactions.types';
-import { VivaPaymentOrderOptions } from '~~/types/VivaOrder.types';
+} from '../types/VivaTransactions.types';
+import { VivaPaymentOrderOptions } from '../types/VivaOrder.types';
 import VivaEndpoints from './VivaEndpoints.class';
 
 class Vivawallet extends VivaAuth {

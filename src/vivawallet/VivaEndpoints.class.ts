@@ -1,4 +1,4 @@
-import { VivawalletEnpointsInit } from '~~/types/Vivawallet.types';
+import { VivawalletEnpointsInit } from '../types/Vivawallet.types';
 
 class VivaEndpoints {
   public static demoEndpoints = {

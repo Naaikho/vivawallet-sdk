@@ -1,4 +1,4 @@
-import { VivawalletAPIInit } from '~~/types/Vivawallet.types';
+import { VivawalletAPIInit } from '../types/Vivawallet.types';
 import VivaEndpoints from './VivaEndpoints.class';
 
 class VivaSkull extends VivaEndpoints {

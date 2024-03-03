@@ -1,6 +1,7 @@
 [Nn]ode_modules/
 [Dd]ata/
 [Ll]ogs/
+[Tt]est/
 
 .env
 token.json
@@ -8,6 +9,7 @@ token.json
 .prettierrc
 .prettierignore
 .gitignore
+*.test.*
 
 ./types
 ./src
