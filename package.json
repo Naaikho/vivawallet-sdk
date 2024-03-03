@@ -2,12 +2,12 @@
   "name": "@nkhind/vivawallet-sdk",
   "version": "1.0.1",
   "description": "Non-Official VivaWallet API SDK",
-  "main": "dist/main.js",
-  "types": "dist/main.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build",
-    "start": "node dist/main.js",
+    "start": "node dist/index.js",
     "dev": "tsc && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
