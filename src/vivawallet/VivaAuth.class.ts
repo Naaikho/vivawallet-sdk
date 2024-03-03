@@ -31,7 +31,7 @@ class VivaAuth extends VivaSkull {
 
   /** Return the VivaWallet API Auth2.0 code from Credentials (needed for API Bearer calls) or `null` on request failed */
   async getVivaToken(): Promise<string | null> {
-    if (!this.clientId || !this.clientSecret)
+    if (!this.smartClientId || !this.smartClientSecret)
       throw new Error('Init not called');
 
     try {
@@ -42,9 +42,9 @@ class VivaAuth extends VivaSkull {
           'Content-Type': 'application/x-www-form-urlencoded',
           Authorization:
             'Basic ' +
-            Buffer.from(this.clientId + ':' + this.clientSecret).toString(
-              'base64'
-            ),
+            Buffer.from(
+              this.smartClientId + ':' + this.smartClientSecret
+            ).toString('base64'),
         },
         {
           grant_type: 'client_credentials',

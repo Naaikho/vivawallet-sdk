@@ -3,9 +3,9 @@ import VivaEndpoints from './VivaEndpoints.class';
 
 class VivaSkull extends VivaEndpoints {
   /** VivaWallet SmartCheckout Client ID */
-  clientId: string;
+  smartClientId: string;
   /** VivaWallet SmartCheckout Client Secret */
-  clientSecret: string;
+  smartClientSecret: string;
   /** VivaWallet Access Merchant ID */
   merchantId: string;
   /** VivaWallet Access API Key */
@@ -15,8 +15,8 @@ class VivaSkull extends VivaEndpoints {
 
   constructor(datas: VivawalletAPIInit) {
     super({ dev: datas.dev });
-    this.clientId = datas.clientId;
-    this.clientSecret = datas.clientSecret;
+    this.smartClientId = datas.smartClientId;
+    this.smartClientSecret = datas.smartClientSecret;
     this.merchantId = datas.merchantId;
     this.apikey = datas.apikey;
     this.sourceCode = datas.sourceCode || null;

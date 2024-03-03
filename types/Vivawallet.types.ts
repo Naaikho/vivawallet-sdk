@@ -5,9 +5,9 @@ export interface VivawalletEnpointsInit {
 
 export interface VivawalletAPIInit extends VivawalletEnpointsInit {
   /** VivaWallet SmartCheckout Client ID */
-  clientId: string;
+  smartClientId: string;
   /** VivaWallet SmartCheckout Client Secret */
-  clientSecret: string;
+  smartClientSecret: string;
   /** VivaWallet Access Merchant ID */
   merchantId: string;
   /** VivaWallet Access API Key */
