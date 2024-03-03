@@ -1,0 +1,10 @@
+[Nn]ode_modules/
+[Dd]ata/
+[Ll]ogs/
+[Dd]ist/
+
+.env
+token.json
+*.py*
+
+package-lock.json

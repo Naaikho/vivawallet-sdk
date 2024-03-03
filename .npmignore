@@ -1,0 +1,12 @@
+[Nn]ode_modules/
+[Dd]ata/
+[Ll]ogs/
+
+.env
+token.json
+*.py*
+.prettierrc
+.prettierignore
+.gitignore
+
+package-lock.json

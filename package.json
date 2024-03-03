@@ -1,0 +1,41 @@
+{
+  "name": "@nkh/vivawallet-sdk",
+  "version": "1.0.0",
+  "description": "Non-Official VivaWallet API SDK",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "start": "node dist/main.js",
+    "dev": "tsc && npm run start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Naaikho/vivawallet.git"
+  },
+  "keywords": [
+    "vivawallet",
+    "api",
+    "sdk",
+    "viva"
+  ],
+  "author": "Naikho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Naaikho/vivawallet-sdk/issues"
+  },
+  "homepage": "https://github.com/Naaikho/vivawallet-sdk#readme",
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "@types/uuid": "^9.0.8",
+    "@types/validator": "^13.11.9",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "uuid": "^9.0.1",
+    "validator": "^13.11.0"
+  }
+}
