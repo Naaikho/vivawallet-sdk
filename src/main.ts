@@ -20,4 +20,4 @@ const vivawallet = {
   },
 };
 
-export default vivawallet;
+module.exports = vivawallet;

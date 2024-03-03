@@ -1,6 +1,6 @@
 {
   "name": "@nkhind/vivawallet-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Non-Official VivaWallet API SDK",
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
