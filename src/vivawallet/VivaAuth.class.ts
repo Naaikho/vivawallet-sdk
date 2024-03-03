@@ -20,7 +20,7 @@ class VivaAuth extends VivaSkull {
     super(datas);
   }
 
-  /** Credentials verification or fetching from Database, `throw` error if credentials is not gived or founded ***(required for API calls)*** */
+  /** Credentials verification, `throw` error if credentials is not gived ***(required for API calls)*** */
   async init(): Promise<void> {
     this.vivaTotken = await this.getVivaToken();
     this.webhookCode = await this.getVivaWebhookCode();
