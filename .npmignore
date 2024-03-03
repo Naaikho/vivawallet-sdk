@@ -9,4 +9,8 @@ token.json
 .prettierignore
 .gitignore
 
+./types
+./src
+./index.ts
+
 package-lock.json

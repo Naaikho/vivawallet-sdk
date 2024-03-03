@@ -12,7 +12,7 @@ import Vivawallet, {
   getSmartCheckout,
 } from './src/vivawallet/Vivawallet.class';
 
-module.exports = {
+export default {
   Vivawallet,
   getSmartCheckout,
   ClassBase: {

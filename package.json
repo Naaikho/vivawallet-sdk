@@ -1,6 +1,6 @@
 {
   "name": "@nkhind/vivawallet-sdk",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Non-Official VivaWallet API SDK",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -37,5 +37,11 @@
   "dependencies": {
     "uuid": "^9.0.1",
     "validator": "^13.11.0"
-  }
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ]
 }
