@@ -1,5 +1,5 @@
 {
-  "name": "@nkh/vivawallet-sdk",
+  "name": "@nkhind/vivawallet-sdk",
   "version": "1.0.0",
   "description": "Non-Official VivaWallet API SDK",
   "main": "dist/main.js",
