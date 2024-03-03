@@ -12,12 +12,10 @@ import Vivawallet, {
   getSmartCheckout,
 } from './src/vivawallet/Vivawallet.class';
 
-export default {
-  Vivawallet,
-  getSmartCheckout,
-  ClassBase: {
-    VivaEndpoints,
-    VivaSkull,
-    VivaAuth,
-  },
+const ClassBase = {
+  VivaEndpoints,
+  VivaSkull,
+  VivaAuth,
 };
+
+export { Vivawallet, getSmartCheckout, ClassBase };
