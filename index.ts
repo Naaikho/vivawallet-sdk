@@ -5,9 +5,9 @@
  * License: ISC
  */
 
-import VivaAuth from './src/vivawallet/VivaAuth.class';
-import VivaEndpoints from './src/vivawallet/VivaEndpoints.class';
-import VivaSkull from './src/vivawallet/VivaSkull.class';
+import VivaAuth from './src/vivabases/VivaAuth.class';
+import VivaEndpoints from './src/vivabases/VivaEndpoints.class';
+import VivaSkull from './src/vivabases/VivaSkull.class';
 import Vivawallet, {
   getSmartCheckout,
 } from './src/vivawallet/Vivawallet.class';

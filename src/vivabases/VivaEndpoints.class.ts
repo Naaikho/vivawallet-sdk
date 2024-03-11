@@ -46,6 +46,28 @@ class VivaEndpoints {
       // &color={color}&paymentMethod={paymentMethod}
       url: 'https://demo.vivapayments.com/web/checkout?ref={orderCode}',
     },
+    marketplace: {
+      accounts: {
+        get: {
+          url: 'https://demo-api.vivapayments.com/platforms/v1/accounts/{accountId}',
+          method: 'GET',
+        },
+        create: {
+          url: 'https://demo-api.vivapayments.com/platforms/v1/accounts',
+          method: 'POST',
+        },
+        update: {
+          url: 'https://demo-api.vivapayments.com/platforms/v1/accounts/{accountId}',
+          method: 'PATCH',
+        },
+      },
+      transfers: {
+        send: {
+          url: 'https://demo-api.vivapayments.com/platforms/v1/transfers',
+          method: 'POST',
+        },
+      },
+    },
   };
 
   public static prodEndpoints: typeof VivaEndpoints.demoEndpoints = {
@@ -92,6 +114,28 @@ class VivaEndpoints {
     checkout: {
       // &color={color}&paymentMethod={paymentMethod}
       url: 'https://www.vivapayments.com/web/checkout?ref={orderCode}',
+    },
+    marketplace: {
+      accounts: {
+        get: {
+          url: 'https://api.vivapayments.com/platforms/v1/accounts/{accountId}',
+          method: 'GET',
+        },
+        create: {
+          url: 'https://api.vivapayments.com/platforms/v1/accounts',
+          method: 'POST',
+        },
+        update: {
+          url: 'https://api.vivapayments.com/platforms/v1/accounts/{accountId}',
+          method: 'PATCH',
+        },
+      },
+      transfers: {
+        send: {
+          url: 'https://api.vivapayments.com/platforms/v1/transfers',
+          method: 'POST',
+        },
+      },
     },
   };
 

@@ -30,12 +30,15 @@ export const NkError = (data: NkRequestError) => {
  *
  * ### If edit, keep the same output format
  */
-export async function requests(
+export async function requests<
+  T extends Record<string, any>,
+  R = Record<string, any>
+>(
   url: string,
   method: string,
   headers: Record<string, string> = {},
-  data: any = {}
-): Promise<NkRequestResponse> {
+  data?: T
+): Promise<NkRequestResponse<R>> {
   let options: RequestsOptions = {
     method: method.toUpperCase(),
     headers: headers,
@@ -67,7 +70,7 @@ export async function requests(
       return {
         status: f.status,
         statusText: f.statusText,
-        data: (await f.json()) as Record<string, any>,
+        data: (await f.json()) as R,
       };
     } else {
       return {

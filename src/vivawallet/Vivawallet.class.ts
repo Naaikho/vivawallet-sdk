@@ -2,8 +2,8 @@ import {
   VivaSmartCheckoutOptions,
   VivawalletAPIInit,
 } from '../types/Vivawallet.types';
-import VivaAuth from './VivaAuth.class';
-import VivaSkull from './VivaSkull.class';
+import VivaAuth from '../vivabases/VivaAuth.class';
+import VivaSkull from '../vivabases/VivaSkull.class';
 import { SourceCodeDatas } from '../types/VivaSource.types';
 import { requests } from '../utils/functions';
 import {
@@ -11,7 +11,7 @@ import {
   VivaTransactionRefundOptions,
 } from '../types/VivaTransactions.types';
 import { VivaPaymentOrderOptions } from '../types/VivaOrder.types';
-import VivaEndpoints from './VivaEndpoints.class';
+import VivaEndpoints from '../vivabases/VivaEndpoints.class';
 
 class Vivawallet extends VivaAuth {
   constructor(datas: VivawalletAPIInit) {
@@ -116,15 +116,7 @@ class Vivawallet extends VivaAuth {
   async createOrder(
     orderData: VivaPaymentOrderOptions
   ): Promise<number | null> {
-    if (!this.merchantId || !this.apikey) throw new Error('Init not called');
-
-    console.log('orderData', orderData);
-    console.log('endpoints payment url:', this.endpoints.payment.create.url);
-    console.log(
-      'endpoints payment method:',
-      this.endpoints.payment.create.method
-    );
-    console.log('auth bearer:', 'Bearer ' + this.vivaTotken);
+    if (!this.vivaTotken) throw new Error('Init not called');
 
     try {
       const r = await requests(

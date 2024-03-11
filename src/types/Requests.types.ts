@@ -1,8 +1,8 @@
-export interface NkRequestResponse {
+export interface NkRequestResponse<R> {
   status: number;
   statusText: string;
   message?: string;
-  data?: Record<string, any> | null;
+  data?: R | null;
 }
 
 export interface NkRequestError {
