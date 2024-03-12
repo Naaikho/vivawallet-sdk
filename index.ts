@@ -11,6 +11,7 @@ import VivaSkull from './src/vivabases/VivaSkull.class';
 import Vivawallet, {
   getSmartCheckout,
 } from './src/vivawallet/Vivawallet.class';
+import { Marketplace } from './src/vivawallet/MarketPlace.class';
 
 const ClassBase = {
   VivaEndpoints,
@@ -18,4 +19,4 @@ const ClassBase = {
   VivaAuth,
 };
 
-export { Vivawallet, getSmartCheckout, ClassBase };
+export { Vivawallet, getSmartCheckout, Marketplace, ClassBase };
