@@ -8,7 +8,9 @@ import { SourceCodeDatas } from '../types/VivaSource.types';
 import { requests } from '../utils/functions';
 import {
   VivaTransaction,
+  VivaTransactionDatas,
   VivaTransactionRefundOptions,
+  VivaTransactionReturn,
 } from '../types/VivaTransactions.types';
 import { VivaPaymentOrderOptions } from '../types/VivaOrder.types';
 import VivaEndpoints from '../vivabases/VivaEndpoints.class';
@@ -65,6 +67,33 @@ class Vivawallet extends VivaAuth {
       );
       if (r.data) return r.data as VivaTransaction;
     } catch (e) {
+      console.log(e);
+    }
+    return null;
+  }
+
+  /** Make transaction by transactionId */
+  async makeTransaction(
+    options: VivaTransactionDatas
+  ): Promise<VivaTransactionReturn | null> {
+    if (!this.merchantId || !this.apikey) throw new Error('Init not called');
+    if (!options.amount || !options.id) return null;
+    try {
+      const transactionUrl = this.endpoints.transaction.create.url.replace(
+        '{transaction_id}',
+        options.id
+      );
+      const r = await requests<VivaTransactionDatas, VivaTransactionReturn>(
+        transactionUrl,
+        this.endpoints.transaction.create.method,
+        {
+          Authorization: 'Bearer ' + this.getVivaBasicToken(),
+        },
+        options
+      );
+      // console.log("R", r);
+      if (r.data && r.data.Success && r.data.StatusId === 'F') return r.data;
+    } catch (e: any) {
       console.log(e);
     }
     return null;

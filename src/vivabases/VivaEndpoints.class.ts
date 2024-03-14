@@ -37,6 +37,10 @@ class VivaEndpoints {
         url: 'https://demo-api.vivapayments.com/checkout/v2/transactions/{transactionId}',
         method: 'GET',
       },
+      create: {
+        url: 'https://demo.vivapayments.com/api/transactions/{transaction_id}',
+        method: 'POST',
+      },
       cancel: {
         url: 'https://demo.vivapayments.com/api/transactions/{transactionId}',
         method: 'DELETE',
@@ -105,6 +109,10 @@ class VivaEndpoints {
       get: {
         url: 'https://api.vivapayments.com/checkout/v2/transactions/{transactionId}',
         method: 'GET',
+      },
+      create: {
+        url: 'https://www.vivapayments.com/api/transactions/{transaction_id}',
+        method: 'POST',
       },
       cancel: {
         url: 'https://www.vivapayments.com/api/transactions/{transactionId}',
