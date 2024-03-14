@@ -1,4 +1,3 @@
-import { VivaPaymentOrderOptions } from '../types/VivaOrder.types';
 import { VivawalletAPIInit } from '../types/Vivawallet.types';
 import { VivaMarketOrdersOptions } from '../types/marketplace.types/VivaMarketOrders.types';
 import {
@@ -10,9 +9,9 @@ import {
   VivaTransfersResponse,
 } from '../types/marketplace.types/VivaTransfers.types';
 import { requests } from '../utils/functions';
-import VivaAuth from '../vivabases/VivaAuth.class';
+import Vivawallet from './Vivawallet.class';
 
-export class Marketplace extends VivaAuth {
+export class Marketplace extends Vivawallet {
   constructor(datas: VivawalletAPIInit) {
     super(datas);
   }
@@ -83,5 +82,5 @@ export class Marketplace extends VivaAuth {
     return null;
   }
 
-  async cancelTransaction(): Promise<any> {}
+  // async cancelMarketTransaction(): Promise<void> {}
 }
