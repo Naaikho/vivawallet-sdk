@@ -15,6 +15,9 @@ const vivawallet = new VivaWallet({
   // Optional
   sourceCode: 'MY_SOURCE_CODE',
 });
+
+// Use init call to setup auth (Basic & OAuth2) and webhook code
+await vivawallet.init()
 ```
 
 ## TypeScript
