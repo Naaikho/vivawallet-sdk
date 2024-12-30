@@ -24,8 +24,8 @@ export class Marketplace extends Vivawallet {
 
     try {
       const r = await requests<CreateAccountDatas, CreateAccountResponse>(
-        this.endpoints.payment.create.url,
-        this.endpoints.payment.create.method,
+        this.endpoints.marketplace.accounts.create.url,
+        this.endpoints.marketplace.accounts.create.method,
         {
           Authorization: 'Bearer ' + this.vivaTotken,
         },

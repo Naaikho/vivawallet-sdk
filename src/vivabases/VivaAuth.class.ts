@@ -22,6 +22,14 @@ class VivaAuth extends VivaSkull {
 
   /** Credentials verification, `throw` error if credentials is not gived ***(required for API calls)*** */
   async init(): Promise<void> {
+    if (
+      !this.apikey ||
+      !this.merchantId ||
+      !this.smartClientId ||
+      !this.smartClientSecret
+    )
+      throw new Error('Credentials not provided');
+
     this.vivaTotken = await this.getVivaToken();
     this.webhookCode = await this.getVivaWebhookCode();
 
