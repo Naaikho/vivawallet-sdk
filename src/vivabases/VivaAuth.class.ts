@@ -25,8 +25,8 @@ class VivaAuth extends VivaSkull {
     if (
       !this.apikey ||
       !this.merchantId ||
-      !this.smartClientId ||
-      !this.smartClientSecret
+      !this.clientId ||
+      !this.clientSecret
     )
       throw new Error('Credentials not provided');
 
@@ -37,9 +37,14 @@ class VivaAuth extends VivaSkull {
       throw new Error('Credentials failed');
   }
 
-  /** Return the VivaWallet API Auth2.0 code from Credentials (needed for API Bearer calls) or `null` on request failed */
-  async getVivaToken(): Promise<string | null> {
-    if (!this.smartClientId || !this.smartClientSecret)
+  /**
+   * Return the VivaWallet API Auth2.0 code from Credentials (needed for API Bearer calls)
+   * or `null` on request failed
+   *
+   * @param general If `true`, apikey and merchantId will be used instead of clientId and clientSecret
+   */
+  async getVivaToken(basic = false): Promise<string | null> {
+    if (!this.clientId || !this.clientSecret)
       throw new Error('Init not called');
 
     try {
@@ -51,7 +56,9 @@ class VivaAuth extends VivaSkull {
           Authorization:
             'Basic ' +
             Buffer.from(
-              this.smartClientId + ':' + this.smartClientSecret
+              basic
+                ? this.merchantId + ':' + this.apikey
+                : this.clientId + ':' + this.clientSecret
             ).toString('base64'),
         },
         {

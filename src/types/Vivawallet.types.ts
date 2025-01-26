@@ -4,16 +4,18 @@ export interface VivawalletEnpointsInit {
 }
 
 export interface VivawalletAPIInit extends VivawalletEnpointsInit {
-  /** VivaWallet SmartCheckout Client ID */
-  smartClientId: string;
-  /** VivaWallet SmartCheckout Client Secret */
-  smartClientSecret: string;
+  /** VivaWallet Client ID */
+  clientId: string;
+  /** VivaWallet Client Secret */
+  clientSecret: string;
   /** VivaWallet Access Merchant ID */
   merchantId: string;
   /** VivaWallet Access API Key */
   apikey: string;
   /** Vivawallet payment source code */
   sourceCode?: string | null;
+  /** Active logs in console */
+  logs?: boolean;
 }
 
 export interface VivaSmartCheckoutOptions {

@@ -23,6 +23,13 @@ export class Marketplace extends Vivawallet {
     if (!this.vivaTotken) throw new Error('Init not called');
 
     try {
+      if (this.logs) {
+        console.log(
+          'createAccount',
+          this.endpoints.marketplace.accounts,
+          'Bearer ' + this.vivaTotken
+        );
+      }
       const r = await requests<CreateAccountDatas, CreateAccountResponse>(
         this.endpoints.marketplace.accounts.create.url,
         this.endpoints.marketplace.accounts.create.method,
