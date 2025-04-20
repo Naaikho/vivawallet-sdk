@@ -7,11 +7,11 @@ import MarketPlaceTransactions from './marketplace/MarketPlaceTransactions.class
 import VivaAuth from './vivabases/VivaAuth.class';
 
 export class Marketplace extends VivaAuth {
-  private source: VivaSourceCode;
-  private payments: MarketPlacePayments;
-  private transactions: MarketPlaceTransactions;
-  private sellers: MarketPlaceSellers;
-  private transfers: MarketPlaceTransfers;
+  source: VivaSourceCode;
+  payments: MarketPlacePayments;
+  transactions: MarketPlaceTransactions;
+  sellers: MarketPlaceSellers;
+  transfers: MarketPlaceTransfers;
 
   constructor(datas: VivawalletAPIInit) {
     super(datas);

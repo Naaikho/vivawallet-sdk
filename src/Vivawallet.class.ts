@@ -9,9 +9,9 @@ import VivaTransactions from './vivawallet/VivaTransactions.class';
 import VivaSourceCode from './vivawallet/VivaSourceCode.class';
 
 class Vivawallet extends VivaAuth {
-  private payments: VivaPayments;
-  private transactions: VivaTransactions;
-  private source: VivaSourceCode;
+  payments: VivaPayments;
+  transactions: VivaTransactions;
+  source: VivaSourceCode;
 
   constructor(datas: VivawalletAPIInit) {
     super(datas);
