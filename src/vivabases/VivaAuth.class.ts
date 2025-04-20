@@ -31,8 +31,8 @@ class VivaAuth extends VivaSkull {
     )
       throw new Error('Credentials not provided');
 
-    this.vivaTotken = (await this.getVivaToken()).data;
-    this.webhookCode = (await this.getVivaWebhookCode()).data;
+    this.vivaTotken = (await this.getVivaToken()).data || null;
+    this.webhookCode = (await this.getVivaWebhookCode()).data || null;
 
     if (!this.vivaTotken || !this.webhookCode)
       throw new Error('Credentials failed');
@@ -44,9 +44,7 @@ class VivaAuth extends VivaSkull {
    *
    * @param general If `true`, apikey and merchantId will be used instead of clientId and clientSecret
    */
-  async getVivaToken(
-    basic = false
-  ): MethodReturn<string | null, 'tokenerror' | 'initerror'> {
+  async getVivaToken(basic = false): MethodReturn<string | null, 'tokenerror'> {
     if (!this.clientId || !this.clientSecret) {
       return {
         success: false,
@@ -106,7 +104,15 @@ class VivaAuth extends VivaSkull {
 
   /** Return the code needed for Viva webhooks returns or `null` on request failed */
   async getVivaWebhookCode(): MethodReturn<string | null, 'webhookerror'> {
-    if (!this.merchantId || !this.apikey) throw new Error('Init not called');
+    if (!this.merchantId || !this.apikey) {
+      return {
+        success: false,
+        message: 'Init not called',
+        code: 'initerror',
+        data: null,
+      };
+    }
+
     try {
       const r = await useAxios.get(this.endpoints.webhookAuth.url, {
         headers: {
