@@ -29,24 +29,6 @@ export interface VivaTransactionCancelOptions {
   customerTrns?: string;
 }
 
-export interface VivaTransactionReturn {
-  Env: string;
-  Amount: number;
-  StatusId: VivaStatusId;
-  CurrencyCode: string;
-  TransactionId: string;
-  ReferenceNumber: number;
-  AuthorizationId: string;
-  RetrievalReferenceNumber: string;
-  ThreeDSecureStatusId: 0 | 1 | 2 | 3;
-  ErrorCode: number;
-  ErrorText: string;
-  TimeStamp: string;
-  CorrelationId: string;
-  EventId: number;
-  Success: boolean;
-}
-
 /**
  * - `F` -> Finished
  * - `A` -> Active

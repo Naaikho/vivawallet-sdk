@@ -107,11 +107,15 @@ export interface KlarnaOrderOptions {
   orderLines: KlarnaOrderOrderLines[];
 }
 
-export interface VivaMarketOrdersOptions extends VivaPaymentOrderOptions {
+export interface MPOrdersOptions extends VivaPaymentOrderOptions {
   transfer?: {
     amount?: number | null;
     platformFee?: number | null;
     connectedAccountId: string;
   };
   klarnaOrderOptions?: Array<KlarnaOrderOptions>;
+}
+
+export interface MPOrdersReturn {
+  orderCode: string;
 }

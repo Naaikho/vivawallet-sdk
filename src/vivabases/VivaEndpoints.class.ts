@@ -65,6 +65,18 @@ class VivaEndpoints {
           method: 'PATCH',
         },
       },
+      payment: {
+        create: {
+          url: 'https://demo-api.vivapayments.com/checkout/v2/orders',
+          method: 'POST',
+        },
+      },
+      transaction: {
+        cancel: {
+          url: 'https://demo-api.vivapayments.com/acquiring/v1/transactions/{transactionID}',
+          method: 'DELETE',
+        },
+      },
       transfers: {
         send: {
           url: 'https://demo-api.vivapayments.com/platforms/v1/transfers',
@@ -136,6 +148,18 @@ class VivaEndpoints {
         update: {
           url: 'https://api.vivapayments.com/platforms/v1/accounts/{accountId}',
           method: 'PATCH',
+        },
+      },
+      transaction: {
+        cancel: {
+          url: 'https://api.vivapayments.com/acquiring/v1/transactions/{transactionID}',
+          method: 'DELETE',
+        },
+      },
+      payment: {
+        create: {
+          url: 'https://api.vivapayments.com/checkout/v2/orders',
+          method: 'POST',
         },
       },
       transfers: {

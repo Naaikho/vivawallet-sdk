@@ -1,93 +1,24 @@
 import { VivawalletAPIInit } from './types/Vivawallet.types';
-import { VivaMarketOrdersOptions } from './types/marketplace.types/VivaMarketOrders.types';
-import {
-  CreateAccountDatas,
-  CreateAccountResponse,
-} from './types/marketplace.types/VivaSellers.types';
-import {
-  VivaTransfersDatas,
-  VivaTransfersResponse,
-} from './types/marketplace.types/VivaTransfers.types';
-import { requests } from './utils/functions';
-import Vivawallet from './Vivawallet.class';
+import VivaSourceCode from './vivawallet/VivaSourceCode.class';
+import MarketPlacePayments from './marketplace/MarketPlacePayments.class';
+import MarketPlaceTransfers from './marketplace/MarketPlaceTransfers.class';
+import MarketPlaceSellers from './marketplace/MarketPlaceSellers.class';
+import MarketPlaceTransactions from './marketplace/MarketPlaceTransactions.class';
+import VivaAuth from './vivabases/VivaAuth.class';
 
-export class Marketplace extends Vivawallet {
+export class Marketplace extends VivaAuth {
+  private source: VivaSourceCode;
+  private payments: MarketPlacePayments;
+  private transactions: MarketPlaceTransactions;
+  private sellers: MarketPlaceSellers;
+  private transfers: MarketPlaceTransfers;
+
   constructor(datas: VivawalletAPIInit) {
     super(datas);
+    this.source = new VivaSourceCode(datas);
+    this.payments = new MarketPlacePayments(datas);
+    this.transactions = new MarketPlaceTransactions(datas);
+    this.sellers = new MarketPlaceSellers(datas);
+    this.transfers = new MarketPlaceTransfers(datas);
   }
-
-  /** Create new Seller Account */
-  async createAccount(
-    datas: CreateAccountDatas
-  ): Promise<CreateAccountResponse | null> {
-    if (!this.vivaTotken) throw new Error('Init not called');
-
-    try {
-      if (this.logs) {
-        console.log(
-          'createAccount',
-          this.endpoints.marketplace.accounts,
-          'Bearer ' + this.vivaTotken
-        );
-      }
-      const r = await requests<CreateAccountDatas, CreateAccountResponse>(
-        this.endpoints.marketplace.accounts.create.url,
-        this.endpoints.marketplace.accounts.create.method,
-        {
-          Authorization: 'Bearer ' + this.vivaTotken,
-        },
-        datas
-      );
-      if (r.data) return r.data;
-    } catch (e) {
-      console.log(e);
-    }
-    return null;
-  }
-
-  /** Make new VivaWallet Marketplace order, return `orderCode` */
-  async createMarketplaceOrder(
-    orderData: VivaMarketOrdersOptions
-  ): Promise<number | null> {
-    if (!this.vivaTotken) throw new Error('Init not called');
-
-    try {
-      const r = await requests(
-        this.endpoints.payment.create.url,
-        this.endpoints.payment.create.method,
-        {
-          Authorization: 'Bearer ' + this.vivaTotken,
-        },
-        orderData
-      );
-      if (r.data && r.data.orderCode) return r.data.orderCode;
-    } catch (e) {
-      console.log(e);
-    }
-    return null;
-  }
-
-  /** Send funds from marketplace to seller account/brank */
-  async sendFunds(
-    datas: VivaTransfersDatas
-  ): Promise<VivaTransfersResponse | null> {
-    if (!this.vivaTotken) throw new Error('Init not called');
-
-    try {
-      const r = await requests<VivaTransfersDatas, VivaTransfersResponse>(
-        this.endpoints.marketplace.transfers.send.url,
-        this.endpoints.marketplace.transfers.send.method,
-        {
-          Authorization: 'Bearer ' + this.vivaTotken,
-        },
-        datas
-      );
-      if (r.data) return r.data;
-    } catch (e) {
-      console.log(e);
-    }
-    return null;
-  }
-
-  // async cancelMarketTransaction(): Promise<void> {}
 }

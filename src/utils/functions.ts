@@ -118,3 +118,14 @@ export function replaceKeyByValue(
   });
   return str;
 }
+
+export function querifyDatas(datas: Record<string, any>): string {
+  return Object.keys(datas)
+    .map((key) => {
+      const k: keyof typeof datas = key as keyof typeof datas;
+      return (
+        key + '=' + encodeURIComponent(datas[k] as string | number | boolean)
+      );
+    })
+    .join('&');
+}

@@ -1,4 +1,4 @@
-export interface VivaTransfersDatas {
+export interface MPTransfersDatas {
   /**
    * Amount to be sent.
    *
@@ -21,7 +21,7 @@ export interface VivaTransfersDatas {
   transactionId?: string | null;
 }
 
-export interface VivaTransfersResponse {
+export interface MPTransfersResponse {
   /** The ID of the transfer */
   transferId: string;
   /** The date that the transfer was executed. If the transaction is not settled this value is empty, otherwise the transfer is executed instantly with funds from the account's available balance */

@@ -1,4 +1,4 @@
-export interface CreateAccountDatas {
+export interface MPCreateAccountDatas {
   /** Email address */
   email: string;
   /** Mobile number */
@@ -71,7 +71,7 @@ export interface CreateAccountDatas {
   };
 }
 
-export interface CreateAccountResponse {
+export interface MPCreateAccountResponse {
   /** ID of the created connected account */
   accountId: string;
   /** Invitation information for the created connected account */
