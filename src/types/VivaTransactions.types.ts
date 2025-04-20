@@ -1,4 +1,4 @@
-export interface VivaTransactionRefundOptions {
+export interface VivaTransactionCancelOptions {
   /**
    * The amount that will be refunded in the currency's smallest denomination
    * (e.g., amount in pounds / euros x 100). It cannot exceed the amount of the
@@ -27,6 +27,24 @@ export interface VivaTransactionRefundOptions {
    * appears on the receipt the customer receives.
    */
   customerTrns?: string;
+}
+
+export interface VivaTransactionReturn {
+  Env: string;
+  Amount: number;
+  StatusId: VivaStatusId;
+  CurrencyCode: string;
+  TransactionId: string;
+  ReferenceNumber: number;
+  AuthorizationId: string;
+  RetrievalReferenceNumber: string;
+  ThreeDSecureStatusId: 0 | 1 | 2 | 3;
+  ErrorCode: number;
+  ErrorText: string;
+  TimeStamp: string;
+  CorrelationId: string;
+  EventId: number;
+  Success: boolean;
 }
 
 /**

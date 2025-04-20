@@ -181,3 +181,7 @@ export interface VivaPaymentOrderOptions {
    */
   isCardVerification?: boolean;
 }
+
+export interface VivaPaymentOrderReturn {
+  orderCode: number;
+}

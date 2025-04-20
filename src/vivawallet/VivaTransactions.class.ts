@@ -1,11 +1,13 @@
 import {
   VivaTransaction,
   VivaTransactionDatas,
-  VivaTransactionRefundOptions,
+  VivaTransactionCancelOptions,
   VivaTransactionReturn,
 } from '../types/VivaTransactions.types';
 import { VivawalletAPIInit } from '../types/Vivawallet.types';
 import VivaAuth from '../vivabases/VivaAuth.class';
+import { useAxios } from '../utils/axiosInstance.ts';
+import { MethodReturn } from '../types/Methods.types';
 
 class VivaTransactions extends VivaAuth {
   constructor(datas: VivawalletAPIInit) {
@@ -17,59 +19,130 @@ class VivaTransactions extends VivaAuth {
   /** Return the transaction if exist, or `null` if error/not exist */
   async getTransactionById(
     transactionId: string
-  ): Promise<VivaTransaction | null> {
-    if (!this.vivaTotken) throw new Error('Init not called');
+  ): MethodReturn<VivaTransaction | null, 'nodatas'> {
+    if (!this.vivaTotken) {
+      return {
+        success: false,
+        message: 'Init not called',
+        code: 'initerror',
+        data: null,
+      };
+    }
+
     try {
-      const r = await requests(
+      const response = await useAxios.get<VivaTransaction>(
         this.endpoints.transaction.get.url.replace(
           '{transactionId}',
           transactionId
         ),
-        this.endpoints.transaction.get.method,
         {
-          Authorization: 'Bearer ' + this.vivaTotken,
+          headers: {
+            Authorization: 'Bearer ' + this.vivaTotken,
+          },
         }
       );
-      if (r.data) return r.data as VivaTransaction;
+
+      if (!response.data) {
+        return {
+          success: false,
+          message: 'Transaction not found',
+          code: 'nodatas',
+          data: null,
+        };
+      }
+
+      return {
+        success: true,
+        message: 'Transaction retrieved successfully',
+        data: response.data,
+      };
     } catch (e) {
-      console.log(e);
+      console.error('Viva Transaction Error', e);
+      return {
+        success: false,
+        message: 'Failed to get transaction',
+        code: 'error',
+        data: null,
+      };
     }
-    return null;
   }
 
   /** Make transaction by transactionId */
   async makeTransaction(
     options: VivaTransactionDatas
-  ): Promise<VivaTransactionReturn | null> {
-    if (!this.merchantId || !this.apikey) throw new Error('Init not called');
-    if (!options.amount || !options.id) return null;
+  ): MethodReturn<VivaTransactionReturn | null, 'invaliddatas' | 'nodatas'> {
+    if (!this.merchantId || !this.apikey) {
+      return {
+        success: false,
+        message: 'Init not called',
+        code: 'initerror',
+        data: null,
+      };
+    }
+
+    if (!options.amount || !options.id) {
+      return {
+        success: false,
+        message: 'Amount and ID are required',
+        code: 'invaliddatas',
+        data: null,
+      };
+    }
+
     try {
       const transactionUrl = this.endpoints.transaction.create.url.replace(
         '{transaction_id}',
         options.id
       );
-      const r = await requests<VivaTransactionDatas, VivaTransactionReturn>(
+
+      const response = await useAxios.post<VivaTransactionReturn>(
         transactionUrl,
-        this.endpoints.transaction.create.method,
+        options,
         {
-          Authorization: 'Bearer ' + this.getVivaBasicToken(),
-        },
-        options
+          headers: {
+            Authorization: 'Bearer ' + this.getVivaBasicToken(),
+          },
+        }
       );
-      // console.log("R", r);
-      if (r.data && r.data.Success && r.data.StatusId === 'F') return r.data;
-    } catch (e: any) {
-      console.log(e);
+
+      if (!response.data) {
+        return {
+          success: false,
+          message: 'Transaction creation failed',
+          code: 'nodatas',
+          data: null,
+        };
+      }
+
+      return {
+        success: true,
+        message: 'Transaction created successfully',
+        data: response.data,
+      };
+    } catch (e) {
+      console.error('Viva Transaction Error', e);
+      return {
+        success: false,
+        message: 'Failed to create transaction',
+        code: 'error',
+        data: null,
+      };
     }
-    return null;
   }
 
-  /** Allow refund transaction, return `true` if the transaction be refund succefuly */
-  async refundTransaction(
+  /** Allow cancel transaction (refund) */
+  async cancelTransaction(
     transactionId: string,
-    refundOptions: VivaTransactionRefundOptions
-  ): Promise<boolean> {
-    if (!this.vivaTotken) throw new Error('Init not called');
+    refundOptions: VivaTransactionCancelOptions
+  ): MethodReturn<VivaTransactionReturn | null, 'nodatas'> {
+    if (!this.vivaTotken) {
+      return {
+        success: false,
+        message: 'Init not called',
+        code: 'initerror',
+        data: null,
+      };
+    }
 
     const queries = Object.keys(refundOptions)
       .map((key) => {
@@ -83,23 +156,44 @@ class VivaTransactions extends VivaAuth {
       .join('&');
 
     try {
-      const r = await requests(
+      const response = await useAxios.post<VivaTransactionReturn>(
         this.endpoints.transaction.cancel.url.replace(
           '{transactionId}',
           transactionId
         ) +
           '?' +
           queries,
-        this.endpoints.transaction.cancel.method,
+        {},
         {
-          Authorization: 'Bearer ' + this.vivaTotken,
+          headers: {
+            Authorization: 'Bearer ' + this.vivaTotken,
+          },
         }
       );
-      if (r.data && r.data.Success) return true;
+
+      if (!response.data) {
+        return {
+          success: false,
+          message: 'Transaction refund failed',
+          code: 'nodatas',
+          data: null,
+        };
+      }
+
+      return {
+        success: true,
+        message: 'Transaction refunded successfully',
+        data: response.data,
+      };
     } catch (e) {
-      console.log(e);
+      console.error('Viva Refund Error', e);
+      return {
+        success: false,
+        message: 'Failed to refund transaction',
+        code: 'error',
+        data: null,
+      };
     }
-    return false;
   }
 
   /** ------------------------------------------------- */
