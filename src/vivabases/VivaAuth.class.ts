@@ -19,10 +19,11 @@ class VivaAuth extends VivaSkull {
 
   constructor(datas: VivawalletAPIInit) {
     super(datas);
+    this.init();
   }
 
   /** Credentials verification, `throw` error if credentials is not gived ***(required for API calls)*** */
-  async init(): Promise<void> {
+  private async init(): Promise<void> {
     if (
       !this.apikey ||
       !this.merchantId ||
