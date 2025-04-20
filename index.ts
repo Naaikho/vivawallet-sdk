@@ -8,12 +8,10 @@
 import VivaAuth from './src/vivabases/VivaAuth.class';
 import VivaEndpoints from './src/vivabases/VivaEndpoints.class';
 import VivaSkull from './src/vivabases/VivaSkull.class';
-import Vivawallet, {
-  getSmartCheckout,
-} from './src/vivawallet/Vivawallet.class';
-import { Marketplace } from './src/vivawallet/MarketPlace.class';
+import Vivawallet, { getSmartCheckout } from './src/Vivawallet.class';
+import { Marketplace } from './src/marketplace/MarketPlace.class';
 
-const ClassBase = {
+const ClassBase = {./src/MarketPlace.class
   VivaEndpoints,
   VivaSkull,
   VivaAuth,

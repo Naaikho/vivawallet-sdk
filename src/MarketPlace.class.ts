@@ -1,14 +1,14 @@
-import { VivawalletAPIInit } from '../types/Vivawallet.types';
-import { VivaMarketOrdersOptions } from '../types/marketplace.types/VivaMarketOrders.types';
+import { VivawalletAPIInit } from './types/Vivawallet.types';
+import { VivaMarketOrdersOptions } from './types/marketplace.types/VivaMarketOrders.types';
 import {
   CreateAccountDatas,
   CreateAccountResponse,
-} from '../types/marketplace.types/VivaSellers.types';
+} from './types/marketplace.types/VivaSellers.types';
 import {
   VivaTransfersDatas,
   VivaTransfersResponse,
-} from '../types/marketplace.types/VivaTransfers.types';
-import { requests } from '../utils/functions';
+} from './types/marketplace.types/VivaTransfers.types';
+import { requests } from './utils/functions';
 import Vivawallet from './Vivawallet.class';
 
 export class Marketplace extends Vivawallet {
