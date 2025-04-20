@@ -10,6 +10,12 @@ export interface MPTransfersDatas {
   /**ID of the connected account */
   connectedAccountId: string;
   /**
+   * Default: `"Amount Settlement from Platform"`
+   *
+   * A decription that can be set, as identification key, by the platform marketplace during sending funds to a connected account id.
+   */
+  description?: string;
+  /**
    * Default: `null`
    *
    * Denotes the transaction (i.e. customer payment) associated with this transfer.
