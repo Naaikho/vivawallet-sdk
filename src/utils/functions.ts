@@ -1,96 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
 import validator from 'validator';
-import {
-  INkError,
-  NkRequestError,
-  NkRequestResponse,
-  RequestsOptions,
-} from '../types/Requests.types';
 
 /**
  * Make an uuid V4
  */
 export function makeUuid(): string {
   return uuidv4();
-}
-
-export const NkError = (data: NkRequestError) => {
-  const err: any = new Error(JSON.stringify(data.error));
-  err.details = {
-    status: data.status,
-    statusText: data.statusText,
-    message: data.message,
-    error: data.error,
-  } as NkRequestError;
-  return err as INkError;
-};
-
-/**
- * Main request method using Fetch API
- *
- * ### If edit, keep the same output format
- */
-export async function requests<
-  T extends Record<string, any>,
-  R = Record<string, any>
->(
-  url: string,
-  method: string,
-  headers: Record<string, string> = {},
-  data?: T
-): Promise<NkRequestResponse<R>> {
-  let options: RequestsOptions = {
-    method: method.toUpperCase(),
-    headers: headers,
-  };
-
-  if (options.method !== 'GET') {
-    options.headers['Content-Type'] =
-      options.headers['Content-Type'] || 'application/json';
-
-    switch (options.headers['Content-Type']) {
-      case 'application/x-www-form-urlencoded':
-        options.body = new URLSearchParams(data);
-        break;
-
-      case 'application/json':
-        options.body = JSON.stringify(data);
-        break;
-    }
-  } else {
-    let params = new URLSearchParams(data);
-    url += '?' + params.toString();
-  }
-
-  let f = await fetch(String(url), options);
-
-  if (f.ok) {
-    const contentType = f.headers.get('content-type');
-    if (contentType && contentType.includes('application/json')) {
-      return {
-        status: f.status,
-        statusText: f.statusText,
-        data: (await f.json()) as R,
-      };
-    } else {
-      return {
-        status: f.status,
-        statusText: f.statusText,
-        message: await f.text(),
-      };
-    }
-  } else {
-    let text: string | null = null;
-    try {
-      text = await f.text();
-    } catch (e) {}
-    throw NkError({
-      error: 'Request failed',
-      status: f.status,
-      statusText: f.statusText,
-      message: text,
-    });
-  }
 }
 
 export function isDev(): boolean {
