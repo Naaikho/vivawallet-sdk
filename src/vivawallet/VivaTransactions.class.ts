@@ -20,7 +20,8 @@ class VivaTransactions extends VivaAuth {
   async getTransactionById(
     transactionId: string
   ): MethodReturn<VivaTransaction | null, 'nodatas'> {
-    if (!this.vivaTotken) {
+    const vivaToken = (await this.getVivaToken()).data;
+    if (!vivaToken) {
       return {
         success: false,
         message: 'Init not called',
@@ -37,7 +38,7 @@ class VivaTransactions extends VivaAuth {
         ),
         {
           headers: {
-            Authorization: 'Bearer ' + this.vivaTotken,
+            Authorization: 'Bearer ' + vivaToken,
           },
         }
       );
@@ -135,7 +136,8 @@ class VivaTransactions extends VivaAuth {
     transactionId: string,
     refundOptions: VivaTransactionCancelOptions
   ): MethodReturn<VivaTransactionReturn | null, 'nodatas'> {
-    if (!this.vivaTotken) {
+    const vivaToken = (await this.getVivaToken()).data;
+    if (!vivaToken) {
       return {
         success: false,
         message: 'Init not called',
@@ -166,7 +168,7 @@ class VivaTransactions extends VivaAuth {
         {},
         {
           headers: {
-            Authorization: 'Bearer ' + this.vivaTotken,
+            Authorization: 'Bearer ' + vivaToken,
           },
         }
       );

@@ -5,18 +5,6 @@ import { MethodReturn } from '../types/Methods.types';
 import { GetVivaTokenReturn } from '../types/VivawalletAuth.types';
 
 class VivaAuth extends VivaSkull {
-  /**
-   * This code is used for Viva Wallet webhook verification (validation and events) and should be return in the `json` response with the following format:
-   * ```json
-   * {
-   *    "key": "<webhookCode>"
-   * }
-   * ```
-   */
-  webhookCode: string | null = null;
-
-  vivaTotken: string | null = null;
-
   constructor(datas: VivawalletAPIInit) {
     super(datas);
     this.init();
@@ -24,6 +12,7 @@ class VivaAuth extends VivaSkull {
 
   /** Credentials verification, `throw` error if credentials is not gived ***(required for API calls)*** */
   private async init(): Promise<void> {
+    console.log('Init viva');
     if (
       !this.apikey ||
       !this.merchantId ||
@@ -31,12 +20,6 @@ class VivaAuth extends VivaSkull {
       !this.clientSecret
     )
       throw new Error('Credentials not provided');
-
-    this.vivaTotken = (await this.getVivaToken()).data || null;
-    this.webhookCode = (await this.getVivaWebhookCode()).data || null;
-
-    if (!this.vivaTotken || !this.webhookCode)
-      throw new Error('Credentials failed');
   }
 
   /**

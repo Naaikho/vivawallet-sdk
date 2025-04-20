@@ -14,7 +14,8 @@ class MarketPlaceSellers extends VivaAuth {
   async createAccount(
     datas: MPCreateAccountDatas
   ): MethodReturn<MPCreateAccountResponse | null, 'nodatas'> {
-    if (!this.vivaTotken) {
+    const vivaToken = (await this.getVivaToken()).data;
+    if (!vivaToken) {
       return {
         success: false,
         message: 'Init not called',
@@ -27,7 +28,7 @@ class MarketPlaceSellers extends VivaAuth {
         console.log(
           'createAccount',
           this.endpoints.marketplace.accounts,
-          'Bearer ' + this.vivaTotken
+          'Bearer ' + vivaToken
         );
       }
 
@@ -36,7 +37,7 @@ class MarketPlaceSellers extends VivaAuth {
         datas,
         {
           headers: {
-            Authorization: 'Bearer ' + this.vivaTotken,
+            Authorization: 'Bearer ' + vivaToken,
           },
         }
       );

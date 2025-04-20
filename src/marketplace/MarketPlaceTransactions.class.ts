@@ -24,7 +24,8 @@ class MarketPlaceTransactions extends VivaAuth {
     transactionId: string,
     refundOptions: MPTransactionCancelOptions
   ): MethodReturn<MPCancelTransactionReturn | null, 'nodatas'> {
-    if (!this.vivaTotken) {
+    const vivaToken = (await this.getVivaToken()).data;
+    if (!vivaToken) {
       return {
         success: false,
         message: 'Init not called',
@@ -46,7 +47,7 @@ class MarketPlaceTransactions extends VivaAuth {
         {},
         {
           headers: {
-            Authorization: 'Bearer ' + this.vivaTotken,
+            Authorization: 'Bearer ' + vivaToken,
           },
         }
       );

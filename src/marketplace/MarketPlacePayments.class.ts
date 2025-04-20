@@ -20,7 +20,8 @@ class MarketPlacePayments extends VivaAuth {
   async createOrder(
     orderData: MPOrdersOptions
   ): MethodReturn<MPOrdersReturn | null, 'nodatas'> {
-    if (!this.vivaTotken) {
+    const vivaToken = (await this.getVivaToken()).data;
+    if (!vivaToken) {
       return {
         success: false,
         message: 'Init not called',
@@ -34,7 +35,7 @@ class MarketPlacePayments extends VivaAuth {
         orderData,
         {
           headers: {
-            Authorization: 'Bearer ' + this.vivaTotken,
+            Authorization: 'Bearer ' + vivaToken,
           },
         }
       );

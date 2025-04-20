@@ -16,7 +16,8 @@ class MarketPlaceTransfers extends VivaAuth {
   async sendFunds(
     datas: MPTransfersDatas
   ): MethodReturn<MPTransfersResponse | null, 'nodatas'> {
-    if (!this.vivaTotken) {
+    const vivaToken = (await this.getVivaToken()).data;
+    if (!vivaToken) {
       return {
         success: false,
         message: 'Init not called',
@@ -30,7 +31,7 @@ class MarketPlaceTransfers extends VivaAuth {
         datas,
         {
           headers: {
-            Authorization: 'Bearer ' + this.vivaTotken,
+            Authorization: 'Bearer ' + vivaToken,
           },
         }
       );
