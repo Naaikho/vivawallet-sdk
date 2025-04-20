@@ -32,7 +32,7 @@ class VivaAuth extends VivaSkull {
       throw new Error('Credentials not provided');
 
     this.vivaTotken = (await this.getVivaToken()).data;
-    this.webhookCode = await this.getVivaWebhookCode();
+    this.webhookCode = (await this.getVivaWebhookCode()).data;
 
     if (!this.vivaTotken || !this.webhookCode)
       throw new Error('Credentials failed');
@@ -44,7 +44,9 @@ class VivaAuth extends VivaSkull {
    *
    * @param general If `true`, apikey and merchantId will be used instead of clientId and clientSecret
    */
-  async getVivaToken(basic = false): MethodReturn<string | null> {
+  async getVivaToken(
+    basic = false
+  ): MethodReturn<string | null, 'tokenerror' | 'initerror'> {
     if (!this.clientId || !this.clientSecret) {
       return {
         success: false,
@@ -103,17 +105,38 @@ class VivaAuth extends VivaSkull {
   }
 
   /** Return the code needed for Viva webhooks returns or `null` on request failed */
-  async getVivaWebhookCode(): Promise<string | null> {
+  async getVivaWebhookCode(): MethodReturn<string | null, 'webhookerror'> {
     if (!this.merchantId || !this.apikey) throw new Error('Init not called');
     try {
-      const r = await requests(this.endpoints.webhookAuth.url, 'GET', {
-        Authorization: 'Basic ' + this.getVivaBasicToken(),
+      const r = await useAxios.get(this.endpoints.webhookAuth.url, {
+        headers: {
+          Authorization: 'Basic ' + this.getVivaBasicToken(),
+        },
       });
-      if (r.data && r.data.Key) return r.data.Key;
+
+      if (!r.data || !r.data.Key) {
+        return {
+          success: false,
+          message: 'Failed to get Viva webhook code',
+          code: 'webhookerror',
+          data: null,
+        };
+      }
+
+      return {
+        success: true,
+        message: 'Viva webhook code fetched',
+        data: r.data.Key,
+      };
     } catch (e) {
-      console.log('Webhook code', e);
+      console.error('Viva Webhook Code Error', e);
+      return {
+        success: false,
+        message: 'Failed to get Viva webhook code',
+        code: 'webhookerror',
+        data: null,
+      };
     }
-    return null;
   }
 }
 

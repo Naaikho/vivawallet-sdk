@@ -1,8 +1,8 @@
-export interface MethodReturnDatas<T> {
+export interface MethodReturnDatas<T, E> {
   success: boolean;
   message: string;
-  code?: 'initerror' | 'tokenerror' | 'error';
+  code?: E | 'error';
   data: T;
 }
 
-export type MethodReturn<T> = Promise<MethodReturnDatas<T>>;
+export type MethodReturn<T, E> = Promise<MethodReturnDatas<T, E>>;
