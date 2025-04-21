@@ -92,7 +92,7 @@ class VivaTransactions extends VivaAuth {
 
     try {
       const transactionUrl = this.endpoints.transaction.create.url.replace(
-        '{transaction_id}',
+        '{transactionId}',
         options.id
       );
 
