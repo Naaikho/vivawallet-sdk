@@ -37,14 +37,13 @@ class MarketPlaceTransactions extends VivaAuth {
     const queries = querifyDatas(refundOptions);
 
     try {
-      const response = await useAxios.post<MPCancelTransactionReturn>(
+      const response = await useAxios.delete<MPCancelTransactionReturn>(
         this.endpoints.marketplace.transaction.cancel.url.replace(
           '{transactionId}',
           transactionId
         ) +
           '?' +
           queries,
-        {},
         {
           headers: {
             Authorization: 'Bearer ' + vivaToken,

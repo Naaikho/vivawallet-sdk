@@ -92,15 +92,11 @@ class VivaPayments extends VivaAuth {
         orderCode
       );
 
-      const response = await useAxios.post(
-        cancelUrl,
-        {},
-        {
-          headers: {
-            Authorization: 'Bearer ' + this.getVivaBasicToken(),
-          },
-        }
-      );
+      const response = await useAxios.delete(cancelUrl, {
+        headers: {
+          Authorization: 'Bearer ' + this.getVivaBasicToken(),
+        },
+      });
 
       if (!response.data) {
         return {

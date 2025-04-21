@@ -158,14 +158,13 @@ class VivaTransactions extends VivaAuth {
       .join('&');
 
     try {
-      const response = await useAxios.post<VivaTransactionReturn>(
+      const response = await useAxios.delete<VivaTransactionReturn>(
         this.endpoints.transaction.cancel.url.replace(
           '{transactionId}',
           transactionId
         ) +
           '?' +
           queries,
-        {},
         {
           headers: {
             Authorization: 'Bearer ' + vivaToken,
