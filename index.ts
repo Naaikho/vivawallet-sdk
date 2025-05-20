@@ -5,11 +5,12 @@
  * License: ISC
  */
 
-import { Marketplace } from './src/MarketPlace.class';
 import VivaAuth from './src/vivabases/VivaAuth.class';
 import VivaEndpoints from './src/vivabases/VivaEndpoints.class';
 import VivaSkull from './src/vivabases/VivaSkull.class';
 import Vivawallet, { getSmartCheckout } from './src/Vivawallet.class';
+import { VivaISV } from './src/VivaISV.class';
+import { Marketplace } from './src/MarketPlace.class';
 
 const VivaBases = {
   VivaEndpoints,
@@ -17,4 +18,4 @@ const VivaBases = {
   VivaAuth,
 };
 
-export { Vivawallet, getSmartCheckout, Marketplace, VivaBases };
+export { Vivawallet, getSmartCheckout, Marketplace, VivaISV, VivaBases };
