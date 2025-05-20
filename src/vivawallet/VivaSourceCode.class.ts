@@ -2,7 +2,7 @@ import { MethodReturn } from '../types/Methods.types';
 import { SourceCodeDatas } from '../types/VivaSource.types';
 import { VivawalletAPIInit } from '../types/Vivawallet.types';
 import { useAxios } from '../utils/axiosInstance.ts';
-import VivaAuth from '../vivabases/VivaAuth.class';
+import {VivaAuth} from '../vivabases/VivaAuth.class';
 
 class VivaSourceCode extends VivaAuth {
   constructor(datas: VivawalletAPIInit) {

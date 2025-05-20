@@ -1,4 +1,7 @@
-import { VivawalletAPIInit } from '../types/Vivawallet.types';
+import {
+  VivawalletAPIInit,
+  VivawalletISVInit,
+} from '../types/Vivawallet.types';
 import VivaSkull from './VivaSkull.class';
 import { useAxios } from '../utils/axiosInstance.ts';
 import { MethodReturn } from '../types/Methods.types';
@@ -130,4 +133,33 @@ class VivaAuth extends VivaSkull {
   }
 }
 
-export default VivaAuth;
+// ------------------------------------------------------------
+
+class VivaAuthISV extends VivaSkull {
+  getVivaToken: typeof VivaAuth.prototype.getVivaToken;
+  getVivaWebhookCode: typeof VivaAuth.prototype.getVivaWebhookCode;
+
+  constructor(datas: VivawalletISVInit) {
+    const adaptedDatas: VivawalletAPIInit = {
+      ...datas,
+      merchantId: 'null',
+      apikey: 'null',
+    };
+
+    super(adaptedDatas);
+    this.init();
+
+    const auth = new VivaAuth(adaptedDatas);
+    this.getVivaToken = auth.getVivaToken.bind(auth);
+    this.getVivaWebhookCode = auth.getVivaWebhookCode.bind(auth);
+  }
+
+  /** Credentials verification, `throw` error if credentials is not gived ***(required for API calls)*** */
+  private async init(): Promise<void> {
+    console.log('Init viva');
+    if (!this.clientId || !this.clientSecret)
+      throw new Error('Credentials not provided');
+  }
+}
+
+export { VivaAuth, VivaAuthISV };

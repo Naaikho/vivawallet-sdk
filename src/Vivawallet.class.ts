@@ -2,7 +2,7 @@ import {
   VivaSmartCheckoutOptions,
   VivawalletAPIInit,
 } from './types/Vivawallet.types';
-import VivaAuth from './vivabases/VivaAuth.class';
+import { VivaAuth } from './vivabases/VivaAuth.class';
 import VivaEndpoints from './vivabases/VivaEndpoints.class';
 import VivaPayments from './vivawallet/VivaPayments.class';
 import VivaTransactions from './vivawallet/VivaTransactions.class';

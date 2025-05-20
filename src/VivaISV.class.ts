@@ -1,11 +1,11 @@
 import IsvPos from './isv/IsvPos.class';
-import { VivawalletAPIInit } from './types/Vivawallet.types';
-import VivaAuth from './vivabases/VivaAuth.class';
+import { VivawalletISVInit } from './types/Vivawallet.types';
+import { VivaAuthISV } from './vivabases/VivaAuth.class';
 
-export class VivaISV extends VivaAuth {
+export class VivaISV extends VivaAuthISV {
   pos: IsvPos;
 
-  constructor(datas: VivawalletAPIInit) {
+  constructor(datas: VivawalletISVInit) {
     super(datas);
     this.pos = new IsvPos(datas);
   }

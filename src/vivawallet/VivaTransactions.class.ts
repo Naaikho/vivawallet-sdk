@@ -5,7 +5,7 @@ import {
   VivaTransactionReturn,
 } from '../types/VivaTransactions.types';
 import { VivawalletAPIInit } from '../types/Vivawallet.types';
-import VivaAuth from '../vivabases/VivaAuth.class';
+import { VivaAuth } from '../vivabases/VivaAuth.class';
 import { useAxios } from '../utils/axiosInstance.ts';
 import { MethodReturn } from '../types/Methods.types';
 

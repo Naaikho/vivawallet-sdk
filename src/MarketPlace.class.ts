@@ -4,7 +4,7 @@ import MarketPlacePayments from './marketplace/MarketPlacePayments.class';
 import MarketPlaceTransfers from './marketplace/MarketPlaceTransfers.class';
 import MarketPlaceSellers from './marketplace/MarketPlaceSellers.class';
 import MarketPlaceTransactions from './marketplace/MarketPlaceTransactions.class';
-import VivaAuth from './vivabases/VivaAuth.class';
+import { VivaAuth } from './vivabases/VivaAuth.class';
 
 export class Marketplace extends VivaAuth {
   source: VivaSourceCode;

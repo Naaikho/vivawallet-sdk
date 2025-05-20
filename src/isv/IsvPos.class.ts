@@ -4,12 +4,12 @@ import {
   ISVInitSaleRequest,
 } from '../types/isv.types/ISVPos.types';
 import { MethodReturn } from '../types/Methods.types';
-import { VivawalletAPIInit } from '../types/Vivawallet.types';
+import { VivawalletISVInit } from '../types/Vivawallet.types';
 import { useAxios } from '../utils/axiosInstance.ts';
-import VivaAuth from '../vivabases/VivaAuth.class';
+import { VivaAuthISV } from '../vivabases/VivaAuth.class';
 
-export default class IsvPos extends VivaAuth {
-  constructor(datas: VivawalletAPIInit) {
+export default class IsvPos extends VivaAuthISV {
+  constructor(datas: VivawalletISVInit) {
     super(datas);
   }
 

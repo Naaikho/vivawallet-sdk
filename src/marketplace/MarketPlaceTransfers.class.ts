@@ -5,7 +5,7 @@ import {
 import { MethodReturn } from '../types/Methods.types';
 import { VivawalletAPIInit } from '../types/Vivawallet.types';
 import { useAxios } from '../utils/axiosInstance.ts';
-import VivaAuth from '../vivabases/VivaAuth.class';
+import { VivaAuth } from '../vivabases/VivaAuth.class';
 
 class MarketPlaceTransfers extends VivaAuth {
   constructor(datas: VivawalletAPIInit) {

@@ -18,6 +18,9 @@ export interface VivawalletAPIInit extends VivawalletEnpointsInit {
   logs?: boolean;
 }
 
+export interface VivawalletISVInit
+  extends Omit<VivawalletAPIInit, 'merchantId' | 'apikey'> {}
+
 export interface VivaSmartCheckoutOptions {
   orderCode: string;
   color?: string;
