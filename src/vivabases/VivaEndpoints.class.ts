@@ -84,6 +84,18 @@ class VivaEndpoints {
         },
       },
     },
+    isv: {
+      devices: {
+        url: 'https://demo-api.vivapayments.com/ecr/isv/v1/devices:search',
+        method: 'POST',
+      },
+      transaction: {
+        create: {
+          url: 'https://demo-api.vivapayments.com/ecr/isv/v1/transactions:sale',
+          method: 'POST',
+        },
+      },
+    },
   };
 
   public static prodEndpoints: typeof VivaEndpoints.demoEndpoints = {
@@ -165,6 +177,18 @@ class VivaEndpoints {
       transfers: {
         send: {
           url: 'https://api.vivapayments.com/platforms/v1/transfers',
+          method: 'POST',
+        },
+      },
+    },
+    isv: {
+      devices: {
+        url: 'https://api.vivapayments.com/ecr/v1/devices:search',
+        method: 'POST',
+      },
+      transaction: {
+        create: {
+          url: 'https://api.vivapayments.com/ecr/isv/v1/transactions:sale',
           method: 'POST',
         },
       },
