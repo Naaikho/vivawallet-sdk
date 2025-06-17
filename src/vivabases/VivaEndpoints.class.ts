@@ -85,6 +85,12 @@ class VivaEndpoints {
       },
     },
     isv: {
+      payments: {
+        create: {
+          url: 'https://demo-api.vivapayments.com/checkout/v2/isv/orders',
+          method: 'POST',
+        },
+      },
       devices: {
         url: 'https://demo-api.vivapayments.com/ecr/isv/v1/devices:search',
         method: 'POST',
@@ -182,8 +188,14 @@ class VivaEndpoints {
       },
     },
     isv: {
+      payments: {
+        create: {
+          url: 'https://api.vivapayments.com/checkout/v2/isv/orders',
+          method: 'POST',
+        },
+      },
       devices: {
-        url: 'https://api.vivapayments.com/ecr/v1/devices:search',
+        url: 'https://api.vivapayments.com/ecr/isv/v1/devices:search',
         method: 'POST',
       },
       transaction: {
