@@ -8,6 +8,7 @@ import { VivawalletAPIInit } from '../types/Vivawallet.types';
 import { VivaAuth } from '../vivabases/VivaAuth.class';
 import { useAxios } from '../utils/axiosInstance.ts';
 import { MethodReturn } from '../types/Methods.types';
+import { querifyDatas } from '../utils/functions';
 
 class VivaTransactions extends VivaAuth {
   constructor(datas: VivawalletAPIInit) {
@@ -136,7 +137,7 @@ class VivaTransactions extends VivaAuth {
     transactionId: string,
     refundOptions: VivaTransactionCancelOptions
   ): MethodReturn<VivaTransactionReturn | null, 'nodatas'> {
-    const vivaToken = (await this.getVivaToken()).data;
+    const vivaToken = await this.getVivaBasicToken();
     if (!vivaToken) {
       return {
         success: false,
@@ -146,16 +147,7 @@ class VivaTransactions extends VivaAuth {
       };
     }
 
-    const queries = Object.keys(refundOptions)
-      .map((key) => {
-        const k: keyof typeof refundOptions = key as keyof typeof refundOptions;
-        return (
-          key +
-          '=' +
-          encodeURIComponent(refundOptions[k] as string | number | boolean)
-        );
-      })
-      .join('&');
+    const queries = querifyDatas(refundOptions);
 
     try {
       const response = await useAxios.delete<VivaTransactionReturn>(
