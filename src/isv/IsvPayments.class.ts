@@ -32,7 +32,7 @@ export default class IsvPayments extends VivaAuthISV {
 
     try {
       const response = await useAxios.post<VivaPaymentOrderReturn>(
-        this.endpoints.isv.payments.create + '?merchantId=' + merchantId,
+        this.endpoints.isv.payments.create.url + '?merchantId=' + merchantId,
         orderData,
         {
           headers: {
