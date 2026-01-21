@@ -30,9 +30,10 @@ class MarketPlaceTransfers extends VivaAuth {
       );
 
       if (!r.data) {
+        if (this.errorLogs) console.error('Vivawallet returned no sent funds data', r.data);
         return {
           success: false,
-          message: 'Failed to send funds',
+          message: 'Vivawallet returned no sent funds data',
           code: 'nodatas',
           data: null,
         };
@@ -44,10 +45,10 @@ class MarketPlaceTransfers extends VivaAuth {
         data: r.data,
       };
     } catch (e) {
-      console.log('MarketPlaceTransfers.sendFunds', e);
+      if (this.errorLogs) console.error('MarketPlaceTransfers.sendFunds', e);
       return {
         success: false,
-        message: 'Failed to send funds',
+        message: 'Failed to send funds to seller account/brand',
         code: 'error',
         data: null,
       };

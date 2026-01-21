@@ -12,8 +12,8 @@ class VivaSkull extends VivaEndpoints {
   apikey: string;
   /** Vivawallet payment source code */
   sourceCode: string | null;
-  /** Active logs in console */
-  logs = false;
+  /** Active internal error logs in console */
+  errorLogs = false;
 
   constructor(datas: VivawalletAPIInit) {
     super({ dev: datas.dev });
@@ -22,7 +22,7 @@ class VivaSkull extends VivaEndpoints {
     this.merchantId = datas.merchantId;
     this.apikey = datas.apikey;
     this.sourceCode = datas.sourceCode || null;
-    this.logs = datas.logs || false;
+    this.errorLogs = datas.logs || false;
   }
 }
 

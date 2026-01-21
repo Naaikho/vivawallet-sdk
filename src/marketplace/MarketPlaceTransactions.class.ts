@@ -43,9 +43,10 @@ class MarketPlaceTransactions extends VivaAuth {
       );
 
       if (!response.data) {
+        if (this.errorLogs) console.error('Vivawallet returned no canceled transaction data', response.data);
         return {
           success: false,
-          message: 'Transaction refund failed',
+          message: 'Vivawallet returned no canceled transaction data',
           code: 'nodatas',
           data: null,
         };
@@ -53,14 +54,14 @@ class MarketPlaceTransactions extends VivaAuth {
 
       return {
         success: true,
-        message: 'Transaction refunded successfully',
+        message: 'Transaction canceled successfully',
         data: response.data,
       };
     } catch (e) {
-      console.error('Viva Refund Error', e);
+      if (this.errorLogs) console.error('MarketPlaceTransactions.cancelTransaction', e);
       return {
         success: false,
-        message: 'Failed to refund transaction',
+        message: 'Failed to cancel transaction',
         code: 'error',
         data: null,
       };

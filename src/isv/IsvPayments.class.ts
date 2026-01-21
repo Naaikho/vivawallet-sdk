@@ -29,7 +29,7 @@ export default class IsvPayments extends VivaAuthISV {
       );
 
       if (!response.data) {
-        console.error('VivaWallet returned no create order data', response.data);
+        if (this.errorLogs) console.error('VivaWallet returned no create order data', response.data);
         return {
           success: false,
           message: 'VivaWallet returned no create order data',
@@ -46,7 +46,7 @@ export default class IsvPayments extends VivaAuthISV {
         },
       };
     } catch (e) {
-      console.error('IsvPayments.createOrder', e);
+      if (this.errorLogs) console.error('IsvPayments.createOrder', e);
       return {
         success: false,
         message: 'Failed to create order',

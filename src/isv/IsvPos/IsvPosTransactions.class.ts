@@ -32,7 +32,7 @@ export default class IsvPosTransactions extends VivaAuthISV {
         data: null,
       };
     } catch (e) {
-      console.error('IsvPos.initSale', e);
+      if (this.errorLogs) console.error('IsvPos.initSale', e);
       return {
         success: false,
         message: 'Failed to init sale',
@@ -62,7 +62,7 @@ export default class IsvPosTransactions extends VivaAuthISV {
         data: null,
       };
     } catch (e) {
-      console.error('IsvPos.refundTransaction', e);
+      if (this.errorLogs) console.error('IsvPos.refundTransaction', e);
       return {
         success: false,
         message: 'Failed to refund transaction',
@@ -94,7 +94,7 @@ export default class IsvPosTransactions extends VivaAuthISV {
         data: response.data,
       };
     } catch (e) {
-      console.error('IsvPos.getActionDatas', e);
+      if (this.errorLogs) console.error('IsvPos.getActionDatas', e);
       return {
         success: false,
         message: 'Failed to get action details',
@@ -127,7 +127,7 @@ export default class IsvPosTransactions extends VivaAuthISV {
         data: response.data,
       };
     } catch (e) {
-      console.error('IsvPos.createAction', e);
+      if (this.errorLogs) console.error('IsvPos.createAction', e);
       return {
         success: false,
         message: 'Failed to create action',

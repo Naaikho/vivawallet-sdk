@@ -28,7 +28,7 @@ export default class IsvConnectedAccounts extends VivaAuthISV {
       );
 
       if (!r.data) {
-        console.error('VivaWallet returned no account data', r.data);
+        if (this.errorLogs) console.error('VivaWallet returned no account data', r.data);
         return {
           success: false,
           message: 'VivaWallet returned no account data',
@@ -43,7 +43,7 @@ export default class IsvConnectedAccounts extends VivaAuthISV {
         data: r.data,
       };
     } catch (e) {
-      console.error('IsvConnectedAccounts.getAccountDatas', e);
+      if (this.errorLogs) console.error('IsvConnectedAccounts.getAccountDatas', e);
       return {
         success: false,
         message: 'Failed to get account datas',
@@ -73,7 +73,7 @@ export default class IsvConnectedAccounts extends VivaAuthISV {
       );
 
       if (!r.data) {
-        console.error('VivaWallet returned no create account data', r.data);
+        if (this.errorLogs) console.error('VivaWallet returned no create account data', r.data);
         return {
           success: false,
           message: 'VivaWallet returned no create account data',
@@ -88,7 +88,7 @@ export default class IsvConnectedAccounts extends VivaAuthISV {
         data: r.data,
       };
     } catch (e) {
-      console.log('IsvConnectedAccounts.create', e);
+      if (this.errorLogs) console.log('IsvConnectedAccounts.create', e);
       return {
         success: false,
         message: 'Failed to create account',

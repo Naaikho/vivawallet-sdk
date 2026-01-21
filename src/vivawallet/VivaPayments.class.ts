@@ -32,9 +32,10 @@ class VivaPayments extends VivaAuth {
       );
 
       if (!response.data) {
+        if (this.errorLogs) console.error('Vivawallet returned no created order data', response.data);
         return {
           success: false,
-          message: 'Failed to create order',
+          message: 'Vivawallet returned no created order data',
           code: 'nodatas',
           data: null,
         };
@@ -48,10 +49,10 @@ class VivaPayments extends VivaAuth {
         },
       };
     } catch (e) {
-      console.error('Viva Order Error', e);
+      if (this.errorLogs) console.error('VivaPayments.createOrder', e);
       return {
         success: false,
-        message: 'Failed to create order',
+        message: 'Failed to create VivaWallet order',
         code: 'error',
         data: null,
       };
@@ -60,26 +61,8 @@ class VivaPayments extends VivaAuth {
 
   /** Allow cancel operation on non-validate orders, return `true` if the order canceled successfully */
   async cancelOrder(
-    orderCode: string | null
-  ): MethodReturn<void, 'alreadycanceled' | 'invalidordercode' | 'nodatas'> {
-    if (!this.merchantId || !this.apikey) {
-      return {
-        success: false,
-        message: 'Init not called',
-        code: 'initerror',
-        data: null,
-      };
-    }
-
-    if (!orderCode) {
-      return {
-        success: false,
-        message: 'Order code is required',
-        code: 'invalidordercode',
-        data: null,
-      };
-    }
-
+    orderCode: string
+  ): MethodReturn<void, 'alreadycanceled' | 'nodatas'> {
     try {
       const cancelUrl = this.endpoints.payment.cancel.url.replace(
         '{orderCode}',
@@ -93,9 +76,10 @@ class VivaPayments extends VivaAuth {
       });
 
       if (!response.data) {
+        if (this.errorLogs) console.error('Vivawallet returned no canceled order data', response.data);
         return {
           success: false,
-          message: 'Failed to cancel order',
+          message: 'Vivawallet returned no canceled order data',
           code: 'nodatas',
           data: null,
         };
@@ -107,7 +91,7 @@ class VivaPayments extends VivaAuth {
         data: null,
       };
     } catch (e: any) {
-      console.error('Viva Cancel Order Error', e);
+      if (this.errorLogs) console.error('VivaPayments.cancelOrder', e);
 
       if (e.response?.status === 404) {
         return {

@@ -19,9 +19,10 @@ class VivaSourceCode extends VivaAuth {
       const sourceCode = data.sourceCode || this.sourceCode;
 
       if (!sourceCode) {
+        if (this.errorLogs) console.error('Source code is required');
         return {
           success: false,
-          message: 'Source code is required',
+          message: 'Source code is required in datas or at initialization',
           code: 'sourcecodeerror',
           data: null,
         };
@@ -42,13 +43,14 @@ class VivaSourceCode extends VivaAuth {
         data: null,
       };
     } catch (e: any) {
-      console.error('Viva Source Code Error', e);
+      if (this.errorLogs) console.error('VivaSourceCode.setVivawalletSource', e);
 
       // if the source already exist
       if (e.status === 409) {
+        if (this.errorLogs) console.error('Source code already exist');
         return {
           success: false,
-          message: 'Source code already exist',
+          message: 'Source code already exists',
           code: 'sourcecodeexist',
           data: null,
         };
@@ -56,7 +58,7 @@ class VivaSourceCode extends VivaAuth {
 
       return {
         success: false,
-        message: 'Source code set error',
+        message: 'Failed to set source code',
         code: 'error',
         data: null,
       };

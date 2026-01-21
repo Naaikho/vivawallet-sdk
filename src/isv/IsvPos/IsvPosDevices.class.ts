@@ -27,7 +27,7 @@ export default class IsvPosDevices extends VivaAuthISV {
       );
 
       if (!r.data) {
-        console.error('VivaWallet returned no devices data', r.data);
+        if (this.errorLogs) console.error('VivaWallet returned no devices data', r.data);
         return {
           success: false,
           message: 'VivaWallet returned no devices data',
@@ -42,7 +42,7 @@ export default class IsvPosDevices extends VivaAuthISV {
         data: r.data,
       };
     } catch (e) {
-      console.error('IsvPos.getDevices', e);
+      if (this.errorLogs) console.error('IsvPos.getDevices', e);
       return {
         success: false,
         message: 'Failed to get devices',

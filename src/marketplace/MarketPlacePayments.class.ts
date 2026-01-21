@@ -34,9 +34,10 @@ class MarketPlacePayments extends VivaAuth {
       );
 
       if (!r.data || !r.data.orderCode) {
+        if (this.errorLogs) console.error('Vivawallet returned no created order data', r.data);
         return {
           success: false,
-          message: 'Failed to create order',
+          message: 'Vivawallet returned no created order data',
           code: 'nodatas',
           data: null,
         };
@@ -48,7 +49,7 @@ class MarketPlacePayments extends VivaAuth {
         data: r.data,
       };
     } catch (e) {
-      console.log('MarketPlacePayments.createOrder', e);
+      if (this.errorLogs) console.error('MarketPlacePayments.createOrder', e);
       return {
         success: false,
         message: 'Failed to create order',

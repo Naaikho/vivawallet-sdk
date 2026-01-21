@@ -37,9 +37,10 @@ class VivaTransactions extends VivaAuth {
       );
 
       if (!response.data) {
+        if (this.errorLogs) console.error('Vivawallet returned no transaction data', response.data);
         return {
           success: false,
-          message: 'Transaction not found',
+          message: 'Vivawallet returned no transaction data',
           code: 'nodatas',
           data: null,
         };
@@ -51,10 +52,10 @@ class VivaTransactions extends VivaAuth {
         data: response.data,
       };
     } catch (e) {
-      console.error('Viva Transaction Error', e);
+      if (this.errorLogs) console.error('VivaTransactions.getTransactionById', e);
       return {
         success: false,
-        message: 'Failed to get transaction',
+        message: 'Failed to get transaction by ID',
         code: 'error',
         data: null,
       };
@@ -82,9 +83,10 @@ class VivaTransactions extends VivaAuth {
       );
 
       if (!response.data) {
+        if (this.errorLogs) console.error('Vivawallet returned no created transaction data', response.data);
         return {
           success: false,
-          message: 'Transaction creation failed',
+          message: 'Vivawallet returned no created transaction data',
           code: 'nodatas',
           data: null,
         };
@@ -96,7 +98,7 @@ class VivaTransactions extends VivaAuth {
         data: response.data,
       };
     } catch (e) {
-      console.error('Viva Transaction Error', e);
+      if (this.errorLogs) console.error('VivaTransactions.makeTransaction', e);
       return {
         success: false,
         message: 'Failed to create transaction',
@@ -130,9 +132,10 @@ class VivaTransactions extends VivaAuth {
       );
 
       if (!response.data) {
+        if (this.errorLogs) console.error('Vivawallet returned no canceled transaction data', response.data);
         return {
           success: false,
-          message: 'Transaction refund failed',
+          message: 'Vivawallet returned no canceled transaction data',
           code: 'nodatas',
           data: null,
         };
@@ -140,14 +143,14 @@ class VivaTransactions extends VivaAuth {
 
       return {
         success: true,
-        message: 'Transaction refunded successfully',
+        message: 'Transaction canceled successfully',
         data: response.data,
       };
     } catch (e) {
-      console.error('Viva Refund Error', e);
+      if (this.errorLogs) console.error('VivaTransactions.cancelTransaction', e);
       return {
         success: false,
-        message: 'Failed to refund transaction',
+        message: 'Failed to cancel transaction',
         code: 'error',
         data: null,
       };
