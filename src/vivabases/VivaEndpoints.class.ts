@@ -101,6 +101,16 @@ class VivaEndpoints {
           method: 'POST',
         },
       },
+      webhook: {
+        getKey: {
+          url: 'https://demo-api.vivapayments.com/isv/v1/webhooks/token',
+          method: 'GET',
+        },
+        create: {
+          url: 'https://demo-api.vivapayments.com/isv/v1/webhooks',
+          method: 'POST',
+        },
+      }
     },
   };
 
@@ -204,6 +214,16 @@ class VivaEndpoints {
           method: 'POST',
         },
       },
+      webhook: {
+        getKey: {
+          url: 'https://api.vivapayments.com/isv/v1/webhooks/token',
+          method: 'GET',
+        },
+        create: {
+          url: 'https://api.vivapayments.com/isv/v1/webhooks',
+          method: 'POST',
+        },
+      }
     },
   };
 

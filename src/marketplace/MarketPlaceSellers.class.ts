@@ -20,6 +20,7 @@ class MarketPlaceSellers extends VivaAuth {
         success: false,
         message: 'Init not called',
         code: 'initerror',
+        data: null,
       };
     }
 

@@ -1,8 +1,14 @@
-export interface MethodReturnDatas<T, E> {
-  success: boolean;
+export interface MethodReturnDatas<T> {
+  success: true;
   message: string;
-  code?: E | 'sourcecodeerror' | 'initerror' | 'error';
-  data?: T;
+  data: T | null;
 }
 
-export type MethodReturn<T, E> = Promise<MethodReturnDatas<T, E>>;
+export interface MethodErrorReturnDatas<E> {
+  success: false;
+  message: string;
+  code: E | 'sourcecodeerror' | 'initerror' | 'error';
+  data: null;
+}
+
+export type MethodReturn<T, E = 'nodatas'> = Promise<MethodReturnDatas<T> | MethodErrorReturnDatas<E>>;

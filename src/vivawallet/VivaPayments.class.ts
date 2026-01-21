@@ -75,6 +75,7 @@ class VivaPayments extends VivaAuth {
         success: false,
         message: 'Init not called',
         code: 'initerror',
+        data: null,
       };
     }
 
@@ -83,6 +84,7 @@ class VivaPayments extends VivaAuth {
         success: false,
         message: 'Order code is required',
         code: 'invalidordercode',
+        data: null,
       };
     }
 
@@ -103,12 +105,14 @@ class VivaPayments extends VivaAuth {
           success: false,
           message: 'Failed to cancel order',
           code: 'nodatas',
+          data: null,
         };
       }
 
       return {
         success: true,
         message: 'Order canceled successfully',
+        data: null,
       };
     } catch (e: any) {
       console.error('Viva Cancel Order Error', e);
@@ -118,6 +122,7 @@ class VivaPayments extends VivaAuth {
           success: false,
           message: 'Order already canceled or not found',
           code: 'alreadycanceled',
+          data: null,
         };
       }
 
@@ -125,6 +130,7 @@ class VivaPayments extends VivaAuth {
         success: false,
         message: 'Failed to cancel order',
         code: 'error',
+        data: null,
       };
     }
   }

@@ -1,11 +1,11 @@
+import { MethodReturn } from '../types/Methods.types';
 import {
   VivawalletAPIInit,
   VivawalletISVInit,
 } from '../types/Vivawallet.types';
-import VivaSkull from './VivaSkull.class';
-import { useAxios } from '../utils/axiosInstance.ts';
-import { MethodReturn } from '../types/Methods.types';
 import { GetVivaTokenReturn } from '../types/VivawalletAuth.types';
+import { useAxios } from '../utils/axiosInstance.ts';
+import VivaSkull from './VivaSkull.class';
 
 class VivaAuth extends VivaSkull {
   constructor(datas: VivawalletAPIInit) {
@@ -29,7 +29,7 @@ class VivaAuth extends VivaSkull {
    * Return the VivaWallet API Auth2.0 code from Credentials (needed for API Bearer calls)
    * or `null` on request failed
    *
-   * @param general If `true`, apikey and merchantId will be used instead of clientId and clientSecret
+   * @param basic If `true`, apikey and merchantId will be used instead of clientId and clientSecret
    */
   async getVivaToken(basic = false): MethodReturn<string | null, 'tokenerror'> {
     if (!this.clientId || !this.clientSecret) {

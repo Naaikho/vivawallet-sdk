@@ -2,7 +2,7 @@ import { MethodReturn } from '../types/Methods.types';
 import { SourceCodeDatas } from '../types/VivaSource.types';
 import { VivawalletAPIInit } from '../types/Vivawallet.types';
 import { useAxios } from '../utils/axiosInstance.ts';
-import {VivaAuth} from '../vivabases/VivaAuth.class';
+import { VivaAuth } from '../vivabases/VivaAuth.class';
 
 class VivaSourceCode extends VivaAuth {
   constructor(datas: VivawalletAPIInit) {
@@ -20,6 +20,7 @@ class VivaSourceCode extends VivaAuth {
         success: false,
         message: 'Init not called',
         code: 'initerror',
+        data: null,
       };
     }
 
@@ -28,6 +29,7 @@ class VivaSourceCode extends VivaAuth {
         success: false,
         message: 'Source code is required',
         code: 'sourcecodeerror',
+        data: null,
       };
     }
 
@@ -46,6 +48,7 @@ class VivaSourceCode extends VivaAuth {
       return {
         success: true,
         message: 'Source code set',
+        data: null,
       };
     } catch (e: any) {
       console.error('Viva Source Code Error', e);
@@ -56,6 +59,7 @@ class VivaSourceCode extends VivaAuth {
           success: false,
           message: 'Source code already exist',
           code: 'sourcecodeexist',
+          data: null,
         };
       }
 
@@ -63,6 +67,7 @@ class VivaSourceCode extends VivaAuth {
         success: false,
         message: 'Source code set error',
         code: 'error',
+        data: null,
       };
     }
   }

@@ -5,7 +5,7 @@ import {
 import { MethodReturn } from '../types/Methods.types';
 import { VivawalletAPIInit } from '../types/Vivawallet.types';
 import { useAxios } from '../utils/axiosInstance.ts';
-import {VivaAuth} from '../vivabases/VivaAuth.class';
+import { VivaAuth } from '../vivabases/VivaAuth.class';
 import VivaPayments from '../vivawallet/VivaPayments.class';
 
 class MarketPlacePayments extends VivaAuth {
@@ -26,6 +26,7 @@ class MarketPlacePayments extends VivaAuth {
         success: false,
         message: 'Init not called',
         code: 'initerror',
+        data: null,
       };
     }
 
@@ -45,6 +46,7 @@ class MarketPlacePayments extends VivaAuth {
           success: false,
           message: 'Failed to create order',
           code: 'nodatas',
+          data: null,
         };
       }
 
@@ -59,6 +61,7 @@ class MarketPlacePayments extends VivaAuth {
         success: false,
         message: 'Failed to create order',
         code: 'error',
+        data: null,
       };
     }
   }

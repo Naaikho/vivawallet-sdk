@@ -23,6 +23,7 @@ export default class IsvPos extends VivaAuthISV {
         success: false,
         message: 'Init not called',
         code: 'initerror',
+        data: null,
       };
     }
 
@@ -42,6 +43,7 @@ export default class IsvPos extends VivaAuthISV {
           success: false,
           message: 'Failed to get devices',
           code: 'nodatas',
+          data: null,
         };
       }
 
@@ -56,6 +58,7 @@ export default class IsvPos extends VivaAuthISV {
         success: false,
         message: 'Failed to get devices',
         code: 'error',
+        data: null,
       };
     }
   }
@@ -70,6 +73,7 @@ export default class IsvPos extends VivaAuthISV {
         success: false,
         message: 'Init not called',
         code: 'initerror',
+        data: null,
       };
     }
 
@@ -87,6 +91,7 @@ export default class IsvPos extends VivaAuthISV {
       return {
         success: true,
         message: 'Sale initialized successfully',
+        data: null,
       };
     } catch (e) {
       console.log('IsvPos.initSale', e);
@@ -94,6 +99,7 @@ export default class IsvPos extends VivaAuthISV {
         success: false,
         message: 'Failed to init sale',
         code: 'error',
+        data: null,
       };
     }
   }

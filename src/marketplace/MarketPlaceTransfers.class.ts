@@ -22,6 +22,7 @@ class MarketPlaceTransfers extends VivaAuth {
         success: false,
         message: 'Init not called',
         code: 'initerror',
+        data: null,
       };
     }
 
@@ -41,6 +42,7 @@ class MarketPlaceTransfers extends VivaAuth {
           success: false,
           message: 'Failed to send funds',
           code: 'nodatas',
+          data: null,
         };
       }
 
@@ -55,6 +57,7 @@ class MarketPlaceTransfers extends VivaAuth {
         success: false,
         message: 'Failed to send funds',
         code: 'error',
+        data: null,
       };
     }
   }
