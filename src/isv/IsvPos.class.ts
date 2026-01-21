@@ -17,17 +17,9 @@ export default class IsvPos extends VivaAuthISV {
   async getDevices(
     options: ISVDevicesOptions
   ): MethodReturn<ISVDevicesReturn | null, 'nodatas'> {
-    const vivaToken = (await this.getVivaToken()).data;
-    if (!vivaToken) {
-      return {
-        success: false,
-        message: 'Init not called',
-        code: 'initerror',
-        data: null,
-      };
-    }
-
     try {
+      const vivaToken = (await this.getVivaToken()).data;
+
       const r = await useAxios.post<ISVDevicesReturn>(
         this.endpoints.isv.devices.url,
         options,
@@ -39,9 +31,10 @@ export default class IsvPos extends VivaAuthISV {
       );
 
       if (!r.data) {
+        console.error('VivaWallet returned no devices data', r.data);
         return {
           success: false,
-          message: 'Failed to get devices',
+          message: 'VivaWallet returned no devices data',
           code: 'nodatas',
           data: null,
         };
@@ -53,7 +46,7 @@ export default class IsvPos extends VivaAuthISV {
         data: r.data,
       };
     } catch (e) {
-      console.log('MarketPlacePayments.createOrder', e);
+      console.error('IsvPos.getDevices', e);
       return {
         success: false,
         message: 'Failed to get devices',
@@ -67,17 +60,9 @@ export default class IsvPos extends VivaAuthISV {
   async initSale(
     options: ISVInitSaleRequest
   ): MethodReturn<undefined, 'nodatas'> {
-    const vivaToken = (await this.getVivaToken()).data;
-    if (!vivaToken) {
-      return {
-        success: false,
-        message: 'Init not called',
-        code: 'initerror',
-        data: null,
-      };
-    }
-
     try {
+      const vivaToken = (await this.getVivaToken()).data;
+
       await useAxios.post<null>(
         this.endpoints.isv.transaction.create.url,
         options,
@@ -94,7 +79,7 @@ export default class IsvPos extends VivaAuthISV {
         data: null,
       };
     } catch (e) {
-      console.log('IsvPos.initSale', e);
+      console.error('IsvPos.initSale', e);
       return {
         success: false,
         message: 'Failed to init sale',

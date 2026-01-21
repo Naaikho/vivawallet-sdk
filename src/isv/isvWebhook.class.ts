@@ -11,9 +11,9 @@ export default class IsvWebhook extends VivaAuthISV {
   }
 
   async getWebhookKey(): MethodReturn<ISVGetWebhookKeyReturn | null> {
-    const vivaToken = (await this.getVivaToken()).data;
-
     try {
+      const vivaToken = (await this.getVivaToken()).data;
+
       const r = await useAxios.get<ISVGetWebhookKeyReturn>(
         this.endpoints.isv.webhook.getKey.url,
         {
@@ -24,9 +24,10 @@ export default class IsvWebhook extends VivaAuthISV {
       );
 
       if (!r.data) {
+        console.error('VivaWallet returned no webhook key data', r.data);
         return {
           success: false,
-          message: 'Failed to get webhook key',
+          message: 'VivaWallet returned no webhook key data',
           code: 'nodatas',
           data: null,
         };
@@ -38,7 +39,7 @@ export default class IsvWebhook extends VivaAuthISV {
         data: r.data,
       };
     } catch (e) {
-      console.log('IsvWebhook.getWebhookKey', e);
+      console.error('IsvWebhook.getWebhookKey', e);
       return {
         success: false,
         message: 'Failed to get webhook key',
@@ -68,7 +69,7 @@ export default class IsvWebhook extends VivaAuthISV {
         data: null,
       };
     } catch (e) {
-      console.log('IsvWebhook.create', e);
+      console.error('IsvWebhook.create', e);
       return {
         success: false,
         message: 'Failed to create webhook',

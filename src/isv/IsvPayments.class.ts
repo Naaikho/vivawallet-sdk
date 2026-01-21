@@ -1,9 +1,4 @@
 import { ISVPaymentsOptions } from '../types/isv.types/ISVPayments.types';
-import {
-  ISVDevicesOptions,
-  ISVDevicesReturn,
-  ISVInitSaleRequest,
-} from '../types/isv.types/ISVPos.types';
 import { MethodReturn } from '../types/Methods.types';
 import { VivaPaymentOrderReturn } from '../types/VivaOrder.types';
 import { VivawalletISVInit } from '../types/Vivawallet.types';
@@ -20,17 +15,9 @@ export default class IsvPayments extends VivaAuthISV {
     merchantId: string,
     orderData: ISVPaymentsOptions
   ): MethodReturn<VivaPaymentOrderReturn | null, 'nodatas'> {
-    const vivaToken = (await this.getVivaToken()).data;
-    if (!vivaToken) {
-      return {
-        success: false,
-        message: 'Init not called',
-        code: 'initerror',
-        data: null,
-      };
-    }
-
     try {
+      const vivaToken = (await this.getVivaToken()).data;
+
       const response = await useAxios.post<VivaPaymentOrderReturn>(
         this.endpoints.isv.payments.create.url + '?merchantId=' + merchantId,
         orderData,
@@ -42,10 +29,10 @@ export default class IsvPayments extends VivaAuthISV {
       );
 
       if (!response.data) {
-        console.error('Viva Order Error', response.data);
+        console.error('VivaWallet returned no create order data', response.data);
         return {
           success: false,
-          message: 'Failed to create order',
+          message: 'VivaWallet returned no create order data',
           code: 'nodatas',
           data: null,
         };
@@ -59,7 +46,7 @@ export default class IsvPayments extends VivaAuthISV {
         },
       };
     } catch (e) {
-      console.error('Viva Order Error', e);
+      console.error('IsvPayments.createOrder', e);
       return {
         success: false,
         message: 'Failed to create order',

@@ -16,6 +16,9 @@ class VivaEndpoints {
     },
     payment: {
       get: {
+        /**
+         * @Param `{orderCode}`
+         */
         url: 'https://demo.vivapayments.com/api/orders/{orderCode}',
         method: 'GET',
       },
@@ -24,35 +27,62 @@ class VivaEndpoints {
         method: 'POST',
       },
       update: {
+        /**
+         * @Param `{orderCode}`
+         */
         url: 'https://demo.vivapayments.com/api/orders/{orderCode}',
         method: 'PATCH',
       },
       cancel: {
+        /**
+         * @Param `{orderCode}`
+         */
         url: 'https://demo.vivapayments.com/api/orders/{orderCode}',
         method: 'DELETE',
       },
     },
     transaction: {
       get: {
+        /**
+         * @Param `{transactionId}`
+         */
         url: 'https://demo-api.vivapayments.com/checkout/v2/transactions/{transactionId}',
         method: 'GET',
       },
       create: {
+        /**
+         * @Param `{transactionId}`
+         */
         url: 'https://demo.vivapayments.com/api/transactions/{transactionId}',
         method: 'POST',
       },
       cancel: {
+        /**
+         * @Param `{transactionId}`
+         */
         url: 'https://demo.vivapayments.com/api/transactions/{transactionId}',
         method: 'DELETE',
       },
     },
     checkout: {
       // &color={color}&paymentMethod={paymentMethod}
+      /**
+       * @Param `{orderCode}`
+       * 
+       * ---
+       * 
+       * Queries you can add to the url
+       * - color=`{color}`
+       * - paymentMethod=`{paymentMethod}`
+       */
       url: 'https://demo.vivapayments.com/web/checkout?ref={orderCode}',
     },
     marketplace: {
       accounts: {
         get: {
+          /**
+           * @Param `{accountId}`
+           */
           url: 'https://demo-api.vivapayments.com/platforms/v1/accounts/{accountId}',
           method: 'GET',
         },
@@ -61,6 +91,9 @@ class VivaEndpoints {
           method: 'POST',
         },
         update: {
+          /**
+           * @Param `{accountId}`
+           */
           url: 'https://demo-api.vivapayments.com/platforms/v1/accounts/{accountId}',
           method: 'PATCH',
         },
@@ -73,6 +106,9 @@ class VivaEndpoints {
       },
       transaction: {
         cancel: {
+          /**
+           * @Param `{transactionId}`
+           */
           url: 'https://demo-api.vivapayments.com/acquiring/v1/transactions/{transactionId}',
           method: 'DELETE',
         },
@@ -85,6 +121,19 @@ class VivaEndpoints {
       },
     },
     isv: {
+      connectedAccounts: {
+        get: {
+          /**
+           * @Param `{accountId}`
+           */
+          url: 'https://demo-api.vivapayments.com/isv/v1/accounts/{accountId}',
+          method: 'GET',
+        },
+        create: {
+          url: 'https://demo-api.vivapayments.com/isv/v1/accounts',
+          method: 'POST',
+        }
+      },
       payments: {
         create: {
           url: 'https://demo-api.vivapayments.com/checkout/v2/isv/orders',
@@ -129,6 +178,9 @@ class VivaEndpoints {
     },
     payment: {
       get: {
+        /**
+         * @Param `{orderCode}`
+         */
         url: 'https://www.vivapayments.com/api/orders/{orderCode}',
         method: 'GET',
       },
@@ -137,35 +189,61 @@ class VivaEndpoints {
         method: 'POST',
       },
       update: {
+        /**
+         * @Param `{orderCode}`
+         */
         url: 'https://www.vivapayments.com/api/orders/{orderCode}',
         method: 'PATCH',
       },
       cancel: {
+        /**
+         * @Param `{orderCode}`
+         */
         url: 'https://www.vivapayments.com/api/orders/{orderCode}',
         method: 'DELETE',
       },
     },
     transaction: {
       get: {
+        /**
+         * @Param `{transactionId}`
+         */
         url: 'https://api.vivapayments.com/checkout/v2/transactions/{transactionId}',
         method: 'GET',
       },
       create: {
+        /**
+         * @Param `{transactionId}`
+         */
         url: 'https://www.vivapayments.com/api/transactions/{transactionId}',
         method: 'POST',
       },
       cancel: {
+        /**
+         * @Param `{transactionId}`
+         */
         url: 'https://www.vivapayments.com/api/transactions/{transactionId}',
         method: 'DELETE',
       },
     },
     checkout: {
-      // &color={color}&paymentMethod={paymentMethod}
+      /**
+       * @Param `{orderCode}`
+       * 
+       * ---
+       * 
+       * Queries you can add to the url
+       * - color=`{color}`
+       * - paymentMethod=`{paymentMethod}`
+       */
       url: 'https://www.vivapayments.com/web/checkout?ref={orderCode}',
     },
     marketplace: {
       accounts: {
         get: {
+          /**
+           * @Param `{accountId}`
+           */
           url: 'https://api.vivapayments.com/platforms/v1/accounts/{accountId}',
           method: 'GET',
         },
@@ -174,12 +252,18 @@ class VivaEndpoints {
           method: 'POST',
         },
         update: {
+          /**
+           * @Param `{accountId}`
+           */
           url: 'https://api.vivapayments.com/platforms/v1/accounts/{accountId}',
           method: 'PATCH',
         },
       },
       transaction: {
         cancel: {
+          /**
+           * @Param `{transactionId}`
+           */
           url: 'https://api.vivapayments.com/acquiring/v1/transactions/{transactionId}',
           method: 'DELETE',
         },
@@ -198,6 +282,19 @@ class VivaEndpoints {
       },
     },
     isv: {
+      connectedAccounts: {
+        get: {
+          /**
+           * @Param `{accountId}`
+           */
+          url: 'https://api.vivapayments.com/isv/v1/accounts/{accountId}',
+          method: 'GET',
+        },
+        create: {
+          url: 'https://api.vivapayments.com/isv/v1/accounts',
+          method: 'POST',
+        },
+      },
       payments: {
         create: {
           url: 'https://api.vivapayments.com/checkout/v2/isv/orders',
