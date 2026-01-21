@@ -140,16 +140,6 @@ class VivaEndpoints {
           method: 'POST',
         },
       },
-      devices: {
-        url: 'https://demo-api.vivapayments.com/ecr/isv/v1/devices:search',
-        method: 'POST',
-      },
-      transaction: {
-        create: {
-          url: 'https://demo-api.vivapayments.com/ecr/isv/v1/transactions:sale',
-          method: 'POST',
-        },
-      },
       webhook: {
         getKey: {
           url: 'https://demo-api.vivapayments.com/isv/v1/webhooks/token',
@@ -158,6 +148,35 @@ class VivaEndpoints {
         create: {
           url: 'https://demo-api.vivapayments.com/isv/v1/webhooks',
           method: 'POST',
+        },
+      },
+      pos: {
+        devices: {
+          url: 'https://demo-api.vivapayments.com/ecr/isv/v1/devices:search',
+          method: 'POST',
+        },
+        transaction: {
+          create: {
+            url: 'https://demo-api.vivapayments.com/ecr/isv/v1/transactions:sale',
+            method: 'POST',
+          },
+          refund: {
+            url: 'https://demo-api.vivapayments.com/ecr/isv/v1/transactions:refund',
+            method: 'POST',
+          },
+        },
+        action: {
+          create: {
+            url: 'https://demo-api.vivapayments.com/ecr/isv/v1/actions',
+            method: 'POST',
+          },
+          get: {
+            /**
+             * @Param `{actionId}`
+             */
+            url: 'https://demo-api.vivapayments.com/ecr/isv/v1/actions/{actionId}',
+            method: 'GET',
+          },
         },
       }
     },
@@ -301,16 +320,6 @@ class VivaEndpoints {
           method: 'POST',
         },
       },
-      devices: {
-        url: 'https://api.vivapayments.com/ecr/isv/v1/devices:search',
-        method: 'POST',
-      },
-      transaction: {
-        create: {
-          url: 'https://api.vivapayments.com/ecr/isv/v1/transactions:sale',
-          method: 'POST',
-        },
-      },
       webhook: {
         getKey: {
           url: 'https://api.vivapayments.com/isv/v1/webhooks/token',
@@ -319,6 +328,35 @@ class VivaEndpoints {
         create: {
           url: 'https://api.vivapayments.com/isv/v1/webhooks',
           method: 'POST',
+        },
+      },
+      pos: {
+        devices: {
+          url: 'https://api.vivapayments.com/ecr/isv/v1/devices:search',
+          method: 'POST',
+        },
+        transaction: {
+          create: {
+            url: 'https://api.vivapayments.com/ecr/isv/v1/transactions:sale',
+            method: 'POST',
+          },
+          refund: {
+            url: 'https://api.vivapayments.com/ecr/isv/v1/transactions:refund',
+            method: 'POST',
+          },
+        },
+        action: {
+          create: {
+            url: 'https://api.vivapayments.com/ecr/isv/v1/actions',
+            method: 'POST',
+          },
+          get: {
+            /**
+             * @Param `{actionId}`
+             */
+            url: 'https://api.vivapayments.com/ecr/isv/v1/actions/{actionId}',
+            method: 'GET',
+          },
         },
       }
     },

@@ -9,7 +9,9 @@ export default class IsvWebhook extends VivaAuthISV {
   constructor(datas: VivawalletISVInit) {
     super(datas);
   }
-
+  /**
+   * Generate a webhook verification key to be used in the response of your webhook endpoints for verification purposes.
+   */
   async getWebhookKey(): MethodReturn<ISVGetWebhookKeyReturn | null> {
     try {
       const vivaToken = (await this.getVivaToken()).data;
@@ -49,6 +51,18 @@ export default class IsvWebhook extends VivaAuthISV {
     }
   }
 
+  /**
+   * Provide your webhook endpoint URL to set up webhooks for your [desired events](https://developer.viva.com/webhooks-for-payments/#webhook-events):
+   * 
+   * - **1802** - Transaction POS Ecr Session Created
+   * - **1803** - Transaction POS Ecr Session Failed
+   * - **1796** - Transaction Payment Created
+   * - **1797** - Transaction Reversal Created
+   * - **1798** - Transaction Failed
+   * - **1799** - Transaction Price Calculated
+   * - **8193** - Account Connected
+   * - **8194** - Account Verification Status Changed
+   */
   async create(options: ISVCreateWebhookOptions): MethodReturn<null> {
     const vivaToken = (await this.getVivaToken()).data;
 

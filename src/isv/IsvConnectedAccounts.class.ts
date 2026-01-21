@@ -9,6 +9,11 @@ export default class IsvConnectedAccounts extends VivaAuthISV {
     super(datas);
   }
 
+  /**
+   * Retrieve information about a connected account.
+   * 
+   * By providing the account id of the merchant, you can retrieve information about the account, such as email address, verification status and invitation details.
+   */
   async getAccountDatas(options: ISVGetAccountDatasOptions): MethodReturn<ISVGetAccountDatasReturn | null> {
     try {
       const vivaToken = (await this.getVivaToken()).data;
@@ -48,6 +53,11 @@ export default class IsvConnectedAccounts extends VivaAuthISV {
     }
   }
 
+  /**
+   * Create a connected account.
+   * 
+   * By providing at least the email of the merchant and the URL they will be redirected to upon completion of onboarding, you can use this API call to generate the account id and invitation url to send to the merchant to initiate the onboarding process.
+   */
   async create(options: ISVCreateAccountOptions): MethodReturn<ISVCreateAccountReturn | null> {
     try {
       const vivaToken = (await this.getVivaToken()).data;
