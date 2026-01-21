@@ -1,6 +1,8 @@
 import { VivaStatusId } from './VivaTransactions.types';
 
-export interface VivaWebhookEventDatas {
+// --------------------- SMART CHECKOUT EVENT DATA ---------------------
+
+export interface SmartCheckoutWebhookEventDatas {
   Moto: boolean;
   BinId: number;
   Ucaf: any;
@@ -74,9 +76,20 @@ export interface VivaWebhookEventDatas {
   DigitalWalletId: any;
 }
 
-export interface VivaWebhook {
+// --------------------- CONNECTED ACCOUNT EVENT DATA ---------------------
+
+export interface ConnectedAccountWebhookEventDatas {
+  PersonId: string;
+  WalletId: number;
+  PlatformPersonId: string;
+  ConnectedAccountId: string;
+}
+
+// --------------------- EVENT WRAPPER ---------------------
+
+export interface VivaWebhookDatas<EventType = SmartCheckoutWebhookEventDatas> {
   Url?: string;
-  EventData?: VivaWebhookEventDatas;
+  EventData?: EventType;
   Created: Date;
   CorrelationId: string;
   EventTypeId: number;
