@@ -1,11 +1,11 @@
+import { MethodReturn } from '../types/Methods.types';
 import {
   VivaPaymentOrderOptions,
   VivaPaymentOrderReturn,
 } from '../types/VivaOrder.types';
 import { VivawalletAPIInit } from '../types/Vivawallet.types';
-import { VivaAuth } from '../vivabases/VivaAuth.class';
 import { useAxios } from '../utils/axiosInstance.ts';
-import { MethodReturn } from '../types/Methods.types';
+import { VivaAuth } from '../vivabases/VivaAuth.class';
 
 class VivaPayments extends VivaAuth {
   constructor(datas: VivawalletAPIInit) {
@@ -18,17 +18,9 @@ class VivaPayments extends VivaAuth {
   async createOrder(
     orderData: VivaPaymentOrderOptions
   ): MethodReturn<VivaPaymentOrderReturn | null, 'nodatas'> {
-    const vivaToken = (await this.getVivaToken()).data;
-    if (!vivaToken) {
-      return {
-        success: false,
-        message: 'Init not called',
-        code: 'initerror',
-        data: null,
-      };
-    }
-
     try {
+      const vivaToken = (await this.getVivaToken()).data;
+
       const response = await useAxios.post<VivaPaymentOrderReturn>(
         this.endpoints.payment.create.url,
         orderData,

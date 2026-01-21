@@ -13,6 +13,10 @@ export interface SourceCodeDatas {
   pathFail: string;
   /** The relative URL path that your client will end up to after a successful transaction. */
   pathSuccess: string;
-  /** A unique code that is exchanged between your application and the API. */
-  sourceCode: string;
+  /**
+   * A unique code that is exchanged between your application and the API.
+   * 
+   * *Optional only if you defined a default source code in the initialization.*
+   */
+  sourceCode?: string;
 }

@@ -20,17 +20,9 @@ class MarketPlacePayments extends VivaAuth {
   async createOrder(
     orderData: MPOrdersOptions
   ): MethodReturn<MPOrdersReturn | null, 'nodatas'> {
-    const vivaToken = (await this.getVivaToken()).data;
-    if (!vivaToken) {
-      return {
-        success: false,
-        message: 'Init not called',
-        code: 'initerror',
-        data: null,
-      };
-    }
-
     try {
+      const vivaToken = (await this.getVivaToken()).data;
+
       const r = await useAxios.post<MPOrdersReturn>(
         this.endpoints.marketplace.payment.create.url,
         orderData,

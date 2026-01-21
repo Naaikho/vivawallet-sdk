@@ -64,9 +64,9 @@ export default class IsvWebhook extends VivaAuthISV {
    * - **8194** - Account Verification Status Changed
    */
   async create(options: ISVCreateWebhookOptions): MethodReturn<null> {
+    try {
     const vivaToken = (await this.getVivaToken()).data;
 
-    try {
       await useAxios.post<null>(
         this.endpoints.isv.webhook.create.url,
         options,

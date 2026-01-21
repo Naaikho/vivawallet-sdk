@@ -15,27 +15,18 @@ class VivaSourceCode extends VivaAuth {
   async setVivawalletSource(
     data: SourceCodeDatas
   ): MethodReturn<void, 'sourcecodeexist'> {
-    if (!this.merchantId || !this.apikey) {
-      return {
-        success: false,
-        message: 'Init not called',
-        code: 'initerror',
-        data: null,
-      };
-    }
-
-    if (!this.sourceCode && !data.sourceCode) {
-      return {
-        success: false,
-        message: 'Source code is required',
-        code: 'sourcecodeerror',
-        data: null,
-      };
-    }
-
-    if (!data.sourceCode && this.sourceCode) data.sourceCode = this.sourceCode;
-
     try {
+      const sourceCode = data.sourceCode || this.sourceCode;
+
+      if (!sourceCode) {
+        return {
+          success: false,
+          message: 'Source code is required',
+          code: 'sourcecodeerror',
+          data: null,
+        };
+      }
+
       await useAxios.request({
         url: this.endpoints.source.url,
         method: this.endpoints.source.method,

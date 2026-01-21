@@ -16,17 +16,9 @@ class MarketPlaceTransfers extends VivaAuth {
   async sendFunds(
     datas: MPTransfersDatas
   ): MethodReturn<MPTransfersResponse | null, 'nodatas'> {
-    const vivaToken = (await this.getVivaToken()).data;
-    if (!vivaToken) {
-      return {
-        success: false,
-        message: 'Init not called',
-        code: 'initerror',
-        data: null,
-      };
-    }
-
     try {
+      const vivaToken = (await this.getVivaToken()).data;
+
       const r = await useAxios.post<MPTransfersResponse>(
         this.endpoints.marketplace.transfers.send.url,
         datas,

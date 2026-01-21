@@ -24,26 +24,17 @@ class MarketPlaceTransactions extends VivaAuth {
     transactionId: string,
     refundOptions: MPTransactionCancelOptions
   ): MethodReturn<MPCancelTransactionReturn | null, 'nodatas'> {
-    const vivaToken = (await this.getVivaToken()).data;
-    if (!vivaToken) {
-      return {
-        success: false,
-        message: 'Init not called',
-        code: 'initerror',
-        data: null,
-      };
-    }
-
-    const queries = querifyDatas(refundOptions);
-
     try {
+      const vivaToken = (await this.getVivaToken()).data;
+      const queries = querifyDatas(refundOptions);
+
       const response = await useAxios.delete<MPCancelTransactionReturn>(
         this.endpoints.marketplace.transaction.cancel.url.replace(
           '{transactionId}',
           transactionId
         ) +
-          '?' +
-          queries,
+        '?' +
+        queries,
         {
           headers: {
             Authorization: 'Bearer ' + vivaToken,

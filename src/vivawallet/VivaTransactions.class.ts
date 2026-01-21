@@ -1,14 +1,14 @@
+import { MethodReturn } from '../types/Methods.types';
 import {
   VivaTransaction,
-  VivaTransactionDatas,
   VivaTransactionCancelOptions,
+  VivaTransactionDatas,
   VivaTransactionReturn,
 } from '../types/VivaTransactions.types';
 import { VivawalletAPIInit } from '../types/Vivawallet.types';
-import { VivaAuth } from '../vivabases/VivaAuth.class';
 import { useAxios } from '../utils/axiosInstance.ts';
-import { MethodReturn } from '../types/Methods.types';
 import { querifyDatas } from '../utils/functions';
+import { VivaAuth } from '../vivabases/VivaAuth.class';
 
 class VivaTransactions extends VivaAuth {
   constructor(datas: VivawalletAPIInit) {
@@ -21,17 +21,9 @@ class VivaTransactions extends VivaAuth {
   async getTransactionById(
     transactionId: string
   ): MethodReturn<VivaTransaction | null, 'nodatas'> {
-    const vivaToken = (await this.getVivaToken()).data;
-    if (!vivaToken) {
-      return {
-        success: false,
-        message: 'Init not called',
-        code: 'initerror',
-        data: null,
-      };
-    }
-
     try {
+      const vivaToken = (await this.getVivaToken()).data;
+
       const response = await useAxios.get<VivaTransaction>(
         this.endpoints.transaction.get.url.replace(
           '{transactionId}',
@@ -73,24 +65,6 @@ class VivaTransactions extends VivaAuth {
   async makeTransaction(
     options: VivaTransactionDatas
   ): MethodReturn<VivaTransactionReturn | null, 'invaliddatas' | 'nodatas'> {
-    if (!this.merchantId || !this.apikey) {
-      return {
-        success: false,
-        message: 'Init not called',
-        code: 'initerror',
-        data: null,
-      };
-    }
-
-    if (!options.amount || !options.id) {
-      return {
-        success: false,
-        message: 'Amount and ID are required',
-        code: 'invaliddatas',
-        data: null,
-      };
-    }
-
     try {
       const transactionUrl = this.endpoints.transaction.create.url.replace(
         '{transactionId}',
@@ -137,26 +111,17 @@ class VivaTransactions extends VivaAuth {
     transactionId: string,
     refundOptions: VivaTransactionCancelOptions
   ): MethodReturn<VivaTransactionReturn | null, 'nodatas'> {
-    const vivaToken = await this.getVivaBasicToken();
-    if (!vivaToken) {
-      return {
-        success: false,
-        message: 'Init not called',
-        code: 'initerror',
-        data: null,
-      };
-    }
-
-    const queries = querifyDatas(refundOptions);
-
     try {
+      const vivaToken = this.getVivaBasicToken();
+      const queries = querifyDatas(refundOptions);
+
       const response = await useAxios.delete<VivaTransactionReturn>(
         this.endpoints.transaction.cancel.url.replace(
           '{transactionId}',
           transactionId
         ) +
-          '?' +
-          queries,
+        '?' +
+        queries,
         {
           headers: {
             Authorization: 'Bearer ' + vivaToken,

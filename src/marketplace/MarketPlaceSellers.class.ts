@@ -14,17 +14,9 @@ class MarketPlaceSellers extends VivaAuth {
   async createAccount(
     datas: MPCreateAccountDatas
   ): MethodReturn<MPCreateAccountResponse | null, 'nodatas'> {
-    const vivaToken = (await this.getVivaToken()).data;
-    if (!vivaToken) {
-      return {
-        success: false,
-        message: 'Init not called',
-        code: 'initerror',
-        data: null,
-      };
-    }
-
     try {
+      const vivaToken = (await this.getVivaToken()).data;
+
       if (this.logs) {
         console.log(
           'createAccount',
