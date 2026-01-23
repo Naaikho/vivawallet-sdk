@@ -12,11 +12,11 @@ export default class IsvPosDevices extends VivaAuthISV {
   /** Get ISV merchant devices, return `ISVDevicesReturn` */
   async getDevices(
     options: ISVDevicesOptions
-  ): MethodReturn<ISVDevicesReturn | null, 'nodatas'> {
+  ): MethodReturn<ISVDevicesReturn[] | null, 'nodatas'> {
     try {
       const vivaToken = (await this.getVivaToken()).data;
 
-      const r = await useAxios.post<ISVDevicesReturn>(
+      const r = await useAxios.post<ISVDevicesReturn[]>(
         this.endpoints.isv.pos.devices.url,
         options,
         {
