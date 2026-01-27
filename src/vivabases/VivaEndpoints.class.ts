@@ -139,6 +139,13 @@ class VivaEndpoints {
           url: 'https://demo-api.vivapayments.com/checkout/v2/isv/orders',
           method: 'POST',
         },
+        cancel: {
+          /**
+           * @Param `{orderCode}`
+           */
+          url: 'https://demo.vivapayments.com/api/orders/{orderCode}',
+          method: 'DELETE',
+        },
       },
       webhook: {
         getKey: {
@@ -318,6 +325,13 @@ class VivaEndpoints {
         create: {
           url: 'https://api.vivapayments.com/checkout/v2/isv/orders',
           method: 'POST',
+        },
+        cancel: {
+          /**
+           * @Param `{orderCode}`
+           */
+          url: 'https://www.vivapayments.com/api/orders/{orderCode}',
+          method: 'DELETE',
         },
       },
       webhook: {

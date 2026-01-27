@@ -278,3 +278,27 @@ export interface ISVPaymentsOptions {
     }>;
   };
 }
+
+// ------------------------------------------------------------
+
+export interface ISVCancelOrderOptions {
+  /** The 16-digit orderCode of the payment order you wish to cancel */
+  orderCode: number;
+}
+
+export interface ISVCancelOrderReturn {
+  /** The unique 12-digit code of the order */
+  OrderCode: string;
+  /** If the call is unsuccessful, an error code is generated. For successful calls, 0 is returned */
+  ErrorCode: number;
+  /** If the ErrorCode is other than 0, a descriptive error message is returned */
+  ErrorText: string;
+  /** The server date and time of the API call */
+  TimeStamp: string;
+  /** Unique identifier logged by Viva for auditing purposes */
+  CorrelationId: string;
+  /** If the call is unsuccessful, an event ID is generated. For successful calls, 0 is returned */
+  EventId: number;
+  /** Indicator of successful API call. True or false */
+  Success: boolean;
+}

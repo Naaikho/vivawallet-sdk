@@ -55,4 +55,38 @@ export default class IsvPayments extends VivaAuthISV {
       };
     }
   }
+
+  // cant be implemented without allow isv auth class to define MerchantID and API Key
+
+  // /** Allows you to **cancel** an open isv payment order. */
+  // async cancelOrder(
+  //   options: ISVCancelOrderOptions
+  // ): MethodReturn<ISVCancelOrderReturn> {
+  //   try {
+  //     const vivaToken = (await this.getVivaToken()).data;
+
+  //     const response = await useAxios.delete<ISVCancelOrderReturn>(
+  //       this.endpoints.isv.payments.cancel.url.replace('{orderCode}', options.orderCode.toString()),
+  //       {
+  //         headers: {
+  //           Authorization: 'Basic ' + vivaToken,
+  //         },
+  //       }
+  //     );
+
+  //     return {
+  //       success: true,
+  //       message: 'Order cancelled successfully',
+  //       data: response.data,
+  //     };
+  //   } catch (e) {
+  //     if (this.errorLogs) console.error('IsvPayments.cancelOrder', e);
+  //     return {
+  //       success: false,
+  //       message: 'Failed to cancel order',
+  //       code: 'error',
+  //       data: null,
+  //     };
+  //   }
+  // }
 }
