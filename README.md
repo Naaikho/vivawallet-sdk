@@ -54,6 +54,8 @@ import {
   SmartCheckoutWebhookEventDatas,
   ConnectedAccountWebhookEventDatas,
 } from '@nkhind/vivawallet-sdk';
+
+const datas: VivaWebhookDatas<SmartCheckoutWebhookEventDatas> = req.body;
 ```
 
 ## TypeScript
