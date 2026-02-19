@@ -68,9 +68,9 @@ class VivaEndpoints {
       // &color={color}&paymentMethod={paymentMethod}
       /**
        * @Param `{orderCode}`
-       * 
+       *
        * ---
-       * 
+       *
        * Queries you can add to the url
        * - color=`{color}`
        * - paymentMethod=`{paymentMethod}`
@@ -132,7 +132,7 @@ class VivaEndpoints {
         create: {
           url: 'https://demo-api.vivapayments.com/isv/v1/accounts',
           method: 'POST',
-        }
+        },
       },
       payments: {
         create: {
@@ -172,6 +172,15 @@ class VivaEndpoints {
             method: 'POST',
           },
         },
+        session: {
+          abort: {
+            /**
+             * @Param `{sessionId}`
+             */
+            url: 'https://demo-api.vivapayments.com/ecr/isv/v1/sessions/{sessionId}',
+            method: 'DELETE',
+          },
+        },
         action: {
           create: {
             url: 'https://demo-api.vivapayments.com/ecr/isv/v1/actions',
@@ -185,7 +194,7 @@ class VivaEndpoints {
             method: 'GET',
           },
         },
-      }
+      },
     },
   };
 
@@ -255,9 +264,9 @@ class VivaEndpoints {
     checkout: {
       /**
        * @Param `{orderCode}`
-       * 
+       *
        * ---
-       * 
+       *
        * Queries you can add to the url
        * - color=`{color}`
        * - paymentMethod=`{paymentMethod}`
@@ -359,6 +368,15 @@ class VivaEndpoints {
             method: 'POST',
           },
         },
+        session: {
+          abort: {
+            /**
+             * @Param `{sessionId}`
+             */
+            url: 'https://api.vivapayments.com/ecr/isv/v1/sessions/{sessionId}',
+            method: 'DELETE',
+          },
+        },
         action: {
           create: {
             url: 'https://api.vivapayments.com/ecr/isv/v1/actions',
@@ -372,7 +390,7 @@ class VivaEndpoints {
             method: 'GET',
           },
         },
-      }
+      },
     },
   };
 
