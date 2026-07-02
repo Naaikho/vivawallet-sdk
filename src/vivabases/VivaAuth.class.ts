@@ -28,7 +28,7 @@ class VivaAuthBase extends VivaSkull {
   protected hasResellerCredentials(): boolean {
     return Boolean(
       this.resellerCredentials?.resellerId &&
-        this.resellerCredentials.resellerApiKey
+      this.resellerCredentials.resellerApiKey
     );
   }
 
@@ -244,7 +244,7 @@ class VivaAuthBase extends VivaSkull {
         data: r.data.Key,
       };
     } catch (e) {
-      console.error('Viva Webhook Code Error', e);
+      if (this.errorLogs) console.error('VivaAuth.getVivaWebhookCode', e);
       return {
         success: false,
         message: 'Failed to get Viva webhook code',

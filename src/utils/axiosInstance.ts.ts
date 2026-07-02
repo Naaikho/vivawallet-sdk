@@ -8,8 +8,5 @@ export const useAxios = axios.create({
 
 useAxios.interceptors.response.use(
   (res) => res,
-  (err) => {
-    console.log('Vivawallet Error:', err);
-    return Promise.reject(err);
-  }
+  (err) => Promise.reject(err)
 );
