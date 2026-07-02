@@ -14,7 +14,7 @@ class MarketPlaceSellers extends VivaAuth {
     datas: MPCreateAccountDatas
   ): MethodReturn<MPCreateAccountResponse | null, 'nodatas'> {
     try {
-      const vivaToken = (await this.getVivaToken()).data;
+      const vivaToken = (await this.getVivaAccessToken()).data;
 
       const r = await useAxios.post<MPCreateAccountResponse>(
         this.endpoints.marketplace.accounts.create.url,

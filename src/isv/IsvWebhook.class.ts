@@ -14,7 +14,7 @@ export default class IsvWebhook extends VivaAuthISV {
    */
   async getWebhookKey(): MethodReturn<ISVGetWebhookKeyReturn | null> {
     try {
-      const vivaToken = (await this.getVivaToken()).data;
+      const vivaToken = (await this.getVivaAccessToken()).data;
 
       const r = await useAxios.get<ISVGetWebhookKeyReturn>(
         this.endpoints.isv.webhook.getKey.url,
@@ -65,7 +65,7 @@ export default class IsvWebhook extends VivaAuthISV {
    */
   async create(options: ISVCreateWebhookOptions): MethodReturn<null> {
     try {
-      const vivaToken = (await this.getVivaToken()).data;
+      const vivaToken = (await this.getVivaAccessToken()).data;
 
       await useAxios.post<null>(
         this.endpoints.isv.webhook.create.url,

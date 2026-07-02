@@ -11,7 +11,7 @@ export default class IsvPosSession extends VivaAuthISV {
 
   async abortSession(options: ISVAbortSessionOptions): MethodReturn<null> {
     try {
-      const vivaToken = (await this.getVivaToken()).data;
+      const vivaToken = (await this.getVivaAccessToken()).data;
 
       await useAxios.delete<null>(
         `${this.endpoints.isv.pos.session.abort.url.replace(

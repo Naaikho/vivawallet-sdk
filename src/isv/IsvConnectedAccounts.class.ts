@@ -16,7 +16,7 @@ export default class IsvConnectedAccounts extends VivaAuthISV {
    */
   async getAccountDatas(options: ISVGetAccountDatasOptions): MethodReturn<ISVGetAccountDatasReturn | null> {
     try {
-      const vivaToken = (await this.getVivaToken()).data;
+      const vivaToken = (await this.getVivaAccessToken()).data;
 
       const r = await useAxios.get<ISVGetAccountDatasReturn>(
         this.endpoints.isv.connectedAccounts.get.url.replace('{accountId}', options.accountId),
@@ -60,7 +60,7 @@ export default class IsvConnectedAccounts extends VivaAuthISV {
    */
   async create(options: ISVCreateAccountOptions): MethodReturn<ISVCreateAccountReturn | null> {
     try {
-      const vivaToken = (await this.getVivaToken()).data;
+      const vivaToken = (await this.getVivaAccessToken()).data;
 
       const r = await useAxios.post<ISVCreateAccountReturn>(
         this.endpoints.isv.connectedAccounts.create.url,

@@ -1,6 +1,5 @@
 import { MethodReturn } from '../types/Methods.types';
 import {
-  VivaMerchantCredentials,
   VivaOAuthCredentials,
   VivawalletAPIInit,
   VivawalletISVInit,
@@ -12,8 +11,6 @@ import {
 } from '../types/VivawalletAuth.types';
 import { useAxios } from '../utils/axiosInstance.ts';
 import VivaSkull from './VivaSkull.class';
-
-type AuthCredentials = VivaOAuthCredentials | VivaMerchantCredentials;
 
 class VivaAuthBase extends VivaSkull {
   constructor(datas: VivawalletAPIInit | VivawalletISVInit) {
@@ -28,8 +25,20 @@ class VivaAuthBase extends VivaSkull {
     return Boolean(this.merchantCredentials);
   }
 
+  /** Ensure OAuth client credentials are available before OAuth-based calls. */
+  protected assertOAuthCredentials(): void {
+    if (!this.hasOAuthCredentials())
+      throw new Error('Credentials not provided');
+  }
+
+  /** Ensure merchant API credentials are available before Basic merchant calls. */
+  protected assertMerchantCredentials(): void {
+    if (!this.hasMerchantCredentials())
+      throw new Error('Credentials not provided');
+  }
+
   protected async requestAccessToken(
-    credentials: AuthCredentials
+    credentials: VivaOAuthCredentials
   ): MethodReturn<string | null, 'tokenerror'> {
     try {
       const res = await useAxios.post<GetVivaTokenReturn>(
@@ -43,9 +52,7 @@ class VivaAuthBase extends VivaSkull {
             Authorization:
               'Basic ' +
               Buffer.from(
-                'apikey' in credentials
-                  ? credentials.merchantId + ':' + credentials.apikey
-                  : credentials.clientId + ':' + credentials.clientSecret
+                credentials.clientId + ':' + credentials.clientSecret
               ).toString('base64'),
           },
         }
@@ -65,7 +72,7 @@ class VivaAuthBase extends VivaSkull {
         data: res.data.access_token,
       };
     } catch (e) {
-      console.error('Viva Auth Error', e);
+      if (this.errorLogs) console.error('VivaAuth.requestAccessToken', e);
       return {
         success: false,
         message: 'Failed to get Viva token',
@@ -91,15 +98,11 @@ class VivaAuthBase extends VivaSkull {
   }
 
   /**
-   * Return the VivaWallet API Auth2.0 code from credentials (needed for API Bearer calls)
-   * or `null` on request failed
-   *
-   * @param basic If `true`, merchantId and apikey will be used instead of clientId and clientSecret
+   * Return the VivaWallet API OAuth 2.0 access token from client credentials
+   * or `null` on request failed.
    */
-  async getVivaToken(basic = false): MethodReturn<string | null, 'tokenerror'> {
-    const credentials = basic ? this.merchantCredentials : this.oauthCredentials;
-
-    if (!credentials) {
+  async getVivaAccessToken(): MethodReturn<string | null, 'tokenerror'> {
+    if (!this.hasOAuthCredentials()) {
       return {
         success: false,
         message: 'Init not called',
@@ -108,7 +111,17 @@ class VivaAuthBase extends VivaSkull {
       };
     }
 
-    return this.requestAccessToken(credentials);
+    return this.requestAccessToken(this.oauthCredentials);
+  }
+
+  getVivaBasicToken(): string {
+    if (!this.merchantCredentials)
+      throw new Error('Merchant credentials not provided');
+    return Buffer.from(
+      this.merchantCredentials.merchantId +
+        ':' +
+        this.merchantCredentials.apikey
+    ).toString('base64');
   }
 
   /**
@@ -161,7 +174,8 @@ class VivaAuthBase extends VivaSkull {
         data: res.data,
       };
     } catch (e) {
-      if (this.errorLogs) console.error('VivaAuth.getCloudTerminalAccessToken', e);
+      if (this.errorLogs)
+        console.error('VivaAuth.getCloudTerminalAccessToken', e);
       return {
         success: false,
         message: 'Failed to get Cloud Terminal token',
@@ -169,13 +183,6 @@ class VivaAuthBase extends VivaSkull {
         data: null,
       };
     }
-  }
-
-  getVivaBasicToken(): string {
-    if (!this.merchantCredentials) throw new Error('Merchant credentials not provided');
-    return Buffer.from(
-      this.merchantCredentials.merchantId + ':' + this.merchantCredentials.apikey
-    ).toString('base64');
   }
 
   /** Return the code needed for Viva webhooks returns or `null` on request failed */
@@ -220,19 +227,33 @@ class VivaAuthBase extends VivaSkull {
       };
     }
   }
+
+  // ---------------------  DEPRECATED METHODS ---------------------
+
+  /**
+   * @deprecated Use `getVivaAccessToken()` instead. Merchant ID/API Key credentials
+   * are used directly with Basic Auth endpoints and do not request an access token.
+   */
+  async getVivaToken(basic = false): MethodReturn<string | null, 'tokenerror'> {
+    if (basic) {
+      return {
+        success: false,
+        message:
+          'Merchant Basic credentials cannot request a Viva access token',
+        code: 'tokenerror',
+        data: null,
+      };
+    }
+
+    return this.getVivaAccessToken();
+  }
 }
 
 class VivaAuth extends VivaAuthBase {
   constructor(datas: VivawalletAPIInit) {
     super(datas);
-    this.init();
-  }
-
-  /** Credentials verification, `throw` error if credentials is not gived ***(required for API calls)*** */
-  private init(): void {
-    console.log('Init viva');
-    if (!this.hasOAuthCredentials() || !this.hasMerchantCredentials())
-      throw new Error('Credentials not provided');
+    this.assertOAuthCredentials();
+    this.assertMerchantCredentials();
   }
 }
 
@@ -241,14 +262,7 @@ class VivaAuth extends VivaAuthBase {
 class VivaAuthISV extends VivaAuthBase {
   constructor(datas: VivawalletISVInit) {
     super(datas);
-    this.init();
-  }
-
-  /** Credentials verification, `throw` error if credentials is not gived ***(required for API calls)*** */
-  private init(): void {
-    console.log('Init viva');
-    if (!this.hasOAuthCredentials())
-      throw new Error('Credentials not provided');
+    this.assertOAuthCredentials();
   }
 }
 

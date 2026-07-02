@@ -14,7 +14,7 @@ export default class IsvPosDevices extends VivaAuthISV {
     options: ISVDevicesOptions
   ): MethodReturn<ISVDevicesReturn[] | null, 'nodatas'> {
     try {
-      const vivaToken = (await this.getVivaToken()).data;
+      const vivaToken = (await this.getVivaAccessToken()).data;
 
       const r = await useAxios.post<ISVDevicesReturn[]>(
         this.endpoints.isv.pos.devices.url,

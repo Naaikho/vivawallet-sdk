@@ -19,7 +19,7 @@ class VivaPayments extends VivaAuth {
     orderData: VivaPaymentOrderOptions
   ): MethodReturn<VivaPaymentOrderReturn | null, 'nodatas'> {
     try {
-      const vivaToken = (await this.getVivaToken()).data;
+      const vivaToken = (await this.getVivaAccessToken()).data;
 
       const response = await useAxios.post<VivaPaymentOrderReturn>(
         this.endpoints.payment.create.url,

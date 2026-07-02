@@ -16,7 +16,7 @@ export default class IsvPayments extends VivaAuthISV {
     orderData: ISVPaymentsOptions
   ): MethodReturn<VivaPaymentOrderReturn | null, 'nodatas'> {
     try {
-      const vivaToken = (await this.getVivaToken()).data;
+      const vivaToken = (await this.getVivaAccessToken()).data;
 
       const response = await useAxios.post<VivaPaymentOrderReturn>(
         this.endpoints.isv.payments.create.url + '?merchantId=' + merchantId,
@@ -63,7 +63,7 @@ export default class IsvPayments extends VivaAuthISV {
   //   options: ISVCancelOrderOptions
   // ): MethodReturn<ISVCancelOrderReturn> {
   //   try {
-  //     const vivaToken = (await this.getVivaToken()).data;
+  //     const vivaToken = (await this.getVivaAccessToken()).data;
 
   //     const response = await useAxios.delete<ISVCancelOrderReturn>(
   //       this.endpoints.isv.payments.cancel.url.replace('{orderCode}', options.orderCode.toString()),

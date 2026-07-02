@@ -22,7 +22,7 @@ class VivaTransactions extends VivaAuth {
     transactionId: string
   ): MethodReturn<VivaTransaction | null, 'nodatas'> {
     try {
-      const vivaToken = (await this.getVivaToken()).data;
+      const vivaToken = (await this.getVivaAccessToken()).data;
 
       const response = await useAxios.get<VivaTransaction>(
         this.endpoints.transaction.get.url.replace(

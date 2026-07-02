@@ -14,7 +14,7 @@ export default class IsvPosTransactions extends VivaAuthISV {
     options: ISVInitSaleOptions
   ): MethodReturn<undefined, 'nodatas'> {
     try {
-      const vivaToken = (await this.getVivaToken()).data;
+      const vivaToken = (await this.getVivaAccessToken()).data;
 
       await useAxios.post<null>(
         this.endpoints.isv.pos.transaction.create.url,
@@ -44,7 +44,7 @@ export default class IsvPosTransactions extends VivaAuthISV {
 
   async refundTransaction(options: ISVRefundTransactionOptions): MethodReturn<null> {
     try {
-      const vivaToken = (await this.getVivaToken()).data;
+      const vivaToken = (await this.getVivaAccessToken()).data;
 
       await useAxios.post<null>(
         this.endpoints.isv.pos.transaction.refund.url,
@@ -77,7 +77,7 @@ export default class IsvPosTransactions extends VivaAuthISV {
     options: ISVGetActionDatasOptions
   ): MethodReturn<ISVGetActionDatasReturn> {
     try {
-      const vivaToken = (await this.getVivaToken()).data;
+      const vivaToken = (await this.getVivaAccessToken()).data;
 
       const response = await useAxios.get<ISVGetActionDatasReturn>(
         this.endpoints.isv.pos.action.get.url.replace('{actionId}', options.actionId),
@@ -109,7 +109,7 @@ export default class IsvPosTransactions extends VivaAuthISV {
     options: ISVCreateActionOptions
   ): MethodReturn<ISVCreateActionReturn> {
     try {
-      const vivaToken = (await this.getVivaToken()).data;
+      const vivaToken = (await this.getVivaAccessToken()).data;
 
       const response = await useAxios.post<ISVCreateActionReturn>(
         this.endpoints.isv.pos.action.create.url,

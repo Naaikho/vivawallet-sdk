@@ -55,7 +55,7 @@ Preserve the current SDK return style unless the user explicitly asks for a brea
 ```ts
 async methodName(options: OptionsType): MethodReturn<ReturnType | null, 'nodatas'> {
   try {
-    const vivaToken = (await this.getVivaToken()).data;
+    const vivaToken = (await this.getVivaAccessToken()).data;
 
     const response = await useAxios.post<ReturnType>(url, options, {
       headers: {

@@ -25,7 +25,7 @@ class MarketPlaceTransactions extends VivaAuth {
     refundOptions: MPTransactionCancelOptions
   ): MethodReturn<MPCancelTransactionReturn | null, 'nodatas'> {
     try {
-      const vivaToken = (await this.getVivaToken()).data;
+      const vivaToken = (await this.getVivaAccessToken()).data;
       const queries = querifyDatas(refundOptions);
 
       const response = await useAxios.delete<MPCancelTransactionReturn>(
