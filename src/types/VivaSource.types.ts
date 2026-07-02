@@ -15,7 +15,7 @@ export interface SourceCodeDatas {
   pathSuccess: string;
   /**
    * A unique code that is exchanged between your application and the API.
-   * 
+   *
    * *Optional only if you defined a default source code in the initialization.*
    */
   sourceCode?: string;

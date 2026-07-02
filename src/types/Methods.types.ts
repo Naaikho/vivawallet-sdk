@@ -11,4 +11,6 @@ interface MethodErrorReturnDatas<E> {
   data: null;
 }
 
-export type MethodReturn<T, E = 'nodatas'> = Promise<MethodReturnDatas<T> | MethodErrorReturnDatas<E>>;
+export type MethodReturn<T, E = 'nodatas'> = Promise<
+  MethodReturnDatas<T> | MethodErrorReturnDatas<E>
+>;

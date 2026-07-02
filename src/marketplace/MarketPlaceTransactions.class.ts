@@ -11,12 +11,15 @@ import VivaTransactions from '../vivawallet/VivaTransactions.class';
 
 class MarketPlaceTransactions extends VivaAuth {
   getTransactionById: VivaTransactions['getTransactionById'];
+  createTransaction: VivaTransactions['createTransaction'];
   makeTransaction: VivaTransactions['makeTransaction'];
 
   constructor(datas: VivawalletAPIInit) {
     super(datas);
-    this.getTransactionById = new VivaTransactions(datas).getTransactionById;
-    this.makeTransaction = new VivaTransactions(datas).makeTransaction;
+    const transactions = new VivaTransactions(datas);
+    this.getTransactionById = transactions.getTransactionById;
+    this.createTransaction = transactions.createTransaction;
+    this.makeTransaction = transactions.makeTransaction;
   }
 
   /** Allow cancel transaction (refund) */
@@ -33,8 +36,8 @@ class MarketPlaceTransactions extends VivaAuth {
           '{transactionId}',
           transactionId
         ) +
-        '?' +
-        queries,
+          '?' +
+          queries,
         {
           headers: {
             Authorization: this.getBearerAuthorization(vivaToken),
@@ -43,7 +46,11 @@ class MarketPlaceTransactions extends VivaAuth {
       );
 
       if (!response.data) {
-        if (this.errorLogs) console.error('Vivawallet returned no canceled transaction data', response.data);
+        if (this.errorLogs)
+          console.error(
+            'Vivawallet returned no canceled transaction data',
+            response.data
+          );
         return {
           success: false,
           message: 'Vivawallet returned no canceled transaction data',
@@ -58,7 +65,8 @@ class MarketPlaceTransactions extends VivaAuth {
         data: response.data,
       };
     } catch (e) {
-      if (this.errorLogs) console.error('MarketPlaceTransactions.cancelTransaction', e);
+      if (this.errorLogs)
+        console.error('MarketPlaceTransactions.cancelTransaction', e);
       return {
         success: false,
         message: 'Failed to cancel transaction',

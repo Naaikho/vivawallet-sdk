@@ -9,7 +9,7 @@ export interface ISVCreateWebhookOptions {
   url: string;
   /**
    * Event Type of the desired webhook:
-   * 
+   *
    * - **1802** - Transaction POS Ecr Session Created
    * - **1803** - Transaction POS Ecr Session Failed
    * - **1796** - Transaction Payment Created

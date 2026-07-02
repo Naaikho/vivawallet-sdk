@@ -30,7 +30,8 @@ class MarketPlaceTransfers extends VivaAuth {
       );
 
       if (!r.data) {
-        if (this.errorLogs) console.error('Vivawallet returned no sent funds data', r.data);
+        if (this.errorLogs)
+          console.error('Vivawallet returned no sent funds data', r.data);
         return {
           success: false,
           message: 'Vivawallet returned no sent funds data',

@@ -1,8 +1,15 @@
-import { ISVCreateActionOptions, ISVCreateActionReturn, ISVGetActionDatasOptions, ISVGetActionDatasReturn, ISVInitSaleOptions, ISVRefundTransactionOptions } from "../../types/isv.types/IsvPos.types/IsvPosTransactions.types";
-import { MethodReturn } from "../../types/Methods.types";
-import { VivawalletISVInit } from "../../types/Vivawallet.types";
-import { useAxios } from "../../utils/axiosInstance.ts";
-import { VivaAuthISV } from "../../vivabases/VivaAuth.class";
+import {
+  ISVCreateActionOptions,
+  ISVCreateActionReturn,
+  ISVGetActionDatasOptions,
+  ISVGetActionDatasReturn,
+  ISVInitSaleOptions,
+  ISVRefundTransactionOptions,
+} from '../../types/isv.types/IsvPos.types/IsvPosTransactions.types';
+import { MethodReturn } from '../../types/Methods.types';
+import { VivawalletISVInit } from '../../types/Vivawallet.types';
+import { useAxios } from '../../utils/axiosInstance.ts';
+import { VivaAuthISV } from '../../vivabases/VivaAuth.class';
 
 export default class IsvPosTransactions extends VivaAuthISV {
   constructor(datas: VivawalletISVInit) {
@@ -42,7 +49,9 @@ export default class IsvPosTransactions extends VivaAuthISV {
     }
   }
 
-  async refundTransaction(options: ISVRefundTransactionOptions): MethodReturn<null> {
+  async refundTransaction(
+    options: ISVRefundTransactionOptions
+  ): MethodReturn<null> {
     try {
       const vivaToken = (await this.getVivaAccessToken()).data;
 
@@ -80,7 +89,10 @@ export default class IsvPosTransactions extends VivaAuthISV {
       const vivaToken = (await this.getVivaAccessToken()).data;
 
       const response = await useAxios.get<ISVGetActionDatasReturn>(
-        this.endpoints.isv.pos.action.get.url.replace('{actionId}', options.actionId),
+        this.endpoints.isv.pos.action.get.url.replace(
+          '{actionId}',
+          options.actionId
+        ),
         {
           headers: {
             Authorization: this.getBearerAuthorization(vivaToken),

@@ -1,9 +1,11 @@
-import { ISVCreateWebhookOptions, ISVGetWebhookKeyReturn } from "../types/isv.types/ISVWebhook.types";
-import { MethodReturn } from "../types/Methods.types";
-import { VivawalletISVInit } from "../types/Vivawallet.types";
-import { useAxios } from "../utils/axiosInstance.ts";
-import { VivaAuthISV } from "../vivabases/VivaAuth.class";
-
+import {
+  ISVCreateWebhookOptions,
+  ISVGetWebhookKeyReturn,
+} from '../types/isv.types/ISVWebhook.types';
+import { MethodReturn } from '../types/Methods.types';
+import { VivawalletISVInit } from '../types/Vivawallet.types';
+import { useAxios } from '../utils/axiosInstance.ts';
+import { VivaAuthISV } from '../vivabases/VivaAuth.class';
 
 export default class IsvWebhook extends VivaAuthISV {
   constructor(datas: VivawalletISVInit) {
@@ -26,7 +28,8 @@ export default class IsvWebhook extends VivaAuthISV {
       );
 
       if (!r.data) {
-        if (this.errorLogs) console.error('VivaWallet returned no webhook key data', r.data);
+        if (this.errorLogs)
+          console.error('VivaWallet returned no webhook key data', r.data);
         return {
           success: false,
           message: 'VivaWallet returned no webhook key data',
@@ -53,7 +56,7 @@ export default class IsvWebhook extends VivaAuthISV {
 
   /**
    * Provide your webhook endpoint URL to set up webhooks for your [desired events](https://developer.viva.com/webhooks-for-payments/#webhook-events):
-   * 
+   *
    * - **1802** - Transaction POS Ecr Session Created
    * - **1803** - Transaction POS Ecr Session Failed
    * - **1796** - Transaction Payment Created

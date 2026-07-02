@@ -121,64 +121,64 @@ export interface ISVRefundTransactionOptions {
   amount: number;
   /** The numeric code of the order's currency as defined in ISO 4712 */
   currencyCode: string;
-  /** 
-   * Free text value that can be used by the merchant as a reference. 
+  /**
+   * Free text value that can be used by the merchant as a reference.
    * If a merchantReference is not provided in the refund request, the system will default to using the merchantReference (MerchantTrns) from the original sale transaction.
    * @default "some-reference"
    */
   merchantReference: string;
-  /** 
+  /**
    * Free text value that can be used by the customer as a reference
    * @default "some-reference"
    */
   customerTrns?: string;
-  /** 
+  /**
    * A flag indicating whether transaction result will be shown
    * @default true
    */
   showTransactionResult?: boolean;
-  /** 
-   * A flag indicating if the receipt and transaction result will be shown. 
-   * If `true`, both transaction result and receipt will be shown. 
+  /**
+   * A flag indicating if the receipt and transaction result will be shown.
+   * If `true`, both transaction result and receipt will be shown.
    * If `false`, the receipt will not be shown and result will be shown in case show_transaction_result is `true`.
    * @default true
    */
   showReceipt?: boolean;
-  /** 
+  /**
    * Specifies how the terminal app should return control after a transaction.
-   * 
+   *
    * Allowed Values:
    * - Valid URI: A full URI (scheme + path; query/fragment allowed) to which the terminal will return after completing the transaction.
    * - `finish`: Special keyword signaling immediate backgrounding of the terminal app.
    * - Empty / Missing: No change to current flow.
    */
   interappCallback?: string;
-  /** 
+  /**
    * Set the Unique Number to identify your Provider (ΥΠΑΗΕΣ).
-   * 
+   *
    * For integration through ΦΗΜΑΣ (Φορολογικός Ηλεκτρονικός Μηχανισμός Ασφαλείας), specify as aadeProviderId the value `800`.
-   * 
+   *
    * *Note: This parameter applies only for Greek merchants.*
    */
   aadeProviderId?: string;
-  /** 
+  /**
    * The unencrypted signature that includes the fields with semicolon as a delimiter `;`.
-   * 
+   *
    * For ΥΠΑΗΕΣ integration, example fields: Receipt UID, MARK, Date and time, Amount, Sum Amount without TAX, VAT amount, Sum Amount with TAX, TID.
-   * 
+   *
    * For ΦΗΜΑΣ integration, use ECR TOKEN as in A.1098/2023.
-   * 
+   *
    * *Note: This parameter applies only for Greek merchants.*
    */
   aadeProviderSignatureData?: string;
-  /** 
+  /**
    * The fields of providerSignatureFields encrypted using a public key and the Elliptic Curve Digital Signature Algorithm (ECDSA).
    * The signature is sent to POS in base64 format.
-   * 
+   *
    * Algorithm: ECDSA, Curve: NISTP256, HASH: SHA256
-   * 
+   *
    * For ΦΗΜΑΣ integration, use SessionKey as in A.1098/2023.
-   * 
+   *
    * *Note: This parameter applies only for Greek merchants.*
    */
   aadeProviderSignature?: string;
@@ -196,9 +196,9 @@ export interface ISVCreateActionOptions {
   terminalId: string;
   /** Cash register identification - set by the merchant */
   cashRegisterId: string;
-  /** 
+  /**
    * The action type to be invoked on the device
-   * 
+   *
    * Value: `aade-fim-control`
    */
   actionType?: 'aade-fim-control';
@@ -219,9 +219,9 @@ export interface ISVCreateActionReturn {
   terminalId: string;
   /** Cash register identification */
   cashRegisterId: string;
-  /** 
+  /**
    * Enum specifying the action to be invoked on the device
-   * 
+   *
    * Value: `aade-fim-control`
    */
   actionType: string;
@@ -241,9 +241,9 @@ export interface ISVGetActionDatasReturn {
   terminalId: string;
   /** Cash register identification */
   cashRegisterId: string;
-  /** 
+  /**
    * Enum specifying the action to be invoked on the device
-   * 
+   *
    * Value: `aade-fim-control`
    */
   actionType: string;

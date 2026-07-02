@@ -25,8 +25,7 @@ export interface VivaResellerCredentials {
 }
 
 export interface VivawalletBaseInit
-  extends VivawalletEnpointsInit,
-    VivaOAuthCredentials {
+  extends VivawalletEnpointsInit, VivaOAuthCredentials {
   /** Vivawallet payment source code */
   sourceCode?: string | null;
   /** Active logs in console */
@@ -34,12 +33,10 @@ export interface VivawalletBaseInit
 }
 
 export interface VivawalletAPIInit
-  extends VivawalletBaseInit,
-    VivaMerchantCredentials {}
+  extends VivawalletBaseInit, VivaMerchantCredentials {}
 
 export interface VivawalletISVInit
-  extends VivawalletBaseInit,
-    Partial<VivaResellerCredentials> {}
+  extends VivawalletBaseInit, Partial<VivaResellerCredentials> {}
 
 export interface VivaSmartCheckoutOptions {
   orderCode: string;

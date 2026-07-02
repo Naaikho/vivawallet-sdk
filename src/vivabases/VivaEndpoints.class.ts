@@ -34,6 +34,10 @@ class VivaEndpoints {
         url: 'https://demo-api.vivapayments.com/checkout/v2/orders',
         method: 'POST',
       },
+      legacyCreate: {
+        url: 'https://demo.vivapayments.com/api/orders',
+        method: 'POST',
+      },
       update: {
         /**
          * @Param `{orderCode}`
@@ -70,6 +74,176 @@ class VivaEndpoints {
          */
         url: 'https://demo.vivapayments.com/api/transactions/{transactionId}',
         method: 'DELETE',
+      },
+      legacyGet: {
+        /**
+         * @Param `{transactionId}`
+         */
+        url: 'https://demo.vivapayments.com/api/transactions/{transactionId}',
+        method: 'GET',
+      },
+      cardToken: {
+        url: 'https://demo-api.vivapayments.com/acquiring/v1/cards/tokens',
+        method: 'POST',
+      },
+      increasePreauth: {
+        /**
+         * @Param `{transactionId}`
+         */
+        url: 'https://demo-api.vivapayments.com/acquiring/v1/transactions/{transactionId}:increasepreauth',
+        method: 'POST',
+      },
+      cancelPartialAuthorization: {
+        /**
+         * @Param `{transactionId}`
+         */
+        url: 'https://demo-api.vivapayments.com/acquiring/v1/transactions/{transactionId}',
+        method: 'DELETE',
+      },
+      octPayout: {
+        /**
+         * @Param `{transactionId}`
+         */
+        url: 'https://demo.vivapayments.com/api/transactions/{transactionId}',
+        method: 'DELETE',
+      },
+      rebate: {
+        /**
+         * @Param `{transactionId}`
+         */
+        url: 'https://demo-api.vivapayments.com/acquiring/v1/transactions/{transactionId}:rebate',
+        method: 'POST',
+      },
+      fastRefund: {
+        /**
+         * @Param `{transactionId}`
+         */
+        url: 'https://demo-api.vivapayments.com/acquiring/v1/transactions/{transactionId}:fastrefund',
+        method: 'POST',
+      },
+      cancelRebateFastRefund: {
+        /**
+         * @Param `{transactionId}`
+         */
+        url: 'https://demo-api.vivapayments.com/acquiring/v1/transactions/{transactionId}',
+        method: 'DELETE',
+      },
+    },
+    webhooks: {
+      subscriptions: {
+        add: {
+          url: 'https://api.vivapayments.com/dataservices/v1/webhooks/subscriptions',
+          method: 'POST',
+        },
+        update: {
+          /**
+           * @Param `{subscriptionId}`
+           */
+          url: 'https://api.vivapayments.com/dataservices/v1/webhooks/subscriptions/{subscriptionId}',
+          method: 'PUT',
+        },
+        delete: {
+          /**
+           * @Param `{subscriptionId}`
+           */
+          url: 'https://api.vivapayments.com/dataservices/v1/webhooks/subscriptions/{subscriptionId}',
+          method: 'DELETE',
+        },
+        list: {
+          url: 'https://api.vivapayments.com/dataservices/v1/webhooks/subscriptions',
+          method: 'GET',
+        },
+      },
+    },
+    resellers: {
+      transactions: {
+        checkCashPaymentEligibility: {
+          url: 'https://demo-api.vivapayments.com/resellers/v1/transactions/cashPayments:validate',
+          method: 'POST',
+        },
+        checkBillPaymentEligibility: {
+          url: 'https://demo-api.vivapayments.com/resellers/v1/transactions/billPayments:validate',
+          method: 'POST',
+        },
+        resendCashPaymentOtp: {
+          url: 'https://demo-api.vivapayments.com/resellers/v1/transactions/cashPayments:sendotp',
+          method: 'POST',
+        },
+        resendBillPaymentOtp: {
+          url: 'https://demo-api.vivapayments.com/resellers/v1/transactions/billPayments:sendotp',
+          method: 'POST',
+        },
+        cashPayment: {
+          url: 'https://demo-api.vivapayments.com/resellers/v1/transactions/cashPayments',
+          method: 'POST',
+        },
+        billPayment: {
+          url: 'https://demo-api.vivapayments.com/resellers/v1/transactions/billPayments',
+          method: 'POST',
+        },
+      },
+      orders: {
+        create: {
+          url: 'https://demo-api.vivapayments.com/resellers/v1/orders',
+          method: 'POST',
+        },
+      },
+    },
+    wallets: {
+      legacyGet: {
+        url: 'https://demo.vivapayments.com/api/wallets',
+        method: 'GET',
+      },
+      merchantGet: {
+        url: 'https://demo-api.vivapayments.com/merchants/v1/wallets',
+        method: 'GET',
+      },
+    },
+    bankTransfers: {
+      bankAccounts: {
+        link: {
+          url: 'https://demo-api.vivapayments.com/banktransfers/v1/bankaccounts',
+          method: 'POST',
+        },
+        list: {
+          url: 'https://demo-api.vivapayments.com/banktransfers/v1/bankaccounts',
+          method: 'GET',
+        },
+        get: {
+          /**
+           * @Param `{bankAccountId}`
+           */
+          url: 'https://demo-api.vivapayments.com/banktransfers/v1/bankaccounts/{bankAccountId}',
+          method: 'GET',
+        },
+        update: {
+          /**
+           * @Param `{bankAccountId}`
+           */
+          url: 'https://demo-api.vivapayments.com/banktransfers/v1/bankaccounts/{bankAccountId}',
+          method: 'PATCH',
+        },
+        instructionTypes: {
+          /**
+           * @Param `{bankAccountId}`
+           */
+          url: 'https://demo-api.vivapayments.com/banktransfers/v1/bankaccounts/{bankAccountId}/instructiontypes',
+          method: 'GET',
+        },
+        fees: {
+          /**
+           * @Param `{bankAccountId}`
+           */
+          url: 'https://demo-api.vivapayments.com/banktransfers/v1/bankaccounts/{bankAccountId}/fees',
+          method: 'POST',
+        },
+        send: {
+          /**
+           * @Param `{bankAccountId}`
+           */
+          url: 'https://demo-api.vivapayments.com/banktransfers/v1/bankaccounts/{bankAccountId}:send',
+          method: 'POST',
+        },
       },
     },
     checkout: {
@@ -246,6 +420,10 @@ class VivaEndpoints {
         url: 'https://api.vivapayments.com/checkout/v2/orders',
         method: 'POST',
       },
+      legacyCreate: {
+        url: 'https://www.vivapayments.com/api/orders',
+        method: 'POST',
+      },
       update: {
         /**
          * @Param `{orderCode}`
@@ -282,6 +460,176 @@ class VivaEndpoints {
          */
         url: 'https://www.vivapayments.com/api/transactions/{transactionId}',
         method: 'DELETE',
+      },
+      legacyGet: {
+        /**
+         * @Param `{transactionId}`
+         */
+        url: 'https://www.vivapayments.com/api/transactions/{transactionId}',
+        method: 'GET',
+      },
+      cardToken: {
+        url: 'https://api.vivapayments.com/acquiring/v1/cards/tokens',
+        method: 'POST',
+      },
+      increasePreauth: {
+        /**
+         * @Param `{transactionId}`
+         */
+        url: 'https://api.vivapayments.com/acquiring/v1/transactions/{transactionId}:increasepreauth',
+        method: 'POST',
+      },
+      cancelPartialAuthorization: {
+        /**
+         * @Param `{transactionId}`
+         */
+        url: 'https://api.vivapayments.com/acquiring/v1/transactions/{transactionId}',
+        method: 'DELETE',
+      },
+      octPayout: {
+        /**
+         * @Param `{transactionId}`
+         */
+        url: 'https://www.vivapayments.com/api/transactions/{transactionId}',
+        method: 'DELETE',
+      },
+      rebate: {
+        /**
+         * @Param `{transactionId}`
+         */
+        url: 'https://api.vivapayments.com/acquiring/v1/transactions/{transactionId}:rebate',
+        method: 'POST',
+      },
+      fastRefund: {
+        /**
+         * @Param `{transactionId}`
+         */
+        url: 'https://api.vivapayments.com/acquiring/v1/transactions/{transactionId}:fastrefund',
+        method: 'POST',
+      },
+      cancelRebateFastRefund: {
+        /**
+         * @Param `{transactionId}`
+         */
+        url: 'https://api.vivapayments.com/acquiring/v1/transactions/{transactionId}',
+        method: 'DELETE',
+      },
+    },
+    webhooks: {
+      subscriptions: {
+        add: {
+          url: 'https://api.vivapayments.com/dataservices/v1/webhooks/subscriptions',
+          method: 'POST',
+        },
+        update: {
+          /**
+           * @Param `{subscriptionId}`
+           */
+          url: 'https://api.vivapayments.com/dataservices/v1/webhooks/subscriptions/{subscriptionId}',
+          method: 'PUT',
+        },
+        delete: {
+          /**
+           * @Param `{subscriptionId}`
+           */
+          url: 'https://api.vivapayments.com/dataservices/v1/webhooks/subscriptions/{subscriptionId}',
+          method: 'DELETE',
+        },
+        list: {
+          url: 'https://api.vivapayments.com/dataservices/v1/webhooks/subscriptions',
+          method: 'GET',
+        },
+      },
+    },
+    resellers: {
+      transactions: {
+        checkCashPaymentEligibility: {
+          url: 'https://api.vivapayments.com/resellers/v1/transactions/cashPayments:validate',
+          method: 'POST',
+        },
+        checkBillPaymentEligibility: {
+          url: 'https://api.vivapayments.com/resellers/v1/transactions/billPayments:validate',
+          method: 'POST',
+        },
+        resendCashPaymentOtp: {
+          url: 'https://api.vivapayments.com/resellers/v1/transactions/cashPayments:sendotp',
+          method: 'POST',
+        },
+        resendBillPaymentOtp: {
+          url: 'https://api.vivapayments.com/resellers/v1/transactions/billPayments:sendotp',
+          method: 'POST',
+        },
+        cashPayment: {
+          url: 'https://api.vivapayments.com/resellers/v1/transactions/cashPayments',
+          method: 'POST',
+        },
+        billPayment: {
+          url: 'https://api.vivapayments.com/resellers/v1/transactions/billPayments',
+          method: 'POST',
+        },
+      },
+      orders: {
+        create: {
+          url: 'https://api.vivapayments.com/resellers/v1/orders',
+          method: 'POST',
+        },
+      },
+    },
+    wallets: {
+      legacyGet: {
+        url: 'https://www.vivapayments.com/api/wallets',
+        method: 'GET',
+      },
+      merchantGet: {
+        url: 'https://api.vivapayments.com/merchants/v1/wallets',
+        method: 'GET',
+      },
+    },
+    bankTransfers: {
+      bankAccounts: {
+        link: {
+          url: 'https://api.vivapayments.com/banktransfers/v1/bankaccounts',
+          method: 'POST',
+        },
+        list: {
+          url: 'https://api.vivapayments.com/banktransfers/v1/bankaccounts',
+          method: 'GET',
+        },
+        get: {
+          /**
+           * @Param `{bankAccountId}`
+           */
+          url: 'https://api.vivapayments.com/banktransfers/v1/bankaccounts/{bankAccountId}',
+          method: 'GET',
+        },
+        update: {
+          /**
+           * @Param `{bankAccountId}`
+           */
+          url: 'https://api.vivapayments.com/banktransfers/v1/bankaccounts/{bankAccountId}',
+          method: 'PATCH',
+        },
+        instructionTypes: {
+          /**
+           * @Param `{bankAccountId}`
+           */
+          url: 'https://api.vivapayments.com/banktransfers/v1/bankaccounts/{bankAccountId}/instructiontypes',
+          method: 'GET',
+        },
+        fees: {
+          /**
+           * @Param `{bankAccountId}`
+           */
+          url: 'https://api.vivapayments.com/banktransfers/v1/bankaccounts/{bankAccountId}/fees',
+          method: 'POST',
+        },
+        send: {
+          /**
+           * @Param `{bankAccountId}`
+           */
+          url: 'https://api.vivapayments.com/banktransfers/v1/bankaccounts/{bankAccountId}:send',
+          method: 'POST',
+        },
       },
     },
     checkout: {

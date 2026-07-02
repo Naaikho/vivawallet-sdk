@@ -129,3 +129,13 @@ export function querifyDatas(datas: Record<string, any>): string {
     })
     .join('&');
 }
+
+export function querifyDefinedDatas(datas: Record<string, any>): string {
+  return querifyDatas(
+    Object.fromEntries(
+      Object.entries(datas).filter(
+        ([, value]) => value !== undefined && value !== null
+      )
+    )
+  );
+}

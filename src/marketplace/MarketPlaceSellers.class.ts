@@ -1,4 +1,7 @@
-import { MPCreateAccountDatas, MPCreateAccountResponse } from '../types/marketplace.types/MPSellers.types';
+import {
+  MPCreateAccountDatas,
+  MPCreateAccountResponse,
+} from '../types/marketplace.types/MPSellers.types';
 import { MethodReturn } from '../types/Methods.types';
 import { VivawalletAPIInit } from '../types/Vivawallet.types';
 import { useAxios } from '../utils/axiosInstance.ts';
@@ -27,7 +30,8 @@ class MarketPlaceSellers extends VivaAuth {
       );
 
       if (!r.data) {
-        if (this.errorLogs) console.error('Vivawallet returned no created account data', r.data);
+        if (this.errorLogs)
+          console.error('Vivawallet returned no created account data', r.data);
         return {
           success: false,
           message: 'Vivawallet returned no created account data',

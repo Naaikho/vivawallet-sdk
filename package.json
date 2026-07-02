@@ -11,7 +11,8 @@
     "dev": "tsc && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "commit": "git add . && git commit -m",
-    "commit:s": "git add . && git commit -S -m"
+    "commit:s": "git add . && git commit -S -m",
+    "format": "prettier --write \"src/**/*.ts\""
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
     "@types/node": "^20.11.24",
     "@types/uuid": "^9.0.8",
     "@types/validator": "^13.11.9",
+    "prettier": "^3.9.4",
     "typescript": "^5.3.3"
   },
   "dependencies": {
