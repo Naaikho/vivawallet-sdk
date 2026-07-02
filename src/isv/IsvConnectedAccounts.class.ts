@@ -22,7 +22,7 @@ export default class IsvConnectedAccounts extends VivaAuthISV {
         this.endpoints.isv.connectedAccounts.get.url.replace('{accountId}', options.accountId),
         {
           headers: {
-            Authorization: 'Bearer ' + vivaToken,
+            Authorization: this.getBearerAuthorization(vivaToken),
           },
         }
       );
@@ -67,7 +67,7 @@ export default class IsvConnectedAccounts extends VivaAuthISV {
         options,
         {
           headers: {
-            Authorization: 'Bearer ' + vivaToken,
+            Authorization: this.getBearerAuthorization(vivaToken),
           },
         }
       );

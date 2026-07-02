@@ -37,7 +37,7 @@ class MarketPlaceTransactions extends VivaAuth {
         queries,
         {
           headers: {
-            Authorization: 'Bearer ' + vivaToken,
+            Authorization: this.getBearerAuthorization(vivaToken),
           },
         }
       );

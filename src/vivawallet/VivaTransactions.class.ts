@@ -31,7 +31,7 @@ class VivaTransactions extends VivaAuth {
         ),
         {
           headers: {
-            Authorization: 'Bearer ' + vivaToken,
+            Authorization: this.getBearerAuthorization(vivaToken),
           },
         }
       );
@@ -77,7 +77,7 @@ class VivaTransactions extends VivaAuth {
         options,
         {
           headers: {
-            Authorization: 'Bearer ' + this.getVivaBasicToken(),
+            Authorization: this.getMerchantBasicAuthorization(),
           },
         }
       );
@@ -114,7 +114,6 @@ class VivaTransactions extends VivaAuth {
     refundOptions: VivaTransactionCancelOptions
   ): MethodReturn<VivaTransactionReturn | null, 'nodatas'> {
     try {
-      const vivaToken = this.getVivaBasicToken();
       const queries = querifyDatas(refundOptions);
 
       const response = await useAxios.delete<VivaTransactionReturn>(
@@ -126,7 +125,7 @@ class VivaTransactions extends VivaAuth {
         queries,
         {
           headers: {
-            Authorization: 'Bearer ' + vivaToken,
+            Authorization: this.getMerchantBasicAuthorization(),
           },
         }
       );

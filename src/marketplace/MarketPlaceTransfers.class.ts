@@ -24,7 +24,7 @@ class MarketPlaceTransfers extends VivaAuth {
         datas,
         {
           headers: {
-            Authorization: 'Bearer ' + vivaToken,
+            Authorization: this.getBearerAuthorization(vivaToken),
           },
         }
       );

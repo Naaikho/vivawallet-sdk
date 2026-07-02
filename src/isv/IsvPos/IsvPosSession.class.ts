@@ -20,7 +20,7 @@ export default class IsvPosSession extends VivaAuthISV {
         )}?cashRegisterId=${options.cashRegisterId}`,
         {
           headers: {
-            Authorization: 'Bearer ' + vivaToken,
+            Authorization: this.getBearerAuthorization(vivaToken),
           },
         }
       );

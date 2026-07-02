@@ -5,17 +5,19 @@ This is a Non-official VivaWallet Node SDK. It provides a simple way to interact
 ## Payment API
 
 ```typescript
-import { VivaWallet } from '@nkhind/vivawallet-sdk';
+import { Vivawallet } from '@nkhind/vivawallet-sdk';
 
-const vivawallet = new VivaWallet({
-  smartClientId: 'your-smartcheckout-client-id',
-  smartClientSecret: 'your-smartcheckout-client-secret',
+const vivawallet = new Vivawallet({
+  clientId: 'your-smartcheckout-client-id',
+  clientSecret: 'your-smartcheckout-client-secret',
   merchantId: 'your-merchant-uuid',
   apikey: 'your-api-key',
 
   sourceCode: 'MY_SOURCE_CODE', // Optional
 });
 ```
+
+The standard Payment API client uses Client ID/Client Secret credentials for OAuth 2.0 Bearer-token calls, and Merchant ID/API Key credentials for Viva Basic Auth endpoints.
 
 ## ISV API
 
@@ -23,12 +25,14 @@ const vivawallet = new VivaWallet({
 import { VivaISV } from '@nkhind/vivawallet-sdk';
 
 const vivaIsv = new VivaISV({
-  smartClientId: 'your-smartcheckout-client-id',
-  smartClientSecret: 'your-smartcheckout-client-secret',
+  clientId: 'your-isv-client-id',
+  clientSecret: 'your-isv-client-secret',
 
   sourceCode: 'MY_SOURCE_CODE', // Optional
 });
 ```
+
+The ISV client uses ISV Client ID/Client Secret credentials for OAuth 2.0 calls. Merchant or reseller credentials can be passed only for ISV flows that require them.
 
 ## Marketplace API
 
@@ -36,8 +40,8 @@ const vivaIsv = new VivaISV({
 import { Marketplace } from '@nkhind/vivawallet-sdk';
 
 const vivaMarketplace = new Marketplace({
-  smartClientId: 'your-smartcheckout-client-id',
-  smartClientSecret: 'your-smartcheckout-client-secret',
+  clientId: 'your-smartcheckout-client-id',
+  clientSecret: 'your-smartcheckout-client-secret',
   merchantId: 'your-merchant-uuid',
   apikey: 'your-api-key',
 
@@ -45,6 +49,8 @@ const vivaMarketplace = new Marketplace({
 });
 
 ```
+
+The Marketplace client uses the platform account's OAuth credentials for Platforms, Checkout and Acquiring API calls, while keeping merchant credentials available for legacy Basic Auth helpers such as payment sources.
 
 ## Webhook Types
 

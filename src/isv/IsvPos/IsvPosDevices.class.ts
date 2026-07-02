@@ -21,7 +21,7 @@ export default class IsvPosDevices extends VivaAuthISV {
         options,
         {
           headers: {
-            Authorization: 'Bearer ' + vivaToken,
+            Authorization: this.getBearerAuthorization(vivaToken),
           },
         }
       );

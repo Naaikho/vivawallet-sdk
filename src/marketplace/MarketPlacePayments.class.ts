@@ -28,7 +28,7 @@ class MarketPlacePayments extends VivaAuth {
         orderData,
         {
           headers: {
-            Authorization: 'Bearer ' + vivaToken,
+            Authorization: this.getBearerAuthorization(vivaToken),
           },
         }
       );

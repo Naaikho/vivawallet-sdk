@@ -21,7 +21,7 @@ export default class IsvPosTransactions extends VivaAuthISV {
         options,
         {
           headers: {
-            Authorization: 'Bearer ' + vivaToken,
+            Authorization: this.getBearerAuthorization(vivaToken),
           },
         }
       );
@@ -51,7 +51,7 @@ export default class IsvPosTransactions extends VivaAuthISV {
         options,
         {
           headers: {
-            Authorization: 'Bearer ' + vivaToken,
+            Authorization: this.getBearerAuthorization(vivaToken),
           },
         }
       );
@@ -83,7 +83,7 @@ export default class IsvPosTransactions extends VivaAuthISV {
         this.endpoints.isv.pos.action.get.url.replace('{actionId}', options.actionId),
         {
           headers: {
-            Authorization: 'Bearer ' + vivaToken,
+            Authorization: this.getBearerAuthorization(vivaToken),
           },
         }
       );
@@ -116,7 +116,7 @@ export default class IsvPosTransactions extends VivaAuthISV {
         options,
         {
           headers: {
-            Authorization: 'Bearer ' + vivaToken,
+            Authorization: this.getBearerAuthorization(vivaToken),
           },
         }
       );

@@ -26,7 +26,7 @@ class VivaPayments extends VivaAuth {
         orderData,
         {
           headers: {
-            Authorization: 'Bearer ' + vivaToken,
+            Authorization: this.getBearerAuthorization(vivaToken),
           },
         }
       );
@@ -71,7 +71,7 @@ class VivaPayments extends VivaAuth {
 
       const response = await useAxios.delete(cancelUrl, {
         headers: {
-          Authorization: 'Bearer ' + this.getVivaBasicToken(),
+          Authorization: this.getMerchantBasicAuthorization(),
         },
       });
 

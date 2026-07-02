@@ -23,7 +23,7 @@ export default class IsvPayments extends VivaAuthISV {
         orderData,
         {
           headers: {
-            Authorization: 'Bearer ' + vivaToken,
+            Authorization: this.getBearerAuthorization(vivaToken),
           },
         }
       );

@@ -20,7 +20,7 @@ export default class IsvWebhook extends VivaAuthISV {
         this.endpoints.isv.webhook.getKey.url,
         {
           headers: {
-            Authorization: 'Bearer ' + vivaToken,
+            Authorization: this.getBearerAuthorization(vivaToken),
           },
         }
       );
@@ -72,7 +72,7 @@ export default class IsvWebhook extends VivaAuthISV {
         options,
         {
           headers: {
-            Authorization: 'Bearer ' + vivaToken,
+            Authorization: this.getBearerAuthorization(vivaToken),
           },
         }
       );

@@ -32,7 +32,7 @@ class VivaSourceCode extends VivaAuth {
         url: this.endpoints.source.url,
         method: this.endpoints.source.method,
         headers: {
-          Authorization: 'Basic ' + this.getVivaBasicToken(),
+          Authorization: this.getMerchantBasicAuthorization(),
         },
         data,
       });

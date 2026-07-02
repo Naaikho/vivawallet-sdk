@@ -3,23 +3,46 @@ export interface VivawalletEnpointsInit {
   dev?: boolean;
 }
 
-export interface VivawalletAPIInit extends VivawalletEnpointsInit {
-  /** VivaWallet Client ID */
+export interface VivaOAuthCredentials {
+  /** VivaWallet Client ID used to request an OAuth 2.0 access token. */
   clientId: string;
-  /** VivaWallet Client Secret */
+  /** VivaWallet Client Secret used to request an OAuth 2.0 access token. */
   clientSecret: string;
-  /** VivaWallet Access Merchant ID */
+}
+
+export interface VivaMerchantCredentials {
+  /** VivaWallet Merchant ID used with Basic Auth. */
   merchantId: string;
-  /** VivaWallet Access API Key */
+  /** VivaWallet API Key used with Basic Auth. */
   apikey: string;
+}
+
+export interface VivaResellerCredentials {
+  /** VivaWallet Reseller ID used by reseller-authenticated ISV calls. */
+  resellerId: string;
+  /** VivaWallet Reseller API Key used by reseller-authenticated ISV calls. */
+  resellerApiKey: string;
+  /** VivaWallet Merchant ID when required by reseller-authenticated ISV calls. */
+  merchantId?: string;
+}
+
+export interface VivawalletBaseInit
+  extends VivawalletEnpointsInit,
+    VivaOAuthCredentials {
   /** Vivawallet payment source code */
   sourceCode?: string | null;
   /** Active logs in console */
   logs?: boolean;
 }
 
+export interface VivawalletAPIInit
+  extends VivawalletBaseInit,
+    VivaMerchantCredentials {}
+
 export interface VivawalletISVInit
-  extends Omit<VivawalletAPIInit, 'merchantId' | 'apikey'> {}
+  extends VivawalletBaseInit,
+    Partial<VivaMerchantCredentials>,
+    Partial<VivaResellerCredentials> {}
 
 export interface VivaSmartCheckoutOptions {
   orderCode: string;
