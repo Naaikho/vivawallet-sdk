@@ -77,7 +77,7 @@ class VivaTransactions extends VivaAuth {
         options,
         {
           headers: {
-            Authorization: this.getMerchantBasicAuthorization(),
+            Authorization: this.getVivaBasicAuth(),
           },
         }
       );
@@ -125,7 +125,7 @@ class VivaTransactions extends VivaAuth {
         queries,
         {
           headers: {
-            Authorization: this.getMerchantBasicAuthorization(),
+            Authorization: this.getVivaBasicAuth(),
           },
         }
       );

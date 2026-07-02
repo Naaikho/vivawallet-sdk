@@ -71,7 +71,7 @@ class VivaPayments extends VivaAuth {
 
       const response = await useAxios.delete(cancelUrl, {
         headers: {
-          Authorization: this.getMerchantBasicAuthorization(),
+          Authorization: this.getVivaBasicAuth(),
         },
       });
 

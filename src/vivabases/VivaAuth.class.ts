@@ -86,10 +86,6 @@ class VivaAuthBase extends VivaSkull {
     return 'Bearer ' + token;
   }
 
-  protected getMerchantBasicAuthorization(): string {
-    return 'Basic ' + this.getVivaBasicToken();
-  }
-
   protected getOAuthBasicAuthorization(): string {
     return (
       'Basic ' +
@@ -114,14 +110,19 @@ class VivaAuthBase extends VivaSkull {
     return this.requestAccessToken(this.oauthCredentials);
   }
 
-  getVivaBasicToken(): string {
+  /** Return the VivaWallet Merchant ID/API Key Basic Auth authorization value. */
+  getVivaBasicAuth(): string {
     if (!this.merchantCredentials)
       throw new Error('Merchant credentials not provided');
-    return Buffer.from(
-      this.merchantCredentials.merchantId +
-        ':' +
-        this.merchantCredentials.apikey
-    ).toString('base64');
+
+    return (
+      'Basic ' +
+      Buffer.from(
+        this.merchantCredentials.merchantId +
+          ':' +
+          this.merchantCredentials.apikey
+      ).toString('base64')
+    );
   }
 
   /**
@@ -199,7 +200,7 @@ class VivaAuthBase extends VivaSkull {
     try {
       const r = await useAxios.get(this.endpoints.webhookAuth.url, {
         headers: {
-          Authorization: this.getMerchantBasicAuthorization(),
+          Authorization: this.getVivaBasicAuth(),
         },
       });
 
@@ -246,6 +247,14 @@ class VivaAuthBase extends VivaSkull {
     }
 
     return this.getVivaAccessToken();
+  }
+
+  /**
+   * @deprecated Use `getVivaBasicAuth()` instead. This returns only the
+   * Base64-encoded Merchant ID/API Key value without the `Basic ` prefix.
+   */
+  getVivaBasicToken(): string {
+    return this.getVivaBasicAuth().replace('Basic ', '');
   }
 }
 

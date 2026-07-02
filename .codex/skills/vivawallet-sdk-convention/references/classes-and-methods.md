@@ -98,6 +98,7 @@ Never guess auth mode from a boolean flag. Prefer explicit helpers or endpoint s
 
 - OAuth access token calls use `Authorization: Bearer <access_token>`.
 - Merchant API key calls use `Authorization: Basic <base64 merchantId:apiKey>`.
+- Use `getVivaBasicAuth()` when a method needs the full Basic Auth authorization value.
 - ISV OAuth calls use the ISV client credentials token as a Bearer token.
 - Do not use placeholder credentials such as `merchantId: 'null'` or `apikey: 'null'`.
 
