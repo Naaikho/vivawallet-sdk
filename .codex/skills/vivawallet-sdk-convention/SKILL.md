@@ -1,6 +1,6 @@
 ---
 name: vivawallet-sdk-convention
-description: Apply Naikho's VivaWallet SDK code design conventions. Use when working in the vivawallet-sdk repository, adding or refactoring SDK classes, endpoint modules, helper groups, TypeScript types, comments based on official Viva documentation, folder organization, file naming, or public API compatibility for Standard, ISV, Marketplace, and POS integrations.
+description: Apply Naikho's VivaWallet SDK code design conventions. Use when working in the vivawallet-sdk repository, adding or refactoring SDK classes, endpoint modules, helper groups, TypeScript types, comments based on official Viva documentation, folder organization, file naming, Linear issue organization, or public API compatibility for Standard, ISV, Marketplace, and POS integrations.
 ---
 
 # VivaWallet SDK Convention
@@ -29,6 +29,15 @@ Load only the reference needed for the task:
 5. Add new behavior as a small class, helper, endpoint spec, or type group instead of expanding a large class.
 6. Keep comments and type property descriptions aligned with the official Viva documentation. If exact wording is unavailable, leave a concise neutral comment and do not invent constraints.
 7. Run the repo's available validation command after changes, normally `npm run build`.
+
+## Linear Workflow
+
+When syncing Linear for this SDK:
+
+- Treat parent/epic issues as the review surface for the maintainer.
+- Mark endpoint or request subissues as `Done` once their implementation, docs/comments, and validation are complete.
+- Put only the parent issue in `In Review` for maintainer validation.
+- Do not leave subissues in `In Review` unless the user explicitly asks to review a specific subissue.
 
 ## Compatibility Contract
 
