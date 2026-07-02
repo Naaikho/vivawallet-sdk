@@ -1,4 +1,8 @@
-import { ISVPaymentsOptions } from '../types/isv.types/ISVPayments.types';
+import {
+  ISVCancelOrderOptions,
+  ISVCancelOrderReturn,
+  ISVPaymentsOptions,
+} from '../types/isv.types/ISVPayments.types';
 import { MethodReturn } from '../types/Methods.types';
 import { VivaPaymentOrderReturn } from '../types/VivaOrder.types';
 import { VivawalletISVInit } from '../types/Vivawallet.types';
@@ -29,7 +33,11 @@ export default class IsvPayments extends VivaAuthISV {
       );
 
       if (!response.data) {
-        if (this.errorLogs) console.error('VivaWallet returned no create order data', response.data);
+        if (this.errorLogs)
+          console.error(
+            'VivaWallet returned no create order data',
+            response.data
+          );
         return {
           success: false,
           message: 'VivaWallet returned no create order data',
@@ -56,37 +64,70 @@ export default class IsvPayments extends VivaAuthISV {
     }
   }
 
-  // cant be implemented without allow isv auth class to define MerchantID and API Key
+  /** Allows you to cancel an open payment order. */
+  async cancelOrder(
+    options: ISVCancelOrderOptions
+  ): MethodReturn<ISVCancelOrderReturn | null, 'nodatas'> {
+    if (!this.hasResellerCredentials()) {
+      return {
+        success: false,
+        message: 'ISV Basic Auth credentials not provided',
+        code: 'initerror',
+        data: null,
+      };
+    }
 
-  // /** Allows you to **cancel** an open isv payment order. */
-  // async cancelOrder(
-  //   options: ISVCancelOrderOptions
-  // ): MethodReturn<ISVCancelOrderReturn> {
-  //   try {
-  //     const vivaToken = (await this.getVivaAccessToken()).data;
+    if (!options.targetMerchantId) {
+      return {
+        success: false,
+        message: 'Target merchant ID not provided',
+        code: 'initerror',
+        data: null,
+      };
+    }
 
-  //     const response = await useAxios.delete<ISVCancelOrderReturn>(
-  //       this.endpoints.isv.payments.cancel.url.replace('{orderCode}', options.orderCode.toString()),
-  //       {
-  //         headers: {
-  //           Authorization: 'Basic ' + vivaToken,
-  //         },
-  //       }
-  //     );
+    try {
+      const response = await useAxios.delete<ISVCancelOrderReturn>(
+        this.endpoints.isv.payments.cancel.url.replace(
+          '{orderCode}',
+          options.orderCode.toString()
+        ),
+        {
+          headers: {
+            Authorization: this.getVivaResellerBasicAuth(
+              options.targetMerchantId
+            ),
+          },
+        }
+      );
 
-  //     return {
-  //       success: true,
-  //       message: 'Order cancelled successfully',
-  //       data: response.data,
-  //     };
-  //   } catch (e) {
-  //     if (this.errorLogs) console.error('IsvPayments.cancelOrder', e);
-  //     return {
-  //       success: false,
-  //       message: 'Failed to cancel order',
-  //       code: 'error',
-  //       data: null,
-  //     };
-  //   }
-  // }
+      if (!response.data) {
+        if (this.errorLogs)
+          console.error(
+            'VivaWallet returned no canceled order data',
+            response.data
+          );
+        return {
+          success: false,
+          message: 'VivaWallet returned no canceled order data',
+          code: 'nodatas',
+          data: null,
+        };
+      }
+
+      return {
+        success: true,
+        message: 'Order canceled successfully',
+        data: response.data,
+      };
+    } catch (e) {
+      if (this.errorLogs) console.error('IsvPayments.cancelOrder', e);
+      return {
+        success: false,
+        message: 'Failed to cancel order',
+        code: 'error',
+        data: null,
+      };
+    }
+  }
 }

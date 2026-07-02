@@ -32,7 +32,25 @@ const vivaIsv = new VivaISV({
 });
 ```
 
-The ISV client uses ISV Client ID/Client Secret credentials for OAuth 2.0 calls. Merchant or reseller credentials can be passed only for ISV flows that require them.
+The ISV client uses ISV Client ID/Client Secret credentials for OAuth 2.0 calls. Some ISV Basic Auth endpoints require a Reseller ID and Reseller API Key on the client:
+
+```typescript
+const vivaIsv = new VivaISV({
+  clientId: 'your-isv-client-id',
+  clientSecret: 'your-isv-client-secret',
+  resellerId: 'your-reseller-id',
+  resellerApiKey: 'your-reseller-api-key',
+});
+```
+
+For these ISV Basic Auth calls, Viva expects `Username = Reseller ID:Merchant ID` and `Password = Reseller API Key`. The Merchant ID is the target merchant account for the request, so pass it on the method options:
+
+```typescript
+await vivaIsv.payments.cancelOrder({
+  orderCode: 1234567890123456,
+  targetMerchantId: 'target-merchant-uuid',
+});
+```
 
 ## Marketplace API
 

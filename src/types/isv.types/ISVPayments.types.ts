@@ -284,6 +284,8 @@ export interface ISVPaymentsOptions {
 export interface ISVCancelOrderOptions {
   /** The 16-digit orderCode of the payment order you wish to cancel */
   orderCode: number;
+  /** Merchant ID used in `Username = Reseller ID:Merchant ID` for this ISV Basic Auth call. */
+  targetMerchantId: string;
 }
 
 export interface ISVCancelOrderReturn {

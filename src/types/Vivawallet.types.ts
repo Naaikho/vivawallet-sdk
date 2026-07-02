@@ -18,12 +18,10 @@ export interface VivaMerchantCredentials {
 }
 
 export interface VivaResellerCredentials {
-  /** VivaWallet Reseller ID used by reseller-authenticated ISV calls. */
+  /** VivaWallet Reseller ID used by reseller-authenticated ISV Basic Auth calls. */
   resellerId: string;
-  /** VivaWallet Reseller API Key used by reseller-authenticated ISV calls. */
+  /** VivaWallet Reseller API Key used by reseller-authenticated ISV Basic Auth calls. */
   resellerApiKey: string;
-  /** VivaWallet Merchant ID when required by reseller-authenticated ISV calls. */
-  merchantId?: string;
 }
 
 export interface VivawalletBaseInit
@@ -41,7 +39,6 @@ export interface VivawalletAPIInit
 
 export interface VivawalletISVInit
   extends VivawalletBaseInit,
-    Partial<VivaMerchantCredentials>,
     Partial<VivaResellerCredentials> {}
 
 export interface VivaSmartCheckoutOptions {

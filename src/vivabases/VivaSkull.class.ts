@@ -58,7 +58,6 @@ class VivaSkull extends VivaEndpoints {
         ? {
             resellerId: datas.resellerId,
             resellerApiKey: datas.resellerApiKey,
-            merchantId: datas.merchantId,
           }
         : undefined;
     this.sourceCode = datas.sourceCode || null;

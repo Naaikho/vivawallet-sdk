@@ -25,6 +25,13 @@ class VivaAuthBase extends VivaSkull {
     return Boolean(this.merchantCredentials);
   }
 
+  protected hasResellerCredentials(): boolean {
+    return Boolean(
+      this.resellerCredentials?.resellerId &&
+        this.resellerCredentials.resellerApiKey
+    );
+  }
+
   /** Ensure OAuth client credentials are available before OAuth-based calls. */
   protected assertOAuthCredentials(): void {
     if (!this.hasOAuthCredentials())
@@ -121,6 +128,24 @@ class VivaAuthBase extends VivaSkull {
         this.merchantCredentials.merchantId +
           ':' +
           this.merchantCredentials.apikey
+      ).toString('base64')
+    );
+  }
+
+  /** Return the VivaWallet Reseller ID/Merchant ID/Reseller API Key Basic Auth authorization value. */
+  getVivaResellerBasicAuth(targetMerchantId: string): string {
+    if (!this.resellerCredentials)
+      throw new Error('Reseller credentials not provided');
+    if (!targetMerchantId) throw new Error('Target merchant ID not provided');
+
+    return (
+      'Basic ' +
+      Buffer.from(
+        this.resellerCredentials.resellerId +
+          ':' +
+          targetMerchantId +
+          ':' +
+          this.resellerCredentials.resellerApiKey
       ).toString('base64')
     );
   }
