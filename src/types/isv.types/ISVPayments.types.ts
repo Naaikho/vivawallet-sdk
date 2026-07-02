@@ -288,6 +288,44 @@ export interface ISVCancelOrderOptions {
   targetMerchantId: string;
 }
 
+export interface ISVGetOrderOptions {
+  /** The 16-digit orderCode for which you wish to retrieve information. */
+  orderCode: number;
+  /** Merchant ID used in `Username = Reseller ID:Merchant ID` for this ISV Basic Auth call. */
+  targetMerchantId: string;
+}
+
+export interface ISVGetOrderReturn {
+  /** The unique 12-digit code of the order. */
+  OrderCode: number;
+  /** The code of the source related to this order. */
+  SourceCode: string;
+  /** An array containing all related tags. */
+  Tags: string[];
+  /** The tip amount of the order (if applicable). */
+  TipAmount: number;
+  /** The ISO 3166-1 alpha-2-formatted request language. */
+  RequestLang: string;
+  /** The merchant's reference code for the specific order. */
+  MerchantTrns: string;
+  /** A user-friendly description for the order. */
+  CustomerTrns: string;
+  /** The number of installments that were offered for the payment (if applicable). */
+  MaxInstallments: number;
+  /** The net payment amount of the order (without fees). */
+  RequestAmount: number;
+  /** The exact date and time at which the order expires. */
+  ExpirationDate: string;
+  /**
+   * The status of the order:
+   * - 0 (Pending)
+   * - 1 (Expired)
+   * - 2 (Canceled)
+   * - 3 (Paid)
+   */
+  StateId: string;
+}
+
 export interface ISVCancelOrderReturn {
   /** The unique 12-digit code of the order */
   OrderCode: string;

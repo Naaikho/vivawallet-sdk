@@ -1,6 +1,8 @@
 import {
   ISVCancelOrderOptions,
   ISVCancelOrderReturn,
+  ISVGetOrderOptions,
+  ISVGetOrderReturn,
   ISVPaymentsOptions,
 } from '../types/isv.types/ISVPayments.types';
 import { MethodReturn } from '../types/Methods.types';
@@ -64,6 +66,80 @@ export default class IsvPayments extends VivaAuthISV {
     }
   }
 
+  /** Retrieve order. */
+  async getOrder(
+    options: ISVGetOrderOptions
+  ): MethodReturn<ISVGetOrderReturn | null, 'nodatas'> {
+    if (!this.hasResellerCredentials()) {
+      return {
+        success: false,
+        message: 'ISV Basic Auth credentials not provided',
+        code: 'initerror',
+        data: null,
+      };
+    }
+
+    if (!options.targetMerchantId) {
+      return {
+        success: false,
+        message: 'Target merchant ID not provided',
+        code: 'initerror',
+        data: null,
+      };
+    }
+
+    try {
+      const response = await useAxios.get<ISVGetOrderReturn>(
+        this.endpoints.isv.payments.get.url.replace(
+          '{orderCode}',
+          encodeURIComponent(options.orderCode.toString())
+        ),
+        {
+          headers: {
+            Authorization: this.getVivaResellerBasicAuth(
+              options.targetMerchantId
+            ),
+          },
+        }
+      );
+
+      if (!response.data) {
+        if (this.errorLogs)
+          console.error('VivaWallet returned no order data', response.data);
+        return {
+          success: false,
+          message: 'VivaWallet returned no order data',
+          code: 'nodatas',
+          data: null,
+        };
+      }
+
+      return {
+        success: true,
+        message: 'Order retrieved successfully',
+        data: response.data,
+      };
+    } catch (e: any) {
+      if (this.errorLogs) console.error('IsvPayments.getOrder', e);
+
+      if (e.response?.status === 404) {
+        return {
+          success: false,
+          message: 'Order not found',
+          code: 'nodatas',
+          data: null,
+        };
+      }
+
+      return {
+        success: false,
+        message: 'Failed to retrieve order',
+        code: 'error',
+        data: null,
+      };
+    }
+  }
+
   /** Allows you to cancel an open payment order. */
   async cancelOrder(
     options: ISVCancelOrderOptions
@@ -90,7 +166,7 @@ export default class IsvPayments extends VivaAuthISV {
       const response = await useAxios.delete<ISVCancelOrderReturn>(
         this.endpoints.isv.payments.cancel.url.replace(
           '{orderCode}',
-          options.orderCode.toString()
+          encodeURIComponent(options.orderCode.toString())
         ),
         {
           headers: {

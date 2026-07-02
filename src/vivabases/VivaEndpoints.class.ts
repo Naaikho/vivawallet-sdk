@@ -147,6 +147,13 @@ class VivaEndpoints {
           url: 'https://demo-api.vivapayments.com/checkout/v2/isv/orders',
           method: 'POST',
         },
+        get: {
+          /**
+           * @Param `{orderCode}`
+           */
+          url: 'https://demo.vivapayments.com/api/orders/{orderCode}',
+          method: 'GET',
+        },
         cancel: {
           /**
            * @Param `{orderCode}`
@@ -350,6 +357,13 @@ class VivaEndpoints {
         create: {
           url: 'https://api.vivapayments.com/checkout/v2/isv/orders',
           method: 'POST',
+        },
+        get: {
+          /**
+           * @Param `{orderCode}`
+           */
+          url: 'https://www.vivapayments.com/api/orders/{orderCode}',
+          method: 'GET',
         },
         cancel: {
           /**
