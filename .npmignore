@@ -2,6 +2,9 @@
 [Dd]ata/
 [Ll]ogs/
 [Tt]est/
+.codex/
+.claude/
+.agent/
 
 .env
 token.json

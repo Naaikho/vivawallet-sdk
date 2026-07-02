@@ -5,6 +5,7 @@
 [Tt]est/
 test/
 tests/
+.codex/skills/linear-project-workflow/
 
 .env
 token.json
