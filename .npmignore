@@ -11,8 +11,11 @@ token.json
 .gitignore
 *.test.*
 
-./types
-./src
+./types/
+./src/
 ./index.ts
+./tests/
+./test/
 
 package-lock.json
+pnpm-lock.yaml

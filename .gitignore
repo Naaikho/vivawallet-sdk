@@ -3,6 +3,8 @@
 [Ll]ogs/
 [Dd]ist/
 [Tt]est/
+test/
+tests/
 
 .env
 token.json
@@ -10,3 +12,4 @@ token.json
 *.test.*
 
 package-lock.json
+pnpm-lock.yaml

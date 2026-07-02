@@ -1,0 +1,4 @@
+interface:
+  display_name: "VivaWallet SDK Convention"
+  short_description: "Code conventions for the VivaWallet SDK"
+  default_prompt: "Use $vivawallet-sdk-convention to apply the VivaWallet SDK code design conventions."
