@@ -1,16 +1,19 @@
-import { ISVDevicesOptions, ISVDevicesReturn } from "../../types/isv.types/IsvPos.types/IsvPosDevices.types";
-import { MethodReturn } from "../../types/Methods.types";
-import { VivawalletISVInit } from "../../types/Vivawallet.types";
-import { useAxios } from "../../utils/axiosInstance.ts";
-import { VivaAuthISV } from "../../vivabases/VivaAuth.class";
+import {
+  ISVDevicesOptions,
+  ISVDevicesReturn,
+} from '../../types/isv.types/IsvPos.types/IsvPosDevices.types';
+import { MethodReturn } from '../../types/Methods.types';
+import { VivawalletISVInit } from '../../types/Vivawallet.types';
+import { useAxios } from '../../utils/axiosInstance.ts';
+import { VivaAuthISV } from '../../vivabases/VivaAuth.class';
 
 export default class IsvPosDevices extends VivaAuthISV {
   constructor(datas: VivawalletISVInit) {
     super(datas);
   }
 
-  /** Get ISV merchant devices, return `ISVDevicesReturn` */
-  async getDevices(
+  /** Search POS Devices */
+  async searchDevices(
     options: ISVDevicesOptions
   ): MethodReturn<ISVDevicesReturn[] | null, 'nodatas'> {
     try {
@@ -27,7 +30,8 @@ export default class IsvPosDevices extends VivaAuthISV {
       );
 
       if (!r.data) {
-        if (this.errorLogs) console.error('VivaWallet returned no devices data', r.data);
+        if (this.errorLogs)
+          console.error('VivaWallet returned no devices data', r.data);
         return {
           success: false,
           message: 'VivaWallet returned no devices data',
@@ -42,13 +46,22 @@ export default class IsvPosDevices extends VivaAuthISV {
         data: r.data,
       };
     } catch (e) {
-      if (this.errorLogs) console.error('IsvPos.getDevices', e);
+      if (this.errorLogs) console.error('IsvPosDevices.searchDevices', e);
       return {
         success: false,
-        message: 'Failed to get devices',
+        message: 'Failed to search devices',
         code: 'error',
         data: null,
       };
     }
+  }
+
+  // ------------------------------ Deprecated Methods ------------------------------
+
+  /** @deprecated Use `searchDevices()` instead. */
+  async getDevices(
+    options: ISVDevicesOptions
+  ): MethodReturn<ISVDevicesReturn[] | null, 'nodatas'> {
+    return this.searchDevices(options);
   }
 }

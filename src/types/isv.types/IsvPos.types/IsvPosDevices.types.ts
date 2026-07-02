@@ -1,10 +1,11 @@
-export type IsvStatusId = 0 | 1 | 2 | 3 | 5 | 6 | 7;
+export type IsvStatusId = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 export interface ISVDevicesOptions {
   /** ID of the relevant Merchant */
   merchantId: string;
-  /** Status of the device:
-   * 
+  /**
+   * Status of the device:
+   *
    * - `0 = WareHouse`
    * - `1 = Live`
    * - `2 = Ready To Ship`
@@ -15,7 +16,7 @@ export interface ISVDevicesOptions {
    * - `7 = Locked`
    */
   statusId?: IsvStatusId;
-  /** Custom indentification code assigned to the device by the merchant */
+  /** Custom identification code assigned to the device by the merchant */
   sourceCode?: string;
 }
 
@@ -26,8 +27,8 @@ export interface ISVDevicesReturn {
   terminalId: string;
   /** Status of the device */
   statusId: IsvStatusId;
-  /** Custom indentification code assigned to the device by the merchant */
+  /** Custom identification code assigned to the device by the merchant */
   sourceCode: string;
-  /** Virtual Terminal identification - the virtual serial number if the terminal */
+  /** Virtual Terminal identification - the virtual serial number of the terminal */
   virtualTerminalId: string;
 }
