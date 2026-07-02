@@ -5,7 +5,11 @@ import {
   VivawalletAPIInit,
   VivawalletISVInit,
 } from '../types/Vivawallet.types';
-import { GetVivaTokenReturn } from '../types/VivawalletAuth.types';
+import {
+  GetVivaTokenReturn,
+  VivaCloudTerminalAccessTokenOptions,
+  VivaCloudTerminalAccessTokenReturn,
+} from '../types/VivawalletAuth.types';
 import { useAxios } from '../utils/axiosInstance.ts';
 import VivaSkull from './VivaSkull.class';
 
@@ -79,6 +83,13 @@ class VivaAuthBase extends VivaSkull {
     return 'Basic ' + this.getVivaBasicToken();
   }
 
+  protected getOAuthBasicAuthorization(): string {
+    return (
+      'Basic ' +
+      Buffer.from(this.clientId + ':' + this.clientSecret).toString('base64')
+    );
+  }
+
   /**
    * Return the VivaWallet API Auth2.0 code from credentials (needed for API Bearer calls)
    * or `null` on request failed
@@ -98,6 +109,66 @@ class VivaAuthBase extends VivaSkull {
     }
 
     return this.requestAccessToken(credentials);
+  }
+
+  /**
+   * Generate an access token to be used in calls to our EFT POS API.
+   *
+   * This method does not cache the token. It returns Viva's full token response so the caller can reuse it until `expires_in`.
+   */
+  async getCloudTerminalAccessToken(
+    options: VivaCloudTerminalAccessTokenOptions = {
+      grant_type: 'client_credentials',
+    }
+  ): MethodReturn<VivaCloudTerminalAccessTokenReturn | null, 'tokenerror'> {
+    if (!this.hasOAuthCredentials()) {
+      return {
+        success: false,
+        message: 'Init not called',
+        code: 'initerror',
+        data: null,
+      };
+    }
+
+    try {
+      const body = new URLSearchParams({
+        grant_type: options.grant_type,
+      });
+
+      const res = await useAxios.post<VivaCloudTerminalAccessTokenReturn>(
+        this.endpoints.cloudTerminal.auth.token.url,
+        body,
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Authorization: this.getOAuthBasicAuthorization(),
+          },
+        }
+      );
+
+      if (!res.data || !res.data.access_token) {
+        return {
+          success: false,
+          message: 'Failed to get Cloud Terminal token',
+          code: 'tokenerror',
+          data: null,
+        };
+      }
+
+      return {
+        success: true,
+        message: 'Cloud Terminal token fetched',
+        data: res.data,
+      };
+    } catch (e) {
+      if (this.errorLogs) console.error('VivaAuth.getCloudTerminalAccessToken', e);
+      return {
+        success: false,
+        message: 'Failed to get Cloud Terminal token',
+        code: 'tokenerror',
+        data: null,
+      };
+    }
   }
 
   getVivaBasicToken(): string {

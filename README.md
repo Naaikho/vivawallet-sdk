@@ -52,6 +52,16 @@ const vivaMarketplace = new Marketplace({
 
 The Marketplace client uses the platform account's OAuth credentials for Platforms, Checkout and Acquiring API calls, while keeping merchant credentials available for legacy Basic Auth helpers such as payment sources.
 
+## Cloud Terminal API
+
+```typescript
+const tokenResult = await vivawallet.getCloudTerminalAccessToken();
+```
+
+`getCloudTerminalAccessToken()` calls `POST /connect/token` with `grant_type=client_credentials` and returns Viva's full token response. The SDK does not cache this token, so callers can reuse it until `expires_in` when needed.
+
+Use POS APIs credentials for merchant or marketplace Cloud Terminal calls, and ISV credentials for ISV Cloud Terminal calls.
+
 ## Webhook Types
 
 ```typescript

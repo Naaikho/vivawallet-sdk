@@ -6,6 +6,14 @@ class VivaEndpoints {
       url: 'https://demo-accounts.vivapayments.com/connect/token',
       method: 'POST',
     },
+    cloudTerminal: {
+      auth: {
+        token: {
+          url: 'https://demo-accounts.vivapayments.com/connect/token',
+          method: 'POST',
+        },
+      },
+    },
     webhookAuth: {
       url: 'https://demo.vivapayments.com/api/messages/config/token',
       method: 'GET',
@@ -202,6 +210,14 @@ class VivaEndpoints {
     auth: {
       url: 'https://accounts.vivapayments.com/connect/token',
       method: 'POST',
+    },
+    cloudTerminal: {
+      auth: {
+        token: {
+          url: 'https://accounts.vivapayments.com/connect/token',
+          method: 'POST',
+        },
+      },
     },
     webhookAuth: {
       url: 'https://www.vivapayments.com/api/messages/config/token',
