@@ -5,6 +5,7 @@ import MarketPlaceTransfers from './marketplace/MarketPlaceTransfers.class';
 import { MethodReturn } from './types/Methods.types';
 import { VivawalletAPIInit } from './types/Vivawallet.types';
 import { VivaAuth } from './vivabases/VivaAuth.class';
+import VivaPos from './vivawallet/VivaPos.class';
 import VivaSourceCode from './vivawallet/VivaSourceCode.class';
 import VivaWebhooks from './vivawallet/VivaWebhooks.class';
 
@@ -15,6 +16,7 @@ export class Marketplace extends VivaAuth {
   sellers: MarketPlaceSellers;
   transfers: MarketPlaceTransfers;
   webhooks: VivaWebhooks;
+  pos: VivaPos;
 
   constructor(datas: VivawalletAPIInit) {
     super(datas);
@@ -24,6 +26,7 @@ export class Marketplace extends VivaAuth {
     this.sellers = new MarketPlaceSellers(datas);
     this.transfers = new MarketPlaceTransfers(datas);
     this.webhooks = new VivaWebhooks(datas);
+    this.pos = new VivaPos(datas);
   }
 
   /* ------------------------- DEPRECATED METHODS ------------------------- */

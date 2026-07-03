@@ -13,6 +13,71 @@ class VivaEndpoints {
           method: 'POST',
         },
       },
+      devices: {
+        search: {
+          url: 'https://demo-api.vivapayments.com/ecr/v1/devices:search',
+          method: 'POST',
+        },
+      },
+      action: {
+        create: {
+          url: 'https://demo-api.vivapayments.com/ecr/v1/actions',
+          method: 'POST',
+        },
+        get: {
+          /**
+           * @Param `{actionId}`
+           */
+          url: 'https://demo-api.vivapayments.com/ecr/v1/actions/{actionId}',
+          method: 'GET',
+        },
+      },
+      transaction: {
+        sale: {
+          url: 'https://demo-api.vivapayments.com/ecr/v1/transactions:sale',
+          method: 'POST',
+        },
+        capturePreauth: {
+          url: 'https://demo-api.vivapayments.com/ecr/v1/transactions:preauth-completion',
+          method: 'POST',
+        },
+        refund: {
+          url: 'https://demo-api.vivapayments.com/ecr/v1/transactions:refund',
+          method: 'POST',
+        },
+        unreferencedRefund: {
+          url: 'https://demo-api.vivapayments.com/ecr/v1/transactions:unreferenced-refund',
+          method: 'POST',
+        },
+        fastRefund: {
+          url: 'https://demo-api.vivapayments.com/ecr/v1/transactions:fast-refund',
+          method: 'POST',
+        },
+        rebate: {
+          url: 'https://demo-api.vivapayments.com/ecr/v1/transactions:rebate',
+          method: 'POST',
+        },
+      },
+      session: {
+        get: {
+          /**
+           * @Param `{sessionId}`
+           */
+          url: 'https://demo-api.vivapayments.com/ecr/v1/sessions/{sessionId}',
+          method: 'GET',
+        },
+        list: {
+          url: 'https://demo-api.vivapayments.com/ecr/v1/sessions',
+          method: 'GET',
+        },
+        abort: {
+          /**
+           * @Param `{sessionId}`
+           */
+          url: 'https://demo-api.vivapayments.com/ecr/v1/sessions/{sessionId}',
+          method: 'DELETE',
+        },
+      },
     },
     webhookAuth: {
       url: 'https://demo.vivapayments.com/api/messages/config/token',
@@ -522,6 +587,17 @@ class VivaEndpoints {
           },
         },
         session: {
+          get: {
+            /**
+             * @Param `{sessionId}`
+             */
+            url: 'https://demo-api.vivapayments.com/ecr/isv/v1/sessions/{sessionId}',
+            method: 'GET',
+          },
+          list: {
+            url: 'https://demo-api.vivapayments.com/ecr/isv/v1/sessions',
+            method: 'GET',
+          },
           abort: {
             /**
              * @Param `{sessionId}`
@@ -557,6 +633,71 @@ class VivaEndpoints {
         token: {
           url: 'https://accounts.vivapayments.com/connect/token',
           method: 'POST',
+        },
+      },
+      devices: {
+        search: {
+          url: 'https://api.vivapayments.com/ecr/v1/devices:search',
+          method: 'POST',
+        },
+      },
+      action: {
+        create: {
+          url: 'https://api.vivapayments.com/ecr/v1/actions',
+          method: 'POST',
+        },
+        get: {
+          /**
+           * @Param `{actionId}`
+           */
+          url: 'https://api.vivapayments.com/ecr/v1/actions/{actionId}',
+          method: 'GET',
+        },
+      },
+      transaction: {
+        sale: {
+          url: 'https://api.vivapayments.com/ecr/v1/transactions:sale',
+          method: 'POST',
+        },
+        capturePreauth: {
+          url: 'https://api.vivapayments.com/ecr/v1/transactions:preauth-completion',
+          method: 'POST',
+        },
+        refund: {
+          url: 'https://api.vivapayments.com/ecr/v1/transactions:refund',
+          method: 'POST',
+        },
+        unreferencedRefund: {
+          url: 'https://api.vivapayments.com/ecr/v1/transactions:unreferenced-refund',
+          method: 'POST',
+        },
+        fastRefund: {
+          url: 'https://api.vivapayments.com/ecr/v1/transactions:fast-refund',
+          method: 'POST',
+        },
+        rebate: {
+          url: 'https://api.vivapayments.com/ecr/v1/transactions:rebate',
+          method: 'POST',
+        },
+      },
+      session: {
+        get: {
+          /**
+           * @Param `{sessionId}`
+           */
+          url: 'https://api.vivapayments.com/ecr/v1/sessions/{sessionId}',
+          method: 'GET',
+        },
+        list: {
+          url: 'https://api.vivapayments.com/ecr/v1/sessions',
+          method: 'GET',
+        },
+        abort: {
+          /**
+           * @Param `{sessionId}`
+           */
+          url: 'https://api.vivapayments.com/ecr/v1/sessions/{sessionId}',
+          method: 'DELETE',
         },
       },
     },
@@ -1067,6 +1208,17 @@ class VivaEndpoints {
           },
         },
         session: {
+          get: {
+            /**
+             * @Param `{sessionId}`
+             */
+            url: 'https://api.vivapayments.com/ecr/isv/v1/sessions/{sessionId}',
+            method: 'GET',
+          },
+          list: {
+            url: 'https://api.vivapayments.com/ecr/isv/v1/sessions',
+            method: 'GET',
+          },
           abort: {
             /**
              * @Param `{sessionId}`

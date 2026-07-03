@@ -1,45 +1,23 @@
-import {
-  ISVAbortSessionOptions,
-  ISVGetSessionReturn,
-  ISVRetrieveSessionByIdOptions,
-  ISVRetrieveSessionInfoByDateOptions,
-  ISVRetrieveSessionInfoByDateReturn,
-} from '../../types/isv.types/IsvPos.types/IsvPosSession.type';
 import { MethodReturn } from '../../types/Methods.types';
-import { VivawalletISVInit } from '../../types/Vivawallet.types';
+import {
+  VivaPosAbortSessionOptions,
+  VivaPosRetrieveSessionByIdOptions,
+  VivaPosRetrieveSessionInfoByDateOptions,
+  VivaPosRetrieveSessionInfoByDateReturn,
+  VivaPosSessionReturn,
+} from '../../types/VivaPos.types';
+import { VivawalletAPIInit } from '../../types/Vivawallet.types';
 import { useAxios } from '../../utils/axiosInstance.ts';
 import { withQuery } from '../../utils/functions.helpers';
-import { VivaAuthISV } from '../../vivabases/VivaAuth.class';
+import VivaPosBase from './VivaPosBase.class';
 
-export default class IsvPosSession extends VivaAuthISV {
-  constructor(datas: VivawalletISVInit) {
+export default class VivaPosSession extends VivaPosBase {
+  constructor(datas: VivawalletAPIInit) {
     super(datas);
   }
 
-  private async getISVAuthorization(): MethodReturn<
-    string | null,
-    'tokenerror'
-  > {
-    const token = await this.getVivaAccessToken();
-
-    if (!token.success || !token.data) {
-      return {
-        success: false,
-        message: token.message,
-        code: 'tokenerror',
-        data: null,
-      };
-    }
-
-    return {
-      success: true,
-      message: 'ISV authorization generated',
-      data: this.getBearerAuthorization(token.data),
-    };
-  }
-
   private normalizeSessionInfoQuery(
-    options: ISVRetrieveSessionInfoByDateOptions
+    options: VivaPosRetrieveSessionInfoByDateOptions
   ): Record<string, string | boolean | undefined> {
     const { aadeAutonomouslyOnly, AadeAutonomouslyOnly, date } = options;
 
@@ -51,10 +29,10 @@ export default class IsvPosSession extends VivaAuthISV {
 
   /** Retrieve Session by Id */
   async retrieveSessionById(
-    options: ISVRetrieveSessionByIdOptions
-  ): MethodReturn<ISVGetSessionReturn | null, 'nodatas' | 'tokenerror'> {
+    options: VivaPosRetrieveSessionByIdOptions
+  ): MethodReturn<VivaPosSessionReturn | null, 'nodatas' | 'tokenerror'> {
     try {
-      const authorization = await this.getISVAuthorization();
+      const authorization = await this.getCloudTerminalAuthorization();
 
       if (!authorization.success || !authorization.data) {
         return {
@@ -65,8 +43,8 @@ export default class IsvPosSession extends VivaAuthISV {
         };
       }
 
-      const response = await useAxios.get<ISVGetSessionReturn>(
-        this.endpoints.isv.pos.session.get.url.replace(
+      const response = await useAxios.get<VivaPosSessionReturn>(
+        this.endpoints.cloudTerminal.session.get.url.replace(
           '{sessionId}',
           encodeURIComponent(options.sessionId)
         ),
@@ -79,7 +57,7 @@ export default class IsvPosSession extends VivaAuthISV {
 
       if (!response.data) {
         if (this.errorLogs)
-          console.error('IsvPosSession.retrieveSessionById', response.data);
+          console.error('VivaPosSession.retrieveSessionById', response.data);
         return {
           success: false,
           message: 'VivaWallet returned no session data',
@@ -94,7 +72,8 @@ export default class IsvPosSession extends VivaAuthISV {
         data: response.data,
       };
     } catch (e) {
-      if (this.errorLogs) console.error('IsvPosSession.retrieveSessionById', e);
+      if (this.errorLogs)
+        console.error('VivaPosSession.retrieveSessionById', e);
       return {
         success: false,
         message: 'Failed to retrieve session',
@@ -106,13 +85,13 @@ export default class IsvPosSession extends VivaAuthISV {
 
   /** Retrieve Session Info by Date */
   async retrieveSessionInfoByDate(
-    options: ISVRetrieveSessionInfoByDateOptions = {}
+    options: VivaPosRetrieveSessionInfoByDateOptions = {}
   ): MethodReturn<
-    ISVRetrieveSessionInfoByDateReturn | null,
+    VivaPosRetrieveSessionInfoByDateReturn | null,
     'nodatas' | 'tokenerror'
   > {
     try {
-      const authorization = await this.getISVAuthorization();
+      const authorization = await this.getCloudTerminalAuthorization();
 
       if (!authorization.success || !authorization.data) {
         return {
@@ -123,22 +102,23 @@ export default class IsvPosSession extends VivaAuthISV {
         };
       }
 
-      const response = await useAxios.get<ISVRetrieveSessionInfoByDateReturn>(
-        withQuery(
-          this.endpoints.isv.pos.session.list.url,
-          this.normalizeSessionInfoQuery(options)
-        ),
-        {
-          headers: {
-            Authorization: authorization.data,
-          },
-        }
-      );
+      const response =
+        await useAxios.get<VivaPosRetrieveSessionInfoByDateReturn>(
+          withQuery(
+            this.endpoints.cloudTerminal.session.list.url,
+            this.normalizeSessionInfoQuery(options)
+          ),
+          {
+            headers: {
+              Authorization: authorization.data,
+            },
+          }
+        );
 
       if (!response.data) {
         if (this.errorLogs)
           console.error(
-            'IsvPosSession.retrieveSessionInfoByDate',
+            'VivaPosSession.retrieveSessionInfoByDate',
             response.data
           );
         return {
@@ -156,7 +136,7 @@ export default class IsvPosSession extends VivaAuthISV {
       };
     } catch (e) {
       if (this.errorLogs)
-        console.error('IsvPosSession.retrieveSessionInfoByDate', e);
+        console.error('VivaPosSession.retrieveSessionInfoByDate', e);
       return {
         success: false,
         message: 'Failed to retrieve sessions',
@@ -166,11 +146,12 @@ export default class IsvPosSession extends VivaAuthISV {
     }
   }
 
+  /** Abort Session */
   async abortSession(
-    options: ISVAbortSessionOptions
+    options: VivaPosAbortSessionOptions
   ): MethodReturn<null, 'tokenerror'> {
     try {
-      const authorization = await this.getISVAuthorization();
+      const authorization = await this.getCloudTerminalAuthorization();
 
       if (!authorization.success || !authorization.data) {
         return {
@@ -183,7 +164,7 @@ export default class IsvPosSession extends VivaAuthISV {
 
       await useAxios.delete<null>(
         withQuery(
-          this.endpoints.isv.pos.session.abort.url.replace(
+          this.endpoints.cloudTerminal.session.abort.url.replace(
             '{sessionId}',
             encodeURIComponent(options.sessionId)
           ),
@@ -202,7 +183,7 @@ export default class IsvPosSession extends VivaAuthISV {
         data: null,
       };
     } catch (e) {
-      if (this.errorLogs) console.error('IsvPos.abortSession', e);
+      if (this.errorLogs) console.error('VivaPosSession.abortSession', e);
       return {
         success: false,
         message: 'Failed to abort session',

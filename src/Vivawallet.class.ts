@@ -10,6 +10,7 @@ import VivaDataServices from './vivawallet/VivaDataServices.class';
 import VivaLegacyBankAccounts from './vivawallet/VivaLegacyBankAccounts.class';
 import VivaObligations from './vivawallet/VivaObligations.class';
 import VivaPayments from './vivawallet/VivaPayments.class';
+import VivaPos from './vivawallet/VivaPos.class';
 import VivaRFCodePayments from './vivawallet/VivaRFCodePayments.class';
 import VivaResellers from './vivawallet/VivaResellers.class';
 import VivaSourceCode from './vivawallet/VivaSourceCode.class';
@@ -29,6 +30,7 @@ class Vivawallet extends VivaAuth {
   legacyBankAccounts: VivaLegacyBankAccounts;
   obligations: VivaObligations;
   rfCodePayments: VivaRFCodePayments;
+  pos: VivaPos;
 
   constructor(datas: VivawalletAPIInit) {
     super(datas);
@@ -43,6 +45,7 @@ class Vivawallet extends VivaAuth {
     this.legacyBankAccounts = new VivaLegacyBankAccounts(datas);
     this.obligations = new VivaObligations(datas);
     this.rfCodePayments = new VivaRFCodePayments(datas);
+    this.pos = new VivaPos(datas);
   }
 
   /* ------------------------- DEPRECATED METHODS ------------------------- */
