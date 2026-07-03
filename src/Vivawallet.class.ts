@@ -7,6 +7,7 @@ import { VivaAuth } from './vivabases/VivaAuth.class';
 import VivaEndpoints from './vivabases/VivaEndpoints.class';
 import VivaBankTransfers from './vivawallet/VivaBankTransfers.class';
 import VivaDataServices from './vivawallet/VivaDataServices.class';
+import VivaFees from './vivawallet/VivaFees.class';
 import VivaLegacyBankAccounts from './vivawallet/VivaLegacyBankAccounts.class';
 import VivaObligations from './vivawallet/VivaObligations.class';
 import VivaPayments from './vivawallet/VivaPayments.class';
@@ -26,6 +27,7 @@ class Vivawallet extends VivaAuth {
   resellers: VivaResellers;
   wallets: VivaWallets;
   bankTransfers: VivaBankTransfers;
+  fees: VivaFees;
   dataServices: VivaDataServices;
   legacyBankAccounts: VivaLegacyBankAccounts;
   obligations: VivaObligations;
@@ -41,6 +43,7 @@ class Vivawallet extends VivaAuth {
     this.resellers = new VivaResellers(datas);
     this.wallets = new VivaWallets(datas);
     this.bankTransfers = new VivaBankTransfers(datas);
+    this.fees = new VivaFees(datas);
     this.dataServices = new VivaDataServices(datas);
     this.legacyBankAccounts = new VivaLegacyBankAccounts(datas);
     this.obligations = new VivaObligations(datas);

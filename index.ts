@@ -99,6 +99,10 @@ import type {
   VivaSaleTransactionsWebhookDatas,
 } from './src/types/VivaDataServices.types';
 import type {
+  VivaFeesOptions,
+  VivaFeesReturn,
+} from './src/types/VivaFees.types';
+import type {
   VivaLegacyBankAccountReturn,
   VivaLegacyLinkBankAccountOptions,
   VivaLegacyOutgoingBankTransferOptions,
@@ -287,6 +291,8 @@ export {
   type VivaExecuteBankTransferOptions,
   type VivaExecuteBankTransferReturn,
   type VivaFastRefundOptions,
+  type VivaFeesOptions,
+  type VivaFeesReturn,
   type VivaGenerateRfCodesOptions,
   type VivaGenerateRfCodesReturn,
   type VivaGetOrderReturn,

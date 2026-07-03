@@ -87,6 +87,12 @@ class VivaEndpoints {
       url: 'https://demo.vivapayments.com/api/sources',
       method: 'POST',
     },
+    fees: {
+      get: {
+        url: 'https://demo.vivapayments.com/api/fees',
+        method: 'GET',
+      },
+    },
     payment: {
       get: {
         /**
@@ -708,6 +714,12 @@ class VivaEndpoints {
     source: {
       url: 'https://www.vivapayments.com/api/sources',
       method: 'POST',
+    },
+    fees: {
+      get: {
+        url: 'https://www.vivapayments.com/api/fees',
+        method: 'GET',
+      },
     },
     payment: {
       get: {
