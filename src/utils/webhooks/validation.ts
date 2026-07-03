@@ -15,6 +15,7 @@ import {
 import {
   createWebhookIssue,
   getWebhookEventData,
+  isMissingWebhookValue,
   validateWebhookFields,
   WebhookFieldCheck,
 } from './internal';
@@ -50,6 +51,30 @@ function buildResult<EventData>(
   };
 }
 
+function requireAtLeastOneField<EventData>(
+  result: VivaWebhookSoftValidationResult<EventData>,
+  fields: string[]
+): VivaWebhookSoftValidationResult<EventData> {
+  if (!result.data) return result;
+
+  const record = result.data as Record<string, unknown>;
+  const hasKnownField = fields.some(
+    (field) => !isMissingWebhookValue(record[field])
+  );
+
+  if (hasKnownField) return result;
+
+  result.issues.push(
+    createWebhookIssue(
+      fields.join('|'),
+      'missing',
+      `${fields.join(' or ')} is missing from the webhook payload`
+    )
+  );
+  result.valid = false;
+  return result;
+}
+
 /** Soft validation for payment-result webhooks. This does not replace an optional Retrieve Transaction confirmation. */
 export function validateVivaPaymentResultWebhook(
   payload: unknown,
@@ -62,21 +87,25 @@ export function validateVivaPaymentResultWebhook(
       field: 'OrderCode',
       actual: data?.OrderCode,
       expected: expectations.expectedOrderCode,
+      required: true,
     },
     {
       field: 'TransactionId',
       actual: data?.TransactionId,
       expected: expectations.expectedTransactionId,
+      required: true,
     },
     {
       field: 'StatusId',
       actual: data?.StatusId,
       expected: expectations.expectedStatusId,
+      required: true,
     },
     {
       field: 'Amount',
       actual: data?.Amount,
       expected: expectations.expectedAmount,
+      required: true,
     },
     {
       field: 'CurrencyCode',
@@ -100,14 +129,15 @@ export function validateVivaTransactionFailedWebhook(
   const data = getWebhookEventData<VivaPaymentResultWebhookEventData>(payload);
   const result = validateVivaPaymentResultWebhook(payload, expectations);
 
-  if (!data?.ResponseEventId) {
-    result.warnings.push(
+  if (result.data && isMissingWebhookValue(data?.ResponseEventId)) {
+    result.issues.push(
       createWebhookIssue(
         'ResponseEventId',
         'missing',
         'ResponseEventId is missing from the failed transaction webhook payload'
       )
     );
+    result.valid = false;
   }
 
   return result;
@@ -279,7 +309,7 @@ export function validateVivaPosSessionWebhook(
 ): VivaWebhookSoftValidationResult<VivaPosEcrSessionWebhookEventData> {
   const data = getWebhookEventData<VivaPosEcrSessionWebhookEventData>(payload);
 
-  return buildResult<VivaPosEcrSessionWebhookEventData>(payload, [
+  const result = buildResult<VivaPosEcrSessionWebhookEventData>(payload, [
     {
       field: 'SessionId',
       actual: data?.SessionId,
@@ -306,6 +336,8 @@ export function validateVivaPosSessionWebhook(
       expected: expectations.expectedCurrencyCode,
     },
   ]);
+
+  return requireAtLeastOneField(result, ['SessionId', 'TransactionId']);
 }
 
 export function validateVivaTransactionPriceCalculatedWebhook(
@@ -385,7 +417,7 @@ export function validateVivaBankTransferCommandWebhook(
   const data =
     getWebhookEventData<VivaBankTransferCommandWebhookEventData>(payload);
 
-  return buildResult<VivaBankTransferCommandWebhookEventData>(payload, [
+  const result = buildResult<VivaBankTransferCommandWebhookEventData>(payload, [
     {
       field: 'CommandId',
       actual: data?.CommandId,
@@ -416,5 +448,11 @@ export function validateVivaBankTransferCommandWebhook(
       actual: data?.WalletId,
       expected: expectations.expectedWalletId,
     },
+  ]);
+
+  return requireAtLeastOneField(result, [
+    'CommandId',
+    'BankTransferId',
+    'TransactionId',
   ]);
 }

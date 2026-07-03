@@ -368,7 +368,6 @@ export interface VivaWebhookSignatureVerificationResult {
   algorithm: 'sha1' | 'sha256' | null;
   issues: VivaWebhookSoftValidationIssue[];
   signature?: string;
-  expectedSignature?: string;
   deliveryId?: string;
   event?: string;
 }

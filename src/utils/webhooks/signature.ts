@@ -2,6 +2,7 @@ import { createHmac, timingSafeEqual } from 'crypto';
 import {
   VivaWebhookSignatureVerificationOptions,
   VivaWebhookSignatureVerificationResult,
+  VivaWebhookSoftValidationIssue,
 } from '../../types/VivaWebHook.types';
 import { createWebhookIssue, readWebhookHeader } from './internal';
 
@@ -107,13 +108,54 @@ function verifyWithAlgorithm(
           createWebhookIssue(
             headerName,
             'mismatch',
-            `${headerName} does not match the computed HMAC digest`,
-            expectedSignature,
-            signature
+            `${headerName} does not match the computed HMAC digest`
           ),
         ],
     signature,
-    expectedSignature,
+    deliveryId,
+    event,
+  };
+}
+
+function buildMissingSignatureResult(
+  options: VivaWebhookSignatureVerificationOptions
+): VivaWebhookSignatureVerificationResult {
+  const deliveryId = readWebhookHeader(options.headers, 'Viva-Delivery-Id');
+  const event = readWebhookHeader(options.headers, 'Viva-Event');
+  const issues: VivaWebhookSoftValidationIssue[] = [];
+
+  if (!options.rawBody) {
+    issues.push(
+      createWebhookIssue(
+        'rawBody',
+        'missing',
+        'Raw request body is required to verify a Viva webhook signature'
+      )
+    );
+  }
+
+  if (!options.secret) {
+    issues.push(
+      createWebhookIssue(
+        'secret',
+        'missing',
+        'Webhook secret is required to verify a Viva webhook signature'
+      )
+    );
+  }
+
+  issues.push(
+    createWebhookIssue(
+      'Viva-Signature-256|Viva-Signature',
+      'missing',
+      'Viva-Signature-256 or Viva-Signature header is required to verify the webhook signature'
+    )
+  );
+
+  return {
+    valid: false,
+    algorithm: null,
+    issues,
     deliveryId,
     event,
   };
@@ -127,15 +169,15 @@ export function verifyVivaDataServicesWebhookSignature(
   if (options.algorithm === 'sha256')
     return verifyWithAlgorithm(options, 'sha256');
 
-  const sha256Result = verifyWithAlgorithm(options, 'sha256');
-  if (sha256Result.valid) return sha256Result;
+  const sha256Signature = readWebhookHeader(
+    options.headers,
+    'Viva-Signature-256'
+  );
+  if (sha256Signature !== undefined)
+    return verifyWithAlgorithm(options, 'sha256');
 
-  const sha1Result = verifyWithAlgorithm(options, 'sha1');
-  if (sha1Result.valid) return sha1Result;
+  const sha1Signature = readWebhookHeader(options.headers, 'Viva-Signature');
+  if (sha1Signature !== undefined) return verifyWithAlgorithm(options, 'sha1');
 
-  return {
-    ...sha256Result,
-    algorithm: null,
-    issues: [...sha256Result.issues, ...sha1Result.issues],
-  };
+  return buildMissingSignatureResult(options);
 }
