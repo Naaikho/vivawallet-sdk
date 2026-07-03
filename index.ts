@@ -6,6 +6,13 @@
  */
 
 import { Marketplace } from './src/MarketPlace.class';
+import type {
+  ISVAbortSessionOptions,
+  ISVGetSessionReturn,
+  ISVRetrieveSessionByIdOptions,
+  ISVRetrieveSessionInfoByDateOptions,
+  ISVRetrieveSessionInfoByDateReturn,
+} from './src/types/isv.types/IsvPos.types/IsvPosSession.type';
 import type { ISVCreateSourceOptions } from './src/types/isv.types/ISVSource.types';
 import type {
   ISVCancelTransactionOptions,
@@ -33,13 +40,6 @@ import type {
   ISVTransactionIdReturn,
   ISVTransactionPathOptions,
 } from './src/types/isv.types/ISVTransactions.types';
-import type {
-  ISVAbortSessionOptions,
-  ISVGetSessionReturn,
-  ISVRetrieveSessionByIdOptions,
-  ISVRetrieveSessionInfoByDateOptions,
-  ISVRetrieveSessionInfoByDateReturn,
-} from './src/types/isv.types/IsvPos.types/IsvPosSession.type';
 import type {
   MPOrdersOptions,
   MPOrdersReturn,
@@ -223,17 +223,17 @@ export {
   type ISVDataServicesPaginationQuery,
   type ISVDataServicesTransactionsSearchOptions,
   type ISVDataServicesTransactionsSearchReturn,
-  type ISVIncrementalPreauthOptions,
   type ISVGetSessionReturn,
+  type ISVIncrementalPreauthOptions,
   type ISVLegacyTransactionsReturn,
   type ISVMotoCardChargeOptions,
   type ISVMotoCardChargeReturn,
   type ISVPayOutOldOptions,
   type ISVResellerSourceTransactionReturn,
+  type ISVRetrieveLegacyTransactionOptions,
   type ISVRetrieveSessionByIdOptions,
   type ISVRetrieveSessionInfoByDateOptions,
   type ISVRetrieveSessionInfoByDateReturn,
-  type ISVRetrieveLegacyTransactionOptions,
   type ISVRetrieveTransactionByIdOptions,
   type ISVRetrieveTransactionsByClearanceDateOptions,
   type ISVRetrieveTransactionsByDateOptions,
@@ -364,3 +364,57 @@ export {
   type VivaWebhookSubscriptionOptions,
   type VivaWebhookSubscriptionReturn,
 };
+
+export {
+  buildVivaIsvWebhookVerificationBody,
+  buildVivaIsvWebhookVerificationResponse,
+  buildVivaMerchantWebhookVerificationBody,
+  buildVivaMerchantWebhookVerificationResponse,
+  extractVivaWebhookIdentity,
+  getVivaWebhookIdempotencyKey,
+  validateVivaAccountConnectionWebhook,
+  validateVivaAccountTransactionWebhook,
+  validateVivaBankTransferCommandWebhook,
+  validateVivaObligationWebhook,
+  validateVivaOrderUpdatedWebhook,
+  validateVivaPaymentResultWebhook,
+  validateVivaPosSessionWebhook,
+  validateVivaTransactionFailedWebhook,
+  validateVivaTransactionPaymentCreatedWebhook,
+  validateVivaTransactionPriceCalculatedWebhook,
+  validateVivaTransactionReversalCreatedWebhook,
+  validateVivaTransferCreatedWebhook,
+  verifyVivaDataServicesWebhookSignature,
+} from './src/utils/webhooks';
+
+export type {
+  VivaAccountConnectedWebhookEventData,
+  VivaAccountTransactionCreatedWebhookEventData,
+  VivaAccountVerificationStatusChangedWebhookEventData,
+  VivaBankTransferCommandWebhookEventData,
+  VivaIsvWebhookVerificationBody,
+  VivaKnownWebhookEventName,
+  VivaMerchantWebhookVerificationBody,
+  VivaObligationWebhookEventData,
+  VivaOrderUpdatedWebhookEventData,
+  VivaPaymentResultWebhookEventData,
+  VivaPosEcrSessionWebhookEventData,
+  VivaSaleTransactionsWebhookEventData,
+  VivaTransactionFailedWebhookEventData,
+  VivaTransactionPaymentCreatedWebhookEventData,
+  VivaTransactionPriceCalculatedWebhookEventData,
+  VivaTransactionReversalCreatedWebhookEventData,
+  VivaTransferCreatedWebhookEventData,
+  VivaWebhookEnvelope,
+  VivaWebhookEventData,
+  VivaWebhookFieldExpectations,
+  VivaWebhookHeaders,
+  VivaWebhookIdempotencyKeyResult,
+  VivaWebhookIdentity,
+  VivaWebhookRawBody,
+  VivaWebhookSignatureVerificationOptions,
+  VivaWebhookSignatureVerificationResult,
+  VivaWebhookSoftValidationIssue,
+  VivaWebhookSoftValidationResult,
+  VivaWebhookVerificationResponse,
+} from './src/types/VivaWebHook.types';

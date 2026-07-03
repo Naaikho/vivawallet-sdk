@@ -146,6 +146,21 @@ export interface VivaSaleTransactionsWebhookDatas {
   /** URL link location of the generated file. */
   Link: string;
 
+  /** Authorization state returned by Viva for the generated file. */
+  Authorized?: boolean;
+
+  /** Expiration date of the generated report file. */
+  ExpirationDate?: string;
+
+  /** File extension of the generated report file. */
+  FileType?: string;
+
+  /** The count of the retries where Viva.com is triggering the webhooks. */
+  RetryCount?: number | null;
+
+  /** Specify the delay between the retries where Viva.com is triggering the webhooks. */
+  RetryDelayInSeconds?: number | null;
+
   /** Additional webhook data received from Viva. */
   [key: string]: unknown;
 }
