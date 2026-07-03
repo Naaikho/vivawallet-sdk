@@ -8,6 +8,35 @@
 import { Marketplace } from './src/MarketPlace.class';
 import type { MethodReturn } from './src/types/Methods.types';
 import type {
+  MPOrdersOptions,
+  MPOrdersReturn,
+} from './src/types/marketplace.types/MPMarketOrders.types';
+import type {
+  MPConnectedAccountAddress,
+  MPConnectedAccountBankAccount,
+  MPConnectedAccountBranding,
+  MPConnectedAccountInvitation,
+  MPConnectedAccountPayouts,
+  MPConnectedAccountReturn,
+  MPCreateAccountDatas,
+  MPCreateAccountResponse,
+  MPCreateConnectedAccountPayouts,
+  MPPayoutDayOfWeek,
+  MPPayoutInterval,
+  MPUpdateConnectedAccountOptions,
+  MPUpdateConnectedAccountReturn,
+} from './src/types/marketplace.types/MPSellers.types';
+import type {
+  MPCancelTransactionReturn,
+  MPTransactionCancelOptions,
+} from './src/types/marketplace.types/MPTransactions.types';
+import type {
+  MPCreateTransferReversalOptions,
+  MPCreateTransferReversalReturn,
+  MPTransfersDatas,
+  MPTransfersResponse,
+} from './src/types/marketplace.types/MPTransfers.types';
+import type {
   VivaBankAccountReturn,
   VivaBankAccountsQuery,
   VivaBankTransferOptionsQuery,
@@ -124,6 +153,27 @@ export {
   Vivawallet,
   type ConnectedAccountWebhookEventDatas,
   type MethodReturn,
+  type MPConnectedAccountAddress,
+  type MPConnectedAccountBankAccount,
+  type MPConnectedAccountBranding,
+  type MPConnectedAccountInvitation,
+  type MPConnectedAccountPayouts,
+  type MPConnectedAccountReturn,
+  type MPCancelTransactionReturn,
+  type MPCreateAccountDatas,
+  type MPCreateAccountResponse,
+  type MPCreateConnectedAccountPayouts,
+  type MPCreateTransferReversalOptions,
+  type MPCreateTransferReversalReturn,
+  type MPOrdersOptions,
+  type MPOrdersReturn,
+  type MPPayoutDayOfWeek,
+  type MPPayoutInterval,
+  type MPTransactionCancelOptions,
+  type MPTransfersDatas,
+  type MPTransfersResponse,
+  type MPUpdateConnectedAccountOptions,
+  type MPUpdateConnectedAccountReturn,
   type SmartCheckoutWebhookEventDatas,
   type VivaAccountTransactionReturn,
   type VivaAccountTransactionsSearchOptions,

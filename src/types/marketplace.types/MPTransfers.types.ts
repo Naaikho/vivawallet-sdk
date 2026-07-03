@@ -33,3 +33,23 @@ export interface MPTransfersResponse {
   /** The date that the transfer was executed. If the transaction is not settled this value is empty, otherwise the transfer is executed instantly with funds from the account's available balance */
   executed: string | null;
 }
+
+export interface MPCreateTransferReversalOptions {
+  /**
+   * Amount to be reversed. Set as `null` to reverse the full amount.
+   *
+   * Must be a positive, non-zero number.
+   *
+   * The amount will be in the currency of the merchant account using the currency's smallest unit of measurement (e.g. cents of a euro).
+   *
+   * Default: `null`
+   */
+  amount?: number | null;
+}
+
+export interface MPCreateTransferReversalReturn {
+  /** The ID of the transfer */
+  transferId: string;
+  /** The date that the transfer was executed. If the transaction is not settled this value is empty, otherwise the transfer is executed instantly with funds from the account's available balance */
+  executed: string | null;
+}

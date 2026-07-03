@@ -380,6 +380,13 @@ class VivaEndpoints {
           url: 'https://demo-api.vivapayments.com/platforms/v1/transfers',
           method: 'POST',
         },
+        reverse: {
+          /**
+           * @Param `{transferId}`
+           */
+          url: 'https://demo-api.vivapayments.com/platforms/v1/transfers/{transferId}:reverse',
+          method: 'POST',
+        },
       },
     },
     isv: {
@@ -843,6 +850,13 @@ class VivaEndpoints {
       transfers: {
         send: {
           url: 'https://api.vivapayments.com/platforms/v1/transfers',
+          method: 'POST',
+        },
+        reverse: {
+          /**
+           * @Param `{transferId}`
+           */
+          url: 'https://api.vivapayments.com/platforms/v1/transfers/{transferId}:reverse',
           method: 'POST',
         },
       },
