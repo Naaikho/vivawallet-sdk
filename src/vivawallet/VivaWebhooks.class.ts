@@ -14,6 +14,49 @@ class VivaWebhooks extends VivaAuth {
     super(datas);
   }
 
+  /** Retrieve webhook key */
+  async retrieveWebhookKey(): MethodReturn<string | null, 'webhookerror'> {
+    if (!this.merchantId || !this.apikey) {
+      return {
+        success: false,
+        message: 'Init not called',
+        code: 'initerror',
+        data: null,
+      };
+    }
+
+    try {
+      const response = await useAxios.get(this.endpoints.webhookAuth.url, {
+        headers: {
+          Authorization: this.getVivaBasicAuth(),
+        },
+      });
+
+      if (!response.data || !response.data.Key) {
+        return {
+          success: false,
+          message: 'Failed to retrieve webhook key',
+          code: 'webhookerror',
+          data: null,
+        };
+      }
+
+      return {
+        success: true,
+        message: 'Webhook key retrieved successfully',
+        data: response.data.Key,
+      };
+    } catch (e) {
+      if (this.errorLogs) console.error('VivaWebhooks.retrieveWebhookKey', e);
+      return {
+        success: false,
+        message: 'Failed to retrieve webhook key',
+        code: 'webhookerror',
+        data: null,
+      };
+    }
+  }
+
   /** Register to webhooks by adding a new subscription */
   async addSubscription(
     options: VivaWebhookSubscriptionOptions

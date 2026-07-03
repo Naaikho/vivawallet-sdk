@@ -1,3 +1,13 @@
+/**
+ * Indicates the instruction type for this bank transfer.
+ *
+ * Enum:
+ * `1` = Shared
+ * `2` = Ours
+ *
+ * The OUR instruction means you pay all transfer charges.
+ * SHA (shared) means you only pay your bank's outgoing transfer charge.
+ */
 export type VivaBankTransferInstructionType = 1 | 2;
 
 export interface VivaLinkBankAccountOptions {
@@ -103,7 +113,16 @@ export interface VivaBankTransferOptionsReturn {
   /** Indicates if the linked bank account supports instant transfers or not. */
   supportsInstant: boolean;
 
-  /** The supported instruction types for the linked bank account. */
+  /**
+   * The supported instruction types for the linked bank account.
+   *
+   * Enum array:
+   * `1` = Shared
+   * `2` = Ours
+   *
+   * The OUR instruction means you pay all transfer charges.
+   * SHA (shared) means you only pay your bank's outgoing transfer charge.
+   */
   instructionTypes: VivaBankTransferInstructionType[];
 
   /** Additional bank transfer option data returned by Viva. */
@@ -120,7 +139,16 @@ export interface VivaCreateBankTransferFeeOptions {
   /** Indicates if the outgoing bank transfer will be instant or not. */
   isInstant?: boolean;
 
-  /** Indicates the instruction type for this bank transfer. */
+  /**
+   * Indicates the instruction type for this bank transfer.
+   *
+   * Enum:
+   * `1` = Shared
+   * `2` = Ours
+   *
+   * The OUR instruction means you pay all transfer charges.
+   * SHA (shared) means you only pay your bank's outgoing transfer charge.
+   */
   instructionType: VivaBankTransferInstructionType;
 }
 
@@ -134,7 +162,16 @@ export interface VivaCreateBankTransferFeeReturn {
   /** The id of the bank transfer fee command, which is associated with the specific fee, instruction type and instant flag. */
   bankCommandId: string;
 
-  /** Indicates the instruction type for this bank transfer. */
+  /**
+   * Indicates the instruction type for this bank transfer.
+   *
+   * Enum:
+   * `1` = Shared
+   * `2` = Ours
+   *
+   * The OUR instruction means you pay all transfer charges.
+   * SHA (shared) means you only pay your bank's outgoing transfer charge.
+   */
   instructionType: VivaBankTransferInstructionType;
 
   /** Additional bank transfer fee data returned by Viva. */

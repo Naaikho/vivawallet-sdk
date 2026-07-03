@@ -340,3 +340,40 @@ export interface VivaCancelRebateFastRefundOptions {
   /** Specify a key in order for the call have idempotent behaviour for all calls with the same key */
   idempotencyKey?: string;
 }
+
+export interface VivaMotoCreditCardOptions {
+  /** The CVC of the card. */
+  cvc?: string;
+
+  /** The card number. */
+  number: string;
+
+  /** The expiration date of the card. */
+  expirationDate: string;
+}
+
+export interface VivaMotoChargeOptions {
+  /** This should always be `true`. */
+  moto: true;
+
+  /** Optional - an ID or a short description that helps you uniquely identify the transaction in the viva banking app. */
+  merchantTrns?: string;
+
+  /** The customer's full name. */
+  fullName?: string;
+
+  /** The customer's email address. */
+  email?: string;
+
+  /** The customer's phone number. */
+  phone?: string;
+
+  /** Information about the card to be charged. */
+  creditcard: VivaMotoCreditCardOptions;
+
+  /** The code of the payment order which is being charged. */
+  orderCode: number;
+
+  /** The code of the payment source to be used. */
+  sourceCode?: string | number;
+}

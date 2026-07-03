@@ -211,49 +211,6 @@ class VivaAuthBase extends VivaSkull {
     }
   }
 
-  /** Return the code needed for Viva webhooks returns or `null` on request failed */
-  async getVivaWebhookCode(): MethodReturn<string | null, 'webhookerror'> {
-    if (!this.merchantId || !this.apikey) {
-      return {
-        success: false,
-        message: 'Init not called',
-        code: 'initerror',
-        data: null,
-      };
-    }
-
-    try {
-      const r = await useAxios.get(this.endpoints.webhookAuth.url, {
-        headers: {
-          Authorization: this.getVivaBasicAuth(),
-        },
-      });
-
-      if (!r.data || !r.data.Key) {
-        return {
-          success: false,
-          message: 'Failed to get Viva webhook code',
-          code: 'webhookerror',
-          data: null,
-        };
-      }
-
-      return {
-        success: true,
-        message: 'Viva webhook code fetched',
-        data: r.data.Key,
-      };
-    } catch (e) {
-      if (this.errorLogs) console.error('VivaAuth.getVivaWebhookCode', e);
-      return {
-        success: false,
-        message: 'Failed to get Viva webhook code',
-        code: 'webhookerror',
-        data: null,
-      };
-    }
-  }
-
   // ---------------------  DEPRECATED METHODS ---------------------
 
   /**
@@ -290,8 +247,6 @@ class VivaAuth extends VivaAuthBase {
     this.assertMerchantCredentials();
   }
 }
-
-// ------------------------------------------------------------
 
 class VivaAuthISV extends VivaAuthBase {
   constructor(datas: VivawalletISVInit) {

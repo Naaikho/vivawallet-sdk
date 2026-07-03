@@ -68,6 +68,10 @@ class VivaEndpoints {
         url: 'https://demo.vivapayments.com/api/transactions/{transactionId}',
         method: 'POST',
       },
+      motoCharge: {
+        url: 'https://demo.vivapayments.com/api/transactions',
+        method: 'POST',
+      },
       cancel: {
         /**
          * @Param `{transactionId}`
@@ -197,6 +201,82 @@ class VivaEndpoints {
       merchantGet: {
         url: 'https://demo-api.vivapayments.com/merchants/v1/wallets',
         method: 'GET',
+      },
+      balanceTransfer: {
+        /**
+         * @Param `{walletId}`
+         * @Param `{targetWalletId}`
+         */
+        url: 'https://demo.vivapayments.com/api/wallets/{walletId}/balancetransfer/{targetWalletId}',
+        method: 'POST',
+      },
+    },
+    dataServices: {
+      transactions: {
+        search: {
+          url: 'https://demo-api.vivapayments.com/dataservices/v2/transactions/Search',
+          method: 'POST',
+        },
+      },
+      mt940: {
+        url: 'https://api.vivapayments.com/dataservices/v2/merchants/mt940',
+        method: 'GET',
+      },
+      saleTransactions: {
+        export: {
+          url: 'https://api.vivapayments.com/dataservices/v1/transactions/exports',
+          method: 'POST',
+        },
+      },
+      accountTransactions: {
+        search: {
+          url: 'https://demo-api.vivapayments.com/dataservices/v2/accounttransactions/Search',
+          method: 'POST',
+        },
+      },
+    },
+    rfCodePayments: {
+      generate: {
+        url: 'https://demo.vivapayments.com/web2/checkout/v2/paymentsessions',
+        method: 'POST',
+      },
+    },
+    legacyBankAccounts: {
+      link: {
+        url: 'https://demo.vivapayments.com/api/bankaccounts',
+        method: 'POST',
+      },
+      list: {
+        url: 'https://demo.vivapayments.com/api/bankaccounts',
+        method: 'GET',
+      },
+      outgoingBankTransfer: {
+        /**
+         * @Param `{walletId}`
+         * @Param `{bankAccountId}`
+         */
+        url: 'https://demo.vivapayments.com/api/wallets/{walletId}/commands/banktransfer/{bankAccountId}',
+        method: 'POST',
+      },
+      get: {
+        /**
+         * @Param `{bankAccountId}`
+         */
+        url: 'https://demo.vivapayments.com/api/bankaccounts/{bankAccountId}',
+        method: 'GET',
+      },
+      unlink: {
+        /**
+         * @Param `{bankAccountId}`
+         */
+        url: 'https://demo.vivapayments.com/api/bankaccounts/{bankAccountId}',
+        method: 'DELETE',
+      },
+    },
+    obligations: {
+      create: {
+        url: 'https://demo-api.vivapayments.com/obligations/v1/obligations',
+        method: 'POST',
       },
     },
     bankTransfers: {
@@ -454,6 +534,10 @@ class VivaEndpoints {
         url: 'https://www.vivapayments.com/api/transactions/{transactionId}',
         method: 'POST',
       },
+      motoCharge: {
+        url: 'https://www.vivapayments.com/api/transactions',
+        method: 'POST',
+      },
       cancel: {
         /**
          * @Param `{transactionId}`
@@ -583,6 +667,82 @@ class VivaEndpoints {
       merchantGet: {
         url: 'https://api.vivapayments.com/merchants/v1/wallets',
         method: 'GET',
+      },
+      balanceTransfer: {
+        /**
+         * @Param `{walletId}`
+         * @Param `{targetWalletId}`
+         */
+        url: 'https://www.vivapayments.com/api/wallets/{walletId}/balancetransfer/{targetWalletId}',
+        method: 'POST',
+      },
+    },
+    dataServices: {
+      transactions: {
+        search: {
+          url: 'https://api.vivapayments.com/dataservices/v2/transactions/Search',
+          method: 'POST',
+        },
+      },
+      mt940: {
+        url: 'https://api.vivapayments.com/dataservices/v2/merchants/mt940',
+        method: 'GET',
+      },
+      saleTransactions: {
+        export: {
+          url: 'https://api.vivapayments.com/dataservices/v1/transactions/exports',
+          method: 'POST',
+        },
+      },
+      accountTransactions: {
+        search: {
+          url: 'https://api.vivapayments.com/dataservices/v2/accounttransactions/Search',
+          method: 'POST',
+        },
+      },
+    },
+    rfCodePayments: {
+      generate: {
+        url: 'https://www.vivapayments.com/web2/checkout/v2/paymentsessions',
+        method: 'POST',
+      },
+    },
+    legacyBankAccounts: {
+      link: {
+        url: 'https://www.vivapayments.com/api/bankaccounts',
+        method: 'POST',
+      },
+      list: {
+        url: 'https://www.vivapayments.com/api/bankaccounts',
+        method: 'GET',
+      },
+      outgoingBankTransfer: {
+        /**
+         * @Param `{walletId}`
+         * @Param `{bankAccountId}`
+         */
+        url: 'https://www.vivapayments.com/api/wallets/{walletId}/commands/banktransfer/{bankAccountId}',
+        method: 'POST',
+      },
+      get: {
+        /**
+         * @Param `{bankAccountId}`
+         */
+        url: 'https://www.vivapayments.com/api/bankaccounts/{bankAccountId}',
+        method: 'GET',
+      },
+      unlink: {
+        /**
+         * @Param `{bankAccountId}`
+         */
+        url: 'https://www.vivapayments.com/api/bankaccounts/{bankAccountId}',
+        method: 'DELETE',
+      },
+    },
+    obligations: {
+      create: {
+        url: 'https://api.vivapayments.com/obligations/v1/obligations',
+        method: 'POST',
       },
     },
     bankTransfers: {

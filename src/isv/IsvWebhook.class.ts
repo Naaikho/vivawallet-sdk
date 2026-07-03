@@ -11,10 +11,8 @@ export default class IsvWebhook extends VivaAuthISV {
   constructor(datas: VivawalletISVInit) {
     super(datas);
   }
-  /**
-   * Generate a webhook verification key to be used in the response of your webhook endpoints for verification purposes.
-   */
-  async getWebhookKey(): MethodReturn<ISVGetWebhookKeyReturn | null> {
+  /** Retrieve webhook key for ISV */
+  async retrieveWebhookKey(): MethodReturn<ISVGetWebhookKeyReturn | null> {
     try {
       const vivaToken = (await this.getVivaAccessToken()).data;
 
@@ -44,7 +42,7 @@ export default class IsvWebhook extends VivaAuthISV {
         data: r.data,
       };
     } catch (e) {
-      if (this.errorLogs) console.error('IsvWebhook.getWebhookKey', e);
+      if (this.errorLogs) console.error('IsvWebhook.retrieveWebhookKey', e);
       return {
         success: false,
         message: 'Failed to get webhook key',
@@ -94,5 +92,16 @@ export default class IsvWebhook extends VivaAuthISV {
         data: null,
       };
     }
+  }
+
+  /* ------------------------- DEPRECATED METHODS ------------------------- */
+
+  /**
+   * Generate a webhook verification key to be used in the response of your webhook endpoints for verification purposes.
+   *
+   * @deprecated Use `retrieveWebhookKey()` instead.
+   */
+  async getWebhookKey(): MethodReturn<ISVGetWebhookKeyReturn | null> {
+    return this.retrieveWebhookKey();
   }
 }

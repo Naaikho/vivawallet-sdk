@@ -1,5 +1,7 @@
 import { MethodReturn } from '../types/Methods.types';
 import {
+  VivaBalanceTransferOptions,
+  VivaBalanceTransferReturn,
   VivaLegacyWalletReturn,
   VivaMerchantWalletReturn,
 } from '../types/VivaWallets.types';
@@ -95,6 +97,57 @@ class VivaWallets extends VivaAuth {
       return {
         success: false,
         message: 'Failed to retrieve merchant wallets',
+        code: 'error',
+        data: null,
+      };
+    }
+  }
+
+  /** Balance Transfer */
+  async balanceTransfer(
+    walletId: string | number,
+    targetWalletId: string | number,
+    options: VivaBalanceTransferOptions
+  ): MethodReturn<VivaBalanceTransferReturn | null, 'nodatas'> {
+    try {
+      const url = this.endpoints.wallets.balanceTransfer.url
+        .replace('{walletId}', encodeURIComponent(String(walletId)))
+        .replace(
+          '{targetWalletId}',
+          encodeURIComponent(String(targetWalletId))
+        );
+
+      const response = await useAxios.post<VivaBalanceTransferReturn>(
+        url,
+        options,
+        {
+          headers: {
+            Authorization: this.getVivaBasicAuth(),
+          },
+        }
+      );
+
+      if (!response.data) {
+        if (this.errorLogs)
+          console.error('VivaWallets.balanceTransfer', response.data);
+        return {
+          success: false,
+          message: 'Vivawallet returned no balance transfer data',
+          code: 'nodatas',
+          data: null,
+        };
+      }
+
+      return {
+        success: true,
+        message: 'Balance transfer created successfully',
+        data: response.data,
+      };
+    } catch (e) {
+      if (this.errorLogs) console.error('VivaWallets.balanceTransfer', e);
+      return {
+        success: false,
+        message: 'Failed to create balance transfer',
         code: 'error',
         data: null,
       };

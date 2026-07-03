@@ -8,6 +8,7 @@ import {
   VivaIncrementalPreauthOptions,
   VivaLegacyTransactionsQuery,
   VivaLegacyTransactionsReturn,
+  VivaMotoChargeOptions,
   VivaOctPayoutOptions,
   VivaRebateOptions,
   VivaTransaction,
@@ -214,6 +215,49 @@ class VivaTransactions extends VivaAuth {
       return {
         success: false,
         message: 'Failed to create transaction',
+        code: 'error',
+        data: null,
+      };
+    }
+  }
+
+  /** Make a MOTO card charge */
+  async makeMotoCardCharge(
+    options: VivaMotoChargeOptions
+  ): MethodReturn<VivaTransactionReturn | null, 'nodatas'> {
+    try {
+      const response = await useAxios.post<VivaTransactionReturn>(
+        this.endpoints.transaction.motoCharge.url,
+        options,
+        {
+          headers: {
+            Authorization: this.getVivaBasicAuth(),
+          },
+        }
+      );
+
+      if (!response.data) {
+        if (this.errorLogs)
+          console.error('VivaTransactions.makeMotoCardCharge', response.data);
+        return {
+          success: false,
+          message: 'Vivawallet returned no MOTO card charge data',
+          code: 'nodatas',
+          data: null,
+        };
+      }
+
+      return {
+        success: true,
+        message: 'MOTO card charge created successfully',
+        data: response.data,
+      };
+    } catch (e) {
+      if (this.errorLogs)
+        console.error('VivaTransactions.makeMotoCardCharge', e);
+      return {
+        success: false,
+        message: 'Failed to create MOTO card charge',
         code: 'error',
         data: null,
       };

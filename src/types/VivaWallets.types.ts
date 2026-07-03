@@ -55,3 +55,32 @@ export interface VivaMerchantWalletReturn {
   /** Additional wallet data returned by Viva. */
   [key: string]: unknown;
 }
+
+export interface VivaBalanceTransferOptions {
+  /**
+   * Must be a positive, non-zero number.
+   *
+   * The amount will be in the currency of the merchant account using the currency's smallest unit of measurement.
+   */
+  amount: number;
+
+  /** Some text to summarize the transfer reason. */
+  description?: string;
+
+  /** The Viva transaction ID generated during checkout. */
+  saleTransactionId?: string;
+
+  /** Short description. */
+  customerTrns?: string;
+}
+
+export interface VivaBalanceTransferReturn {
+  /** DebitTransactionId is a unique identifier for the debit taken from the source wallet. */
+  DebitTransactionId?: string;
+
+  /** CreditTransactionId is a unique identifier for the credit sent to the target wallet. */
+  CreditTransactionId?: string;
+
+  /** Additional balance transfer data returned by Viva. */
+  [key: string]: unknown;
+}
