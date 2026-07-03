@@ -19,7 +19,7 @@ import {
 } from '../types/VivaTransactions.types';
 import { VivawalletAPIInit } from '../types/Vivawallet.types';
 import { useAxios } from '../utils/axiosInstance.ts';
-import { querifyDefinedDatas } from '../utils/functions';
+import { querifyDefinedDatas } from '../utils/functions.helpers';
 import { VivaAuth } from '../vivabases/VivaAuth.class';
 
 class VivaTransactions extends VivaAuth {

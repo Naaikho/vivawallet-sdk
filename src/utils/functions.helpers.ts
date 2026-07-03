@@ -139,3 +139,8 @@ export function querifyDefinedDatas(datas: Record<string, any>): string {
     )
   );
 }
+
+export function withQuery(url: string, query: object): string {
+  const queries = querifyDefinedDatas(query as Record<string, unknown>);
+  return url + (queries ? '?' + queries : '');
+}

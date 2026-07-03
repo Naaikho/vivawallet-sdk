@@ -423,6 +423,79 @@ class VivaEndpoints {
           method: 'DELETE',
         },
       },
+      source: {
+        create: {
+          url: 'https://demo.vivapayments.com/api/sources',
+          method: 'POST',
+        },
+      },
+      transactions: {
+        get: {
+          /**
+           * @Param `{transactionId}`
+           */
+          url: 'https://demo-api.vivapayments.com/checkout/v2/isv/transactions/{transactionId}',
+          method: 'GET',
+        },
+        legacyGet: {
+          /**
+           * @Param `{transactionId}`
+           */
+          url: 'https://demo.vivapayments.com/api/transactions/{transactionId}',
+          method: 'GET',
+        },
+        legacyList: {
+          url: 'https://demo.vivapayments.com/api/transactions/',
+          method: 'GET',
+        },
+        resellerPosList: {
+          url: 'https://demo.vivapayments.com/api/resellers/pos/transactions/',
+          method: 'GET',
+        },
+        dataServicesSearch: {
+          url: 'https://demo-api.vivapayments.com/dataservices/v2/transactions/Search',
+          method: 'POST',
+        },
+        cancel: {
+          /**
+           * @Param `{transactionId}`
+           */
+          url: 'https://demo.vivapayments.com/api/transactions/{transactionId}',
+          method: 'DELETE',
+        },
+        payOutOld: {
+          /**
+           * @Param `{transactionId}`
+           */
+          url: 'https://demo.vivapayments.com/api/transactions/{transactionId}',
+          method: 'DELETE',
+        },
+        createRecurring: {
+          /**
+           * @Param `{transactionId}`
+           */
+          url: 'https://demo.vivapayments.com/api/transactions/{transactionId}',
+          method: 'POST',
+        },
+        increasePreauth: {
+          /**
+           * @Param `{transactionId}`
+           */
+          url: 'https://demo-api.vivapayments.com/acquiring/v1/isv/transactions/{transactionId}:increasepreauth',
+          method: 'POST',
+        },
+        capturePreauth: {
+          /**
+           * @Param `{transactionId}`
+           */
+          url: 'https://demo.vivapayments.com/api/transactions/{transactionId}',
+          method: 'POST',
+        },
+        motoCharge: {
+          url: 'https://demo.vivapayments.com/api/transactions',
+          method: 'POST',
+        },
+      },
       webhook: {
         getKey: {
           url: 'https://demo-api.vivapayments.com/isv/v1/webhooks/token',
@@ -893,6 +966,79 @@ class VivaEndpoints {
            */
           url: 'https://www.vivapayments.com/api/orders/{orderCode}',
           method: 'DELETE',
+        },
+      },
+      source: {
+        create: {
+          url: 'https://www.vivapayments.com/api/sources',
+          method: 'POST',
+        },
+      },
+      transactions: {
+        get: {
+          /**
+           * @Param `{transactionId}`
+           */
+          url: 'https://api.vivapayments.com/checkout/v2/isv/transactions/{transactionId}',
+          method: 'GET',
+        },
+        legacyGet: {
+          /**
+           * @Param `{transactionId}`
+           */
+          url: 'https://www.vivapayments.com/api/transactions/{transactionId}',
+          method: 'GET',
+        },
+        legacyList: {
+          url: 'https://www.vivapayments.com/api/transactions/',
+          method: 'GET',
+        },
+        resellerPosList: {
+          url: 'https://www.vivapayments.com/api/resellers/pos/transactions/',
+          method: 'GET',
+        },
+        dataServicesSearch: {
+          url: 'https://api.vivapayments.com/dataservices/v2/transactions/Search',
+          method: 'POST',
+        },
+        cancel: {
+          /**
+           * @Param `{transactionId}`
+           */
+          url: 'https://www.vivapayments.com/api/transactions/{transactionId}',
+          method: 'DELETE',
+        },
+        payOutOld: {
+          /**
+           * @Param `{transactionId}`
+           */
+          url: 'https://www.vivapayments.com/api/transactions/{transactionId}',
+          method: 'DELETE',
+        },
+        createRecurring: {
+          /**
+           * @Param `{transactionId}`
+           */
+          url: 'https://www.vivapayments.com/api/transactions/{transactionId}',
+          method: 'POST',
+        },
+        increasePreauth: {
+          /**
+           * @Param `{transactionId}`
+           */
+          url: 'https://api.vivapayments.com/acquiring/v1/isv/transactions/{transactionId}:increasepreauth',
+          method: 'POST',
+        },
+        capturePreauth: {
+          /**
+           * @Param `{transactionId}`
+           */
+          url: 'https://www.vivapayments.com/api/transactions/{transactionId}',
+          method: 'POST',
+        },
+        motoCharge: {
+          url: 'https://www.vivapayments.com/api/transactions',
+          method: 'POST',
         },
       },
       webhook: {

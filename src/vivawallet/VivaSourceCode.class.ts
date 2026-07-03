@@ -9,8 +9,8 @@ class VivaSourceCode extends VivaAuth {
     super(datas);
   }
 
-  /** Set the Viva Wallet payment source (needed for Transaction integrations), return `true` if setup is OK, `false` if the payment already exist or on error */
-  async setVivawalletSource(
+  /** Add a new payment source. */
+  async createSource(
     data: SourceCodeDatas
   ): MethodReturn<void, 'sourcecodeexist'> {
     try {
@@ -41,8 +41,7 @@ class VivaSourceCode extends VivaAuth {
         data: null,
       };
     } catch (e: any) {
-      if (this.errorLogs)
-        console.error('VivaSourceCode.setVivawalletSource', e);
+      if (this.errorLogs) console.error('VivaSourceCode.createSource', e);
 
       // if the source already exist
       if (e.status === 409) {
@@ -57,11 +56,22 @@ class VivaSourceCode extends VivaAuth {
 
       return {
         success: false,
-        message: 'Failed to set source code',
+        message: 'Failed to create source code',
         code: 'error',
         data: null,
       };
     }
+  }
+
+  /**
+   * Set the Viva Wallet payment source.
+   *
+   * @deprecated Use `createSource()` instead.
+   */
+  async setVivawalletSource(
+    data: SourceCodeDatas
+  ): MethodReturn<void, 'sourcecodeexist'> {
+    return this.createSource(data);
   }
 }
 

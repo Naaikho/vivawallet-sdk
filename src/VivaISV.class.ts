@@ -1,6 +1,8 @@
 import IsvConnectedAccounts from './isv/IsvConnectedAccounts.class';
 import IsvPayments from './isv/IsvPayments.class';
 import IsvPos from './isv/IsvPos.class';
+import IsvSourceCode from './isv/IsvSourceCode.class';
+import IsvTransactions from './isv/IsvTransactions.class';
 import IsvWebhook from './isv/IsvWebhook.class';
 import { MethodReturn } from './types/Methods.types';
 import { VivawalletISVInit } from './types/Vivawallet.types';
@@ -9,6 +11,8 @@ import { VivaAuthISV } from './vivabases/VivaAuth.class';
 export class VivaISV extends VivaAuthISV {
   connectedAccounts: IsvConnectedAccounts;
   payments: IsvPayments;
+  transactions: IsvTransactions;
+  source: IsvSourceCode;
   pos: IsvPos;
   webhook: IsvWebhook;
   webhooks: IsvWebhook;
@@ -17,6 +21,8 @@ export class VivaISV extends VivaAuthISV {
     super(datas);
     this.connectedAccounts = new IsvConnectedAccounts(datas);
     this.payments = new IsvPayments(datas);
+    this.transactions = new IsvTransactions(datas);
+    this.source = new IsvSourceCode(datas);
     this.pos = new IsvPos(datas);
     this.webhook = new IsvWebhook(datas);
     this.webhooks = this.webhook;
