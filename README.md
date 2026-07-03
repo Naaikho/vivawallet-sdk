@@ -1,5 +1,11 @@
 # VivaWallet Node SDK
 
+[![npm version](https://img.shields.io/npm/v/@nkhind/vivawallet-sdk.svg)](https://www.npmjs.com/package/@nkhind/vivawallet-sdk)
+[![npm downloads](https://img.shields.io/npm/dm/@nkhind/vivawallet-sdk.svg)](https://www.npmjs.com/package/@nkhind/vivawallet-sdk)
+[![license](https://img.shields.io/npm/l/@nkhind/vivawallet-sdk.svg)](https://www.npmjs.com/package/@nkhind/vivawallet-sdk)
+[![types](https://img.shields.io/npm/types/@nkhind/vivawallet-sdk.svg)](https://www.npmjs.com/package/@nkhind/vivawallet-sdk)
+[![docs](https://img.shields.io/badge/docs-Mintlify-0ea5e9.svg)](https://vivawallet-sdk-docs.mintlify.app)
+
 Non-official TypeScript SDK for VivaWallet APIs.
 
 Use this package when you need a typed Node.js wrapper around VivaWallet standard merchant payments, Marketplace, ISV, webhooks, wallets, bank transfers, POS helpers, and related API modules.
