@@ -66,6 +66,7 @@ export function itemsIsInArray(items: any[], array: any[]): boolean {
 }
 
 export function isEmpty(item: any): boolean {
+  if (item === null) return true;
   if (typeof item === 'object') return !Object.keys(item).length;
   return !item && item !== 0;
 }

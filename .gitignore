@@ -1,16 +1,13 @@
-[Nn]ode_modules/
-[Dd]ata/
-[Ll]ogs/
-[Dd]ist/
-[Tt]est/
-test/
-tests/
+node_modules/
+data/
+logs/
+dist/
+coverage/
 .codex/skills/linear-project-workflow/
 
 .env
 token.json
 *.py*
-*.test.*
 
 package-lock.json
 pnpm-lock.yaml

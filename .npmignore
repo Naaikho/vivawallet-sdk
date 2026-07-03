@@ -1,7 +1,12 @@
-[Nn]ode_modules/
-[Dd]ata/
-[Ll]ogs/
-[Tt]est/
+node_modules/
+data/
+logs/
+coverage/
+types/
+src/
+index.ts
+tests/
+test/
 .codex/
 .claude/
 .agent/
@@ -14,11 +19,6 @@ token.json
 .gitignore
 *.test.*
 
-./types/
-./src/
-./index.ts
-./tests/
-./test/
 
 package-lock.json
 pnpm-lock.yaml

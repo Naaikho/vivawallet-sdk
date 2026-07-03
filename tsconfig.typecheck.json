@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "declaration": false,
+    "allowImportingTsExtensions": true,
+    "types": ["node", "vitest"]
+  },
+  "include": ["index.ts", "src/**/*.ts", "tests/**/*.ts", "vitest.config.mts"],
+  "exclude": ["node_modules", "dist", ".codex", "coverage"]
+}
